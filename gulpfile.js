@@ -60,6 +60,8 @@ gulp.task('javascript', function() {
 
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.js, ['javascript']);
+  gulp.watch(paths.html, ['htmlcache']);
 });
 
 gulp.task('install', ['git-check'], function() {
