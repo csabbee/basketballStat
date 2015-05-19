@@ -11,6 +11,7 @@ var minifyHtml = require('gulp-minify-html');
 var concant = require('gulp-concat');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
+var babel = require('gulp-babel');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -20,7 +21,7 @@ var paths = {
   cssDest: './www/css'
 };
 
-gulp.task('default', ['sass', 'htmlcache', 'javascript']);
+gulp.task('default', ['sass', 'htmlcache', 'javascript', 'watch']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -52,7 +53,8 @@ gulp.task('htmlcache', function() {
 
 gulp.task('javascript', function() {
   return gulp.src(paths.js)
-    .pipe(ngAnnotate())
+    .pipe(babel())
+    .pipe(ngAnnotate())    
     .pipe(concant('basketballStat.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.jsDest));
