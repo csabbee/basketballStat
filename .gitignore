@@ -7,3 +7,4 @@ plugins/
 www/lib
 htmlcache.js
 basketballStat.js
+ionic.app*.css
