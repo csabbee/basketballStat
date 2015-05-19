@@ -25,16 +25,6 @@
     <script src="js/basketballStat.js"></script>
   </head>
   <body ng-app="basketballStat">
-
-    <ion-pane ng-controller="MainController as MainController">
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-          on controller: {{ MainController.newThing }}</br>
-          on scope: {{ oldThing }}
-          <div ng-include="'test.html'"></div>
-      </ion-content>
-    </ion-pane>
+    <ion-nav-view></ion-nav-view>
   </body>
 </html>
