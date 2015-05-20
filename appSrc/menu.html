@@ -1,0 +1,22 @@
+<ion-side-menus>
+
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i> Back</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left">
+    <ion-content>
+      <ion-list>
+        <ion-item nav-clear menu-close ui-sref="app.home">
+          Home
+        </ion-item>
+        <ion-item nav-clear menu-close ui-sref="app.details">
+          Details
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
