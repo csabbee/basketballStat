@@ -1,4 +1,3 @@
 angular.module('basketballStat')
-	.controller('AppController', ($scope) => {
-		
+	.controller('AppController', function($rootScope, $scope) {
 	});
