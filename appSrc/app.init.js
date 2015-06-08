@@ -27,6 +27,15 @@ angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => 
 			}
 		}		
 	})
+	.state('app.players', {
+			url: '/players',
+			views: {
+				'menuContent': {
+					templateUrl: 'players/players.html',
+                    controller: 'PlayerController as PlayerController'
+				}
+			}
+		})
 }).config(['$provide', function ($provide) {
     'use strict';
     $provide.decorator('$rootScope', ['$delegate', function ($delegate) {
