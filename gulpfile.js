@@ -14,7 +14,7 @@ var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 
 var paths = {
-  sass: ['./scss/**/*.scss'],
+  sass: ['./scss/**/*.scss', './appSrc/**/*.scss'],
   html: ['./appSrc/**/*.html'],
   js: ['./appSrc/**/*.js'],
   jsDest: './www/js',
