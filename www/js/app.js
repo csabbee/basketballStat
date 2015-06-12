@@ -16,4 +16,4 @@ angular.module('basketballStat', ['ionic', 'ngCordova', 'htmlTemplates', 'ui.rou
       StatusBar.styleDefault();
     }
   });
-})
+});
