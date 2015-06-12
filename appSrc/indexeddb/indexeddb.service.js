@@ -1,10 +1,20 @@
-angular.module('basketballStat.storage', []);
+try {
+    angular.module('basketballStat.storage');
+} catch (e) {
+    angular.module('basketballStat.storage', []);
+}
 angular.module('basketballStat.storage')
-    .service('IndexedDbService', function($q) {
-        window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-        window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-        window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-
+    .service('IndexedDbService', function(basketballStatStorage, $q, storageConfig) {
+        var player = {
+            ssn : '333-33-3333',
+            name: 'New Player',
+            number: 5
+        };
+        var db;
+        basketballStatStorage.getDb().then(function(database) {
+            console.log('database', database);
+            db = database;
+        });
         return {
             get: get,
             set: set
@@ -13,9 +23,13 @@ angular.module('basketballStat.storage')
         function get(key) {
             var deferResult = $q.defer();
 
-            localforage.getItem(JSON.stringify(key)).then(item => {
-                deferResult.resolve(item);
-            });
+            var request = db.transaction([storageConfig.playerObjectStore])
+                .objectStore(storageConfig.playerObjectStore)
+                .get('444-44-4444');
+
+            request.onsuccess = function(event) {
+                deferResult.resolve(event.target.result);
+            };
 
             return deferResult.promise;
         }
@@ -23,9 +37,13 @@ angular.module('basketballStat.storage')
         function set(key, item) {
             var deferResult = $q.defer();
 
-            localeforage.setItem(JSON.stringify(key), JSON.stringify(item)).then(data => {
-                deferResult.resolve(data);
-            });
+            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
+                .objectStore(storageConfig.playerObjectStore)
+                .add(player);
+
+            request.onsuccess = function(event) {
+                deferResult.resolve('player set');
+            };
 
             return deferResult.promise;
         }
