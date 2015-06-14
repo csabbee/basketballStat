@@ -32,9 +32,18 @@ angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => 
 			views: {
 				'menuContent': {
 					templateUrl: 'players/players.html',
-                    controller: 'PlayerController as PlayerController'
+                    controller: 'PlayersController as PlayersController'
 				}
 			}
+		})
+	.state('app.players.player', {
+			url: '/:ssnId',
+			views: {
+                'player': {
+                    templateUrl: 'players/player/player.html',
+                    controller: 'PlayerController as PlayerController'
+                }
+            }
 		})
 }).config(['$provide', function ($provide) {
     'use strict';

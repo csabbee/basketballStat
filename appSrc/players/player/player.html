@@ -1,0 +1,58 @@
+<div class="list card">
+    <div class="item item-avatar">
+        <h2>{{ PlayerController.player.name }}</h2>
+        <h2>{{ PlayerController.player.firstName }} {{ PlayerController.player.lastName }}</h2>
+    </div>
+    <div class="item item-divider">
+        Player Data
+    </div>
+    <div class="item item-body">
+        <form name="form" class="list" novalidate>
+            <label class="item item-input-inset item-floating-label">
+                <span class="input-label">First Name</span>
+                <input type="text" placeholder="First Name"
+                       ng-model="player.firstName"
+                       required="">
+                <span ng-show="form.$submitted || form.firstName.$touched">
+                    <span ng-show="form.firstName.$error.required">First Name is required</span>
+                </span>
+            </label>
+            <label class="item item-input-inset item-floating-label">
+                <span class="input-label">Last Name</span>
+                <input type="text" placeholder="Last Name"
+                       ng-model="player.lastName"
+                       required="">
+                <div ng-show="form.$submitted || form.lastName.$touched">
+                    <div ng-show="form.lastName.$error.required">Last Name is required</div>
+                </div>
+            </label>
+            <label class="item item-input-inset item-floating-label">
+                <span class="input-label">Email</span>
+                <input type="text" placeholder="Email" ng-model="player.email">
+            </label>
+            <div class="item item-divider">
+            </div>
+            <div class="button-bar">
+                <input type="button" class="button button-outline button-assertive"
+                       ng-click="PlayerController.reset(form)" value="Reset" />
+                <input type="submit" class="button button-outline button-balanced"
+                       ng-click="PlayerController.update(player, form)" value="Save" />
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" href="#">
+                    <i class="icon ion-thumbsup"></i>
+                    Like
+                </a>
+                <a class="tab-item" href="#">
+                    <i class="icon ion-chatbox"></i>
+                    Comment
+                </a>
+                <a class="tab-item" href="#" ng-click="PlayerController.goBack()">
+                    <i class="icon ion-arrow-return-left"></i>
+                    Back
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

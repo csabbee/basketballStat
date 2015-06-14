@@ -23,7 +23,6 @@ angular.module('basketballStat.storage')
             };
 
             request.onsuccess = function(event) {
-                console.log('database found', event.target.result);
                 db.resolve(event.target.result);
             };
 
