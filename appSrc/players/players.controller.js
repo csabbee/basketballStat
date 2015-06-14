@@ -7,12 +7,17 @@ angular.module('basketballStat')
             };
 
         vm.addPlayer = function() {
-            IndexedDbService.set('newPlayer', player);
+            IndexedDbService.setPlayer('newPlayer', player);
         };
 
         vm.getPlayer = function() {
-            IndexedDbService.get().then(data => {
+            IndexedDbService.getPlayer('444-44-4444').then(data => {
                 console.log('player', data);
+                vm.player = data;
             });
-        }
+        };
+
+        IndexedDbService.getAllPlayer().then(players => {
+            vm.players = players;
+        });
     });
