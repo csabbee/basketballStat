@@ -1,5 +1,5 @@
 angular.module('basketballStat')
-    .controller('PlayersController', function($scope, IndexedDbService) {
+    .controller('PlayersController', function($scope, IndexedDbService, $state) {
         var vm = this;
         $scope.$on('$stateChangeStart', (event, toState) => {
             vm.activeView = false;
@@ -7,16 +7,11 @@ angular.module('basketballStat')
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.players' ? true : false;
         });
-        $scope.$onRootScope('player.updated', () => {
+        $scope.$onRootScope('players.list.update', () => {
             IndexedDbService.getAllPlayer().then(players => {
                 vm.players = players;
             });
         });
-
-        vm.addPlayer = function() {
-            console.log('setting player');
-            //IndexedDbService.setPlayer('newPlayer', player);
-        };
 
         IndexedDbService.getAllPlayer().then(players => {
             vm.players = players;

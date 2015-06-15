@@ -1,9 +1,6 @@
 <div class="list card">
-    <div class="item item-divider item-icon-right">
+    <div class="item item-divider">
         Player Data
-        <a class="tab-item" href="#">
-            <i class="icon ion-trash-a" ng-click="PlayerController.delete()"></i>
-        </a>
     </div>
     <div class="item item-body">
         <form name="form" class="list" novalidate>
@@ -25,17 +22,13 @@
                     <div ng-show="form.lastName.$error.required">Last Name is required</div>
                 </div>
             </label>
-            <label class="item item-input-inset item-floating-label">
-                <span class="input-label">Email</span>
-                <input type="text" placeholder="Email" ng-model="player.email">
-            </label>
             <div class="item item-divider">
             </div>
             <div class="button-bar">
                 <input type="button" class="button button-outline button-assertive"
-                       ng-click="PlayerController.reset(form)" value="Reset" />
+                       ng-click="NewPlayerController.reset(form)" value="Reset" />
                 <input type="submit" class="button button-outline button-balanced"
-                       ng-click="PlayerController.update(player, form)" value="Save" />
+                       ng-click="NewPlayerController.save(player, form)" value="Save" />
             </div>
 
             <div class="item tabs tabs-secondary tabs-icon-left">
@@ -47,7 +40,7 @@
                     <i class="icon ion-chatbox"></i>
                     Comment
                 </a>
-                <a class="tab-item" href="#" ng-click="PlayerController.goBack()">
+                <a class="tab-item" href="#" ng-click="NewPlayerController.goBack()">
                     <i class="icon ion-arrow-return-left"></i>
                     Back
                 </a>

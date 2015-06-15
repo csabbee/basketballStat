@@ -16,10 +16,9 @@ angular.module('basketballStat.storage')
         function getDb() {
             var db = $q.defer();
 
-            var request = indexedDB.open(storageConfig.database);
+            var request = window.indexedDB.open(storageConfig.database, '2');
 
             request.onerror = function(event) {
-                alert(`Why didn't you allow my web app to use IndexedDB?!`);
             };
 
             request.onsuccess = function(event) {
@@ -29,8 +28,8 @@ angular.module('basketballStat.storage')
             request.onupgradeneeded = function(event) {
                 var database = event.target.result;
 
-                var objectStore = db.createObjectStore(storageConfig.playerObjectStore, {keyPath: 'ssn'});
-                objectStore.createIndex('name', 'name', { unique: false });
+                var objectStore = database.createObjectStore(storageConfig.playerObjectStore, { keyPath : 'ssnId' });
+                objectStore.createIndex('firstName', 'lastName', ['firstName', 'lastName']);
                 objectStore.createIndex('email', 'email', { unique: true });
                 objectStore.transaction.oncomplete = function(event) {
                     console.log('objectstore created', event.target.result);

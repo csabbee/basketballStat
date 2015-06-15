@@ -4,32 +4,65 @@ try {
     angular.module('basketballStat.storage', []);
 }
 angular.module('basketballStat.storage')
-    .service('IndexedDbService', function(basketballStatStorage, $q, storageConfig, $rootScope) {
-        var player = {
-            ssn : '333-33-3333',
-            name: 'New Player',
-            number: 5
-        };
+    .service('IndexedDbService', function(basketballStatStorage, $q, storageConfig, $rootScope, KeyGenerator) {
         var db;
 
         (function() {
             basketballStatStorage.getDb().then(function(database) {
                 db = database;
+                getAllPlayer().then(players => {
+                    var ids = players.map(players => players.ssnId);
+                    KeyGenerator.setSeed(_.max(ids));
+                });
             });
         })();
 
         return {
+            addPlayer: addPlayer,
+            deletePlayer: deletePlayer,
             getPlayer: getPlayer,
             updatePlayer: updatePlayer,
             getAllPlayer: getAllPlayer
         };
+
+        function addPlayer(player) {
+            var deferResult = $q.defer();
+            player.ssnId = KeyGenerator.nextKey();
+
+            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
+                .objectStore(storageConfig.playerObjectStore)
+                .add(player);
+
+            request.onsuccess = function(event) {
+                deferResult.resolve(event.target.result);
+                $rootScope.$emit('players.list.update');
+            };
+
+            return deferResult.promise;
+        }
+
+        function deletePlayer(key) {
+            var deferResult = $q.defer();
+
+            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
+                .objectStore(storageConfig.playerObjectStore)
+                .delete(key);
+
+            request.onsuccess = function(event) {
+                deferResult.resolve(event.target.result);
+                $rootScope.$emit('players.list.update');
+            };
+
+            return deferResult.promise;
+        }
 
         function getPlayer(key) {
             var deferResult = $q.defer();
 
             var request = db.transaction([storageConfig.playerObjectStore])
                 .objectStore(storageConfig.playerObjectStore)
-                .get(key);
+                // This is needed because it tends to be converted to string
+                .get(+key);
 
             request.onsuccess = function(event) {
                 deferResult.resolve(event.target.result);
@@ -47,18 +80,14 @@ angular.module('basketballStat.storage')
 
             request.onsuccess = function(event) {
                 deferResult.resolve('player set');
-                $rootScope.$emit('player.updated');
+                $rootScope.$emit('players.list.update');
             };
 
             return deferResult.promise;
         }
 
         function getAllPlayer() {
-            var deferResult = $q.defer();
-            _getAllEntry(storageConfig.playerObjectStore).then(players => {
-                deferResult.resolve(players);
-            });
-            return deferResult.promise;
+            return _getAllEntry(storageConfig.playerObjectStore);
         }
 
         function _getAllEntry(objectStore) {

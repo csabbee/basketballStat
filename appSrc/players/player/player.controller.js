@@ -28,13 +28,21 @@ angular.module('basketballStat')
             $scope.player = backupPlayer;
         };
 
+        vm.delete = function() {
+            IndexedDbService.deletePlayer(vm.player.ssnId)
+                .then(() => {
+                    StateHandler.goBack();
+                });
+        };
+
         vm.update = function(player, form) {
             if (form.$dirty && form.$valid) {
-                player.ssn = backupPlayer.ssn;
+                player.ssnId = backupPlayer.ssnId;
                 IndexedDbService.updatePlayer(player)
                     .then(() => {
                         backupPlayer = angular.copy(player);
                         vm.player = angular.copy(player);
+                        StateHandler.goBack();
                     })
                     .catch(() => {
                         vm.player = angular.copy(backupPlayer);
