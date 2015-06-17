@@ -18,7 +18,8 @@
     "gulp-ng-annotate": "^0.5.3",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^2.2.14",
-    "shelljs": "^0.3.0"
+    "shelljs": "^0.3.0",
+    "gulp-sourcemaps": "^1.5.2"
   },
   "cordovaPlugins": [
     "org.apache.cordova.device",
