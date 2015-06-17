@@ -4,7 +4,7 @@ try {
     angular.module('basketballStat.storage', []);
 }
 angular.module('basketballStat.storage')
-    .factory('basketballStatStorage', function basketballStatStorageFactory(storageConfig, $q) {
+    .factory('basketballStatDatabase', function basketballStatDatabaseFactory(storageConfig, $q) {
         window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
         window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
         window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;

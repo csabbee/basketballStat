@@ -4,11 +4,11 @@ try {
     angular.module('basketballStat.storage', []);
 }
 angular.module('basketballStat.storage')
-    .service('IndexedDbService', function(basketballStatStorage, $q, storageConfig, $rootScope, KeyGenerator) {
+    .service('IndexedDbService', function(basketballStatDatabase, $q, storageConfig, $rootScope, KeyGenerator) {
         var db;
 
         (function() {
-            basketballStatStorage.getDb().then(function(database) {
+            basketballStatDatabase.getDb().then(function(database) {
                 db = database;
                 getAllPlayer().then(players => {
                     var ids = players.map(players => players.ssnId);
