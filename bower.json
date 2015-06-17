@@ -6,6 +6,6 @@
   },
   "dependencies": {
     "ngCordova": "~0.1.15-alpha",
-    "localforage": "~1.2.3"
+    "underscore": "~1.8.3"
   }
 }

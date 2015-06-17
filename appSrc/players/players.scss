@@ -1,3 +1,10 @@
-.test-background {
-  background-color: #00d4b4;
+$max-view-percent: 0.93;
+$player-view: 0.7;
+
+.player-view {
+  height: percentage($player-view);
+}
+
+.button-panel {
+  height: percentage($max-view-percent - $player-view);
 }
