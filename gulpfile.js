@@ -60,6 +60,7 @@ gulp.task('javascript', function() {
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(ngAnnotate())
+        .pipe(modularize.injectModule(es))
         .pipe(concant('basketballStat.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('.', { sourceRoot: '/appSrc'}))
