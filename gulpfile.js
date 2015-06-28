@@ -13,6 +13,9 @@ var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
+var es = require('event-stream');
+
+var modularize = require('./gulp-build/angular-modularize.js');
 
 var paths = {
     sass: ['./scss/**/*.scss', './appSrc/**/*.scss'],
