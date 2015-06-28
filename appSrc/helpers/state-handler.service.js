@@ -1,8 +1,3 @@
-try {
-    angular.module('basketballStat.helpers');
-} catch (e) {
-    angular.module('basketballStat.helpers', []);
-}
 angular.module('basketballStat.helpers')
     .service('StateHandler', function($rootScope, $state, $ionicScrollDelegate) {
         var previousState = '',

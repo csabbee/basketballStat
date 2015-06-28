@@ -1,8 +1,3 @@
-try {
-    angular.module('basketballStat.storage');
-} catch (e) {
-    angular.module('basketballStat.storage', []);
-}
 angular.module('basketballStat.storage')
     .factory('basketballStatDatabase', function basketballStatDatabaseFactory(storageConfig, $q) {
         window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
