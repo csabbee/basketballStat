@@ -14,7 +14,7 @@ angular.module('basketballStat.storage')
          * @param {number[]} obj.usedIds
          */
         function setSeed(obj) {
-            var generatorObj = _.extend(obj, {maxId: _.max(obj.usedIds)});
+            var generatorObj = Object.create(obj);
 
             if (generators.indexOf(generatorObj) !== -1) {
                 var generatorIndex = generators.indexOf(generatorObj);
@@ -31,8 +31,9 @@ angular.module('basketballStat.storage')
          */
         function nextKey(store) {
             var generatorObj = _.find(generators, generator => generator.store === store),
-                nextKey = _.first(_.difference(_.range(generatorObj.maxId), generatorObj.usedIds));
-            nextKey = !_.isUndefined(nextKey) ? nextKey : ++generatorObj.maxId;
+                maxId = _.max(generatorObj.usedIds),
+                nextKey = _.first(_.difference(_.range(maxId), generatorObj.usedIds));
+            nextKey = !_.isUndefined(nextKey) && _.isFinite(nextKey) ? nextKey : !_.isUndefined(maxId) && _.isFinite(maxId) ? ++maxId : 0;
             generatorObj.usedIds.push(nextKey);
 
             return nextKey;
