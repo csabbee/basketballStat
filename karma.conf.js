@@ -3,6 +3,7 @@
 
 module.exports = function(config) {
     config.set({
+        // karma plugins: install plugins globally
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
