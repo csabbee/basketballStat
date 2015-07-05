@@ -4,6 +4,14 @@
 module.exports = function(config) {
     config.set({
         // karma plugins: install plugins globally
+        plugins: [
+            'karma-jasmine',
+            'karma-babel-preprocessor',
+            'karma-chrome-launcher',
+            'karma-ie-launcher',
+            'karma-phantomjs-launcher',
+            require('./karma-test-framework/karma-ng-module-preprocessor')
+        ],
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
@@ -14,8 +22,13 @@ module.exports = function(config) {
         frameworks: ['jasmine'],
 
 
-        // list of files / patterns to load in the browser
+        // list of files /ww patterns to load in the browser
         files: [
+            'www/lib/angular/angular.js',
+            'node_modules/angular-mocks/angular-mocks.js',
+            'www/js/app.js',
+            'appSrc/**/*.js',
+            'www/js/htmlcache.js',
             'test/**/*Spec.js'
         ],
 
@@ -28,6 +41,7 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
+            'appSrc/**/*.js': ['ng-modularize', 'babel'],
             'test/**/*.js': ['babel']
         },
 
