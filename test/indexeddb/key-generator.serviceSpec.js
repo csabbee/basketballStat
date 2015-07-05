@@ -1,14 +1,15 @@
 describe('KeyGeneratorService', () => {
     var underTest,
-        testStoreObject = {
-            store: 'testStore',
-            usedIds: [0,1,3,4,8]
-        };
+        testStoreObject;
 
     beforeEach(module('basketballStat.storage'));
 
     beforeEach(inject(KeyGenerator => {
         underTest = KeyGenerator;
+        testStoreObject = {
+            store: 'testStore',
+            usedIds: [0,1,3,4,8]
+        };
     }));
 
     describe('nextKey function', () => {
@@ -28,6 +29,7 @@ describe('KeyGeneratorService', () => {
             // GIVEN
             underTest.setSeed(testStoreObject);
             // WHEN
+            underTest.nextKey(testStoreObject.store);
             var result = underTest.nextKey(testStoreObject.store);
             // THEN
             expect(result).toBe(expect2);
@@ -37,6 +39,8 @@ describe('KeyGeneratorService', () => {
             // GIVEN
             underTest.setSeed(testStoreObject);
             // WHEN
+            underTest.nextKey(testStoreObject.store);
+            underTest.nextKey(testStoreObject.store);
             underTest.nextKey(testStoreObject.store);
             underTest.nextKey(testStoreObject.store);
             var result = underTest.nextKey(testStoreObject.store);

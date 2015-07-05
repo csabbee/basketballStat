@@ -14,7 +14,7 @@ angular.module('basketballStat.storage')
          * @param {number[]} obj.usedIds
          */
         function setSeed(obj) {
-            var generatorObj = Object.create(obj);
+            var generatorObj = _.clone(obj);
 
             if (generators.indexOf(generatorObj) !== -1) {
                 var generatorIndex = generators.indexOf(generatorObj);
