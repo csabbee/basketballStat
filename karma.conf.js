@@ -24,6 +24,7 @@ module.exports = function(config) {
 
         // list of files /ww patterns to load in the browser
         files: [
+            'www/lib/underscore/underscore-min.js',
             'www/lib/angular/angular.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'www/js/app.js',
