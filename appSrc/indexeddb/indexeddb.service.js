@@ -3,11 +3,14 @@ angular.module('basketballStat.storage')
         var db;
 
         (function() {
-            basketballStatDatabase.getDb().then(function(database) {
+            basketballStatDatabase.getDb(storageConfig.playerObjectStore).then(function(database) {
                 db = database;
                 getAllPlayer().then(players => {
                     var ids = players.map(players => players.ssnId);
-                    KeyGenerator.setSeed(_.max(ids));
+                    KeyGenerator.setSeed({
+                        store: storageConfig.playerObjectStore,
+                        usedIds: ids
+                    });
                 });
             });
         })();
@@ -22,7 +25,7 @@ angular.module('basketballStat.storage')
 
         function addPlayer(player) {
             var deferResult = $q.defer();
-            player.ssnId = KeyGenerator.nextKey();
+            player.ssnId = KeyGenerator.nextKey(storageConfig.playerObjectStore);
 
             var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
                 .objectStore(storageConfig.playerObjectStore)
