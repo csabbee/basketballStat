@@ -28,8 +28,8 @@ angular.module('basketballStat.storage')
                 request.onupgradeneeded = function(event) {
                     database = event.target.result;
 
-                    var objectStore = database.createObjectStore(objectStore, { keyPath : 'ssnId' });
-                    objectStore.transaction.oncomplete = function(event) {
+                    var objectstore = database.createObjectStore(objectStore, { keyPath : 'ssnId' });
+                    objectstore.transaction.oncomplete = function(event) {
                         console.log('objectstore created', event.target.result);
                         db.resolve(database);
                     }

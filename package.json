@@ -21,8 +21,12 @@
     "shelljs": "^0.3.0",
     "gulp-sourcemaps": "^1.5.2",
     "event-stream": "^3.3.1",
-    "karma-babel-preprocessor": "^5.2.1",
-    "angular-mocks": "^1.4.1"
+    "karma-babel-preprocessor": "~5.2.1",
+    "angular-mocks": "^1.4.1",
+    "karma-jasmine": "~0.3.6",
+    "karma-chrome-launcher": "~0.2.0",
+    "karma-phantomjs-launcher": "~0.2.0",
+    "karma-ie-launcher": "~0.2.0"
   },
   "cordovaPlugins": [
     "org.apache.cordova.device",
