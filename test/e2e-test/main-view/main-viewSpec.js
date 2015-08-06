@@ -3,11 +3,11 @@ var MainPage = require('./main-viewPO.js');
 describe('basketballstat main view', () => {
 
     var mainPage = new MainPage(),
-        mainView = 'Main View';
+        mainViewTitle = 'Main View';
 
-  	it(`should have title called ${mainView}`, () => {
+    it(`should have title called ${mainViewTitle}`, () => {
         mainPage.get();
 
-    	expect(browser.getTitle()).toEqual(mainView);
-  	});
+        expect(browser.getTitle()).toEqual(mainViewTitle);
+    });
 });
