@@ -44,8 +44,8 @@ describe('new player page', () => {
         newPlayerPage.setLastName(lName);
         // WHEN
         newPlayerPage.save();
+        setTimeout(function() {}, 550);
         //THEN
-        expect(playersPage.getPlayers().first()).toEqual(playersPage.getPlayers().last());
-        expect(playersPage.getPlayers().first()).toEqual(`${fName} ${lName}`);
+        expect(playersPage.getPlayers().first().getText()).toEqual(`${fName} ${lName}`);
     });
 });
