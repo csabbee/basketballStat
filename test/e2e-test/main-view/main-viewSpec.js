@@ -1,7 +1,9 @@
-describe('basketballstat main view', function() {
-  it('should have title called Main View', function() {
-    browser.get('http://localhost:8080/index.html');
+describe('basketballstat main view', () => {
+	var mainView = 'Main View';
 
-    expect(browser.getTitle()).toEqual('Main View');
-  });
+  	it(`should have title called ${mainView}`, () => {
+    	browser.get('http://localhost:8080');
+
+    	expect(browser.getTitle()).toEqual(mainView);
+  	});
 });
