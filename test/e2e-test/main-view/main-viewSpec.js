@@ -1,8 +1,12 @@
+var MainPage = require('./main-viewPO.js');
+
 describe('basketballstat main view', () => {
-	var mainView = 'Main View';
+
+    var mainPage = new MainPage(),
+        mainView = 'Main View';
 
   	it(`should have title called ${mainView}`, () => {
-    	browser.get('http://localhost:8080');
+        mainPage.get();
 
     	expect(browser.getTitle()).toEqual(mainView);
   	});
