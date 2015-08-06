@@ -28,7 +28,8 @@
     "karma-ie-launcher": "~0.2.0",
     "karma": "~0.13.3",
     "chalk": "~1.1.0",
-    "node-static": "~0.7.7"
+    "node-static": "~0.7.7",
+    "babel": "~5.8.21"
   },
   "cordovaPlugins": [
     "org.apache.cordova.device",
