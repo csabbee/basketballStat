@@ -1,16 +1,17 @@
 exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
+	seleniumAddress: 'http://localhost:4444/wd/hub',
 
-  capabilities: {
-    'browserName': 'chrome'
-  },
+	capabilities: {
+		'browserName': 'chrome'
+	},
 
-  specs: ['test/e2e-test/**/*Spec.js'],
+	specs: ['test/e2e-test/**/*Spec.js'],
 
-  jasmineNodeOpts: {
-    showColors: true
-  },
-  beforeLaunch: function() {
-  	require('babel/register');
-  }
+	jasmineNodeOpts: {
+	    showColors: true
+	},
+	
+	beforeLaunch: function() {
+	  	require('babel/register');
+	}
 };
