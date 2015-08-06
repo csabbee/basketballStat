@@ -9,5 +9,8 @@ exports.config = {
 
   jasmineNodeOpts: {
     showColors: true
+  },
+  beforeLaunch: function() {
+  	require('babel/register');
   }
 };
