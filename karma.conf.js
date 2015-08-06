@@ -30,7 +30,7 @@ module.exports = function(config) {
             'www/js/app.js',
             'appSrc/**/*.js',
             'www/js/htmlcache.js',
-            'test/**/*Spec.js'
+            'test/unit-test/**/*Spec.js'
         ],
 
 

@@ -32,7 +32,12 @@ angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => 
 			views: {
 				'menuContent': {
 					templateUrl: 'players/players.html',
-					controller: 'PlayersController as PlayersController'
+					controller: 'PlayersController as PlayersController',
+					resolve: {
+						players: ['IndexedDbService', function(IndexedDbService) {
+							return IndexedDbService.getAllPlayer();
+						}]
+					}
 				}
 			}
 		})
