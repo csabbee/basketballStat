@@ -1,0 +1,19 @@
+<ion-view title="Matches View">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="row row-top">
+            <div class="col">
+                <div class="list" ng-hide="!MatchesController.activeView">
+                    <h1>The Matches view</h1>
+                </div>
+            </div>
+        </div>
+        <div class="bar bar-footer" ng-hide="!MatchesController.activeView">
+            <button class="button button-clear button-balanced pull-right icon ion-ios-plus"
+                    ui-sref="app.matches.new"></button>
+        </div>
+        <div ui-view name="match"></div>
+    </ion-content>
+</ion-view>
