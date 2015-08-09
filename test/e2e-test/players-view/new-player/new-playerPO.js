@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var PlayersPage = require('../players-viewPO.js');
 
 module.exports = function() {
@@ -9,6 +10,7 @@ module.exports = function() {
         get: get,
         save: save,
         reset: reset,
+        addPlayers: addPlayers,
         setFirstName: setFirstName,
         getFirstName: getFirstName,
         setLastName: setLastName,
@@ -44,5 +46,16 @@ module.exports = function() {
 
     function getLastName() {
         return lastName.getText();
+    }
+
+    function addPlayers(playerNames) {
+        _.each(playerNames, addPlayer);
+
+        function addPlayer(playerName) {
+            get();
+            setFirstName(playerName.firstName);
+            setLastName(playerName.lastName);
+            save();
+        }
     }
 };
