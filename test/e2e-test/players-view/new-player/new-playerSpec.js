@@ -6,7 +6,14 @@ describe('new player page', () => {
         playersPage = new PlayersPage(),
         newPlayerUrl = 'http://localhost:8080/#/app/players/new',
         fName = 'Jakab',
-        lName = 'Gipsz';
+        lName = 'Gipsz',
+        players = [
+            { firstName: 'Tim', lastName: 'Duncan'},
+            { firstName: 'Antonio', lastName: 'McDyess'},
+            { firstName: 'Vince', lastName: 'Carter'},
+            { firstName: 'Stephen', lastName: 'Curry'},
+            { firstName: 'Shaquille', lastName: 'O\'Neal'}
+        ];
 
     beforeEach(() => {
         newPlayerPage.get();
@@ -47,5 +54,13 @@ describe('new player page', () => {
         setTimeout(function() {}, 550);
         //THEN
         expect(playersPage.getPlayers().first().getText()).toEqual(`${fName} ${lName}`);
+    });
+
+    iit(`should add 5 players to the players list`, () => {
+        // GIVEN
+        // WHEN
+        newPlayerPage.addPlayers(players);
+        // THEN
+        expect(playersPage.getPlayers().count()).toBe(5);
     });
 });
