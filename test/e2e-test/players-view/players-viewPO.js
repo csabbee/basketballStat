@@ -15,4 +15,4 @@ module.exports = function() {
     function getPlayers() {
         return element.all(by.repeater('player in PlayersController.players'));
     }
-}
+};
