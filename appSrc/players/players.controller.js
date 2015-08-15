@@ -1,17 +1,23 @@
 angular.module('basketballStat.players')
-    .controller('PlayersController', function($scope, IndexedDbService, $state, players) {
+    .controller('PlayersController', function($scope, PlayersDbService) {
         var vm = this;
+
         $scope.$on('$stateChangeStart', (event, toState) => {
             vm.activeView = false;
         });
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.players' ? true : false;
+            if (vm.activeView) {
+                PlayersDbService.getAllPlayer().then(players => {
+                    vm.players = players;
+                })
+            }
         });
         $scope.$onRootScope('players.list.update', () => {
-            IndexedDbService.getAllPlayer().then(players => {
+            PlayersDbService.getAllPlayer().then(players => {
                 vm.players = players;
             });
         });
 
-        vm.players = players;
+        vm.players = {};
     });

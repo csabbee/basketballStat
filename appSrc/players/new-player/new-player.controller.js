@@ -1,5 +1,5 @@
 angular.module('basketballStat.players')
-    .controller('NewPlayerController', function($scope, IndexedDbService, $stateParams, StateHandler) {
+    .controller('NewPlayerController', function($scope, PlayersDbService, $stateParams, StateHandler) {
         var vm = this;
 
         vm.goBack = function() {
@@ -16,7 +16,7 @@ angular.module('basketballStat.players')
 
         vm.save = function(player, form) {
             if (form.$dirty && form.$valid) {
-                IndexedDbService.addPlayer(player)
+                PlayersDbService.addPlayer(player)
                     .then(() => {
                         StateHandler.goBack();
                     });

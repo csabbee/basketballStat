@@ -30,4 +30,13 @@ angular.module('basketballStat.players')
                     }
                 }
             })
+        // We 'pre-initialize' the database/object store
+    }).run((storageConfig, KeyGenerator, PlayersDbService) => {
+        PlayersDbService.getAllPlayer().then(players => {
+            var ids = players.map(players => players.ssnId);
+            KeyGenerator.setSeed({
+                store: storageConfig.playerObjectStore,
+                usedIds: ids
+            });
+        });
     });
