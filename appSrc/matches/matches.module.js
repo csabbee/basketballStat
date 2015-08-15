@@ -28,4 +28,12 @@ angular.module('basketballStat.matches')
                     }
                 }
             })
+    }).run((storageConfig, MatchesDbService, KeyGenerator)=> {
+        MatchesDbService.getAllMatches.then(matches => {
+            var ids = matches.map(matches => matches.ssnId);
+            KeyGenerator.setSeed({
+                store: storageConfig.matchesObjectStore,
+                usedIds: ids
+            });
+        });
     });
