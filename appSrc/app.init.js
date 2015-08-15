@@ -1,4 +1,9 @@
-angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => {
+angular.module('basketballStat.mainModule', [
+    'basketballStat.helpers',
+    'basketballStat.storage',
+    'basketballStat.matches',
+    'basketballStat.players'
+]).config(($stateProvider, $urlRouterProvider) => {
 	'use strict';
 
 	$urlRouterProvider.otherwise('/app/home');
@@ -7,8 +12,7 @@ angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => 
 		.state('app', {
 			url: '/app',
 			abstract: true,
-			templateUrl: 'menu.html',
-			controller: 'AppController as AppController'
+			templateUrl: 'menu.html'
 		})
 		.state('app.home', {
 			url: '/home',
@@ -24,38 +28,6 @@ angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => 
 			views: {
 				'menuContent': {
 					templateUrl: 'details.html'
-				}
-			}
-		})
-		.state('app.players', {
-			url: '/players',
-			views: {
-				'menuContent': {
-					templateUrl: 'players/players.html',
-					controller: 'PlayersController as PlayersController',
-					resolve: {
-						players: ['IndexedDbService', function(IndexedDbService) {
-							return IndexedDbService.getAllPlayer();
-						}]
-					}
-				}
-			}
-		})
-		.state('app.players.player', {
-			url: '/:ssnId',
-			views: {
-				'player': {
-					templateUrl: 'players/player/player.html',
-					controller: 'PlayerController as PlayerController'
-				}
-			}
-		})
-		.state('app.players.newPlayer', {
-			url: '/new',
-			views: {
-				'player': {
-					templateUrl: 'players/new-player/new-player.html',
-					controller: 'NewPlayerController as NewPlayerController'
 				}
 			}
 		})

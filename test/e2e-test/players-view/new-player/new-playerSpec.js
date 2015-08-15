@@ -56,7 +56,7 @@ describe('new player page', () => {
         expect(playersPage.getPlayers().first().getText()).toEqual(`${fName} ${lName}`);
     });
 
-    iit(`should add 5 players to the players list`, () => {
+    it(`should add 5 players to the players list`, () => {
         // GIVEN
         // WHEN
         newPlayerPage.addPlayers(players);

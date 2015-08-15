@@ -4,8 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('basketballStat', [
-    'ionic', 'ngCordova', 'htmlTemplates', 'ui.router', 'basketballStat.storage',
-    'basketballStat.helpers'])
+    'ionic', 'ngCordova', 'htmlTemplates', 'ui.router','basketballStat.mainModule'])
 
     .run(function($ionicPlatform, $cordovaSplashscreen, IndexedDbService, StateHandler) {
         $ionicPlatform.ready(function() {

@@ -1,4 +1,4 @@
-angular.module('basketballStat')
+angular.module('basketballStat.players')
     .controller('PlayersController', function($scope, IndexedDbService, $state, players) {
         var vm = this;
         $scope.$on('$stateChangeStart', (event, toState) => {
