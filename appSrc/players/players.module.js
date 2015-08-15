@@ -8,12 +8,7 @@ angular.module('basketballStat.players')
                 views: {
                     'menuContent': {
                         templateUrl: 'players/players.html',
-                        controller: 'PlayersController as PlayersController',
-                        resolve: {
-                            players: ['IndexedDbService', function(IndexedDbService) {
-                                return IndexedDbService.getAllPlayer();
-                            }]
-                        }
+                        controller: 'PlayersController as PlayersController'
                     }
                 }
             })
