@@ -1,108 +1,100 @@
 angular.module('basketballStat.storage')
-    .service('IndexedDbService', function(basketballStatDatabase, $q, storageConfig, $rootScope, KeyGenerator) {
-        var db;
-
-        (function() {
-            basketballStatDatabase.getDb(storageConfig.playerObjectStore).then(function(database) {
-                db = database;
-                getAllPlayer().then(players => {
-                    var ids = players.map(players => players.ssnId);
-                    KeyGenerator.setSeed({
-                        store: storageConfig.playerObjectStore,
-                        usedIds: ids
-                    });
-                });
-            });
-        })();
+    .service('IndexedDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator) {
 
         return {
-            addPlayer: addPlayer,
-            deletePlayer: deletePlayer,
-            getPlayer: getPlayer,
-            updatePlayer: updatePlayer,
-            getAllPlayer: getAllPlayer
+            getAllEntry: getAllEntry,
+            addEntry: addEntry,
+            getEntry: getEntry,
+            deleteEntry: deleteEntry,
+            updateEntry: updateEntry
         };
 
-        function addPlayer(player) {
+        function addEntry(objectStore, entry) {
             var deferResult = $q.defer();
-            player.ssnId = KeyGenerator.nextKey(storageConfig.playerObjectStore);
 
-            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
-                .objectStore(storageConfig.playerObjectStore)
-                .add(player);
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                entry.ssnId = KeyGenerator.nextKey(objectStore);
 
-            request.onsuccess = function(event) {
-                deferResult.resolve(event.target.result);
-                $rootScope.$emit('players.list.update');
-            };
+                var request = database.transaction([objectStore], 'readwrite')
+                    .objectStore(objectStore)
+                    .add(entry);
+                request.onsuccess = function(event) {
+                    deferResult.resolve(event.target.result);
+                };
+
+            });
 
             return deferResult.promise;
         }
 
-        function deletePlayer(key) {
+
+        function deleteEntry(objectStore, key) {
             var deferResult = $q.defer();
 
-            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
-                .objectStore(storageConfig.playerObjectStore)
-                .delete(key);
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                var request = database.transaction([objectStore], 'readwrite')
+                    .objectStore(objectStore)
+                    .delete(key);
 
-            request.onsuccess = function(event) {
-                deferResult.resolve(event.target.result);
-                $rootScope.$emit('players.list.update');
-            };
+                request.onsuccess = function(event) {
+                    deferResult.resolve(event.target.result);
+                };
+            });
 
             return deferResult.promise;
         }
 
-        function getPlayer(key) {
+        function getEntry(objectStore, key) {
             var deferResult = $q.defer();
 
-            var request = db.transaction([storageConfig.playerObjectStore])
-                .objectStore(storageConfig.playerObjectStore)
-                // This is needed because it tends to be converted to string
-                .get(+key);
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                var request = database.transaction([objectStore])
+                    .objectStore(objectStore)
+                    // This is needed because it tends to be converted to string
+                    .get(+key);
 
-            request.onsuccess = function(event) {
-                deferResult.resolve(event.target.result);
-            };
+                request.onsuccess = function(event) {
+                    deferResult.resolve(event.target.result);
+                };
+            });
 
             return deferResult.promise;
         }
 
-        function updatePlayer(item) {
+        function updateEntry(objectStore, entry) {
             var deferResult = $q.defer();
 
-            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
-                .objectStore(storageConfig.playerObjectStore)
-                .put(item);
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                var request = database.transaction([objectStore], 'readwrite')
+                    .objectStore(objectStore)
+                    .put(entry);
 
-            request.onsuccess = function(event) {
-                deferResult.resolve('player set');
-                $rootScope.$emit('players.list.update');
-            };
+                request.onsuccess = function(event) {
+                    deferResult.resolve('entry set');
+                };
+            });
 
             return deferResult.promise;
         }
 
-        function getAllPlayer() {
-            return _getAllEntry(storageConfig.playerObjectStore);
-        }
+        function getAllEntry(objectStore) {
+            var deferResult = $q.defer();
 
-        function _getAllEntry(objectStore) {
-            var deferResult = $q.defer(),
-                entries = [],
-                objectStore = db.transaction(objectStore).objectStore(objectStore);
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                var entries = [],
+                    table = database.transaction(objectStore).objectStore(objectStore);
 
-            objectStore.openCursor().onsuccess = function(event) {
-                var cursor = event.target.result;
+                table.openCursor().onsuccess = function(event) {
+                    var cursor = event.target.result;
 
-                if (cursor) {
-                    entries.push(cursor.value);
-                    cursor.continue();
-                } else {
-                    deferResult.resolve(entries);
-                }
-            };
+                    if (cursor) {
+                        entries.push(cursor.value);
+                        cursor.continue();
+                    } else {
+                        deferResult.resolve(entries);
+                    }
+                };
+            });
 
             return deferResult.promise;
         }
