@@ -1,5 +1,5 @@
 angular.module('basketballStat.matches')
-    .controller('MatchesController', function($scope) {
+    .controller('MatchesController', function($scope, MatchesDbService) {
         var vm = this;
         $scope.$on('$stateChangeStart', (event, toState) => {
             vm.activeView = false;
