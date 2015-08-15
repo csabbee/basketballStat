@@ -1,7 +1,8 @@
 angular.module('basketballStat.mainModule', [
     'basketballStat.helpers',
     'basketballStat.storage',
-    'basketballStat.matches'#,
+    'basketballStat.matches',
+    'basketballStat.players'
 ]).config(($stateProvider, $urlRouterProvider) => {
 	'use strict';
 
