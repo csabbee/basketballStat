@@ -7,8 +7,7 @@ angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => 
 		.state('app', {
 			url: '/app',
 			abstract: true,
-			templateUrl: 'menu.html',
-			controller: 'AppController as AppController'
+			templateUrl: 'menu.html'
 		})
 		.state('app.home', {
 			url: '/home',
