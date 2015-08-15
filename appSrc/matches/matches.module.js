@@ -29,7 +29,7 @@ angular.module('basketballStat.matches')
                 }
             })
     }).run((storageConfig, MatchesDbService, KeyGenerator)=> {
-        MatchesDbService.getAllMatches.then(matches => {
+        MatchesDbService.getAllMatches().then(function(matches) {
             var ids = matches.map(matches => matches.ssnId);
             KeyGenerator.setSeed({
                 store: storageConfig.matchesObjectStore,
