@@ -7,6 +7,13 @@
             <div class="col">
                 <div class="list" ng-hide="!MatchesController.activeView">
                     <h1>The Matches view</h1>
+                    <div class="item item-button-right" ng-repeat="match in MatchesController.matches">
+                        {{match |json}}
+                        <button class="button button-outline button-royal"
+                                ui-sref="app.matches.match({ssnId: match.ssnId})">
+                            <i class="icon ion-edit"></i>
+                        </button>
+                    </div>
                 </div>
                 <div ui-view name="match"></div>
             </div>

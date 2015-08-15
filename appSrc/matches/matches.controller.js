@@ -6,5 +6,11 @@ angular.module('basketballStat.matches')
         });
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.matches' ? true : false;
+            if(vm.activeView) {
+                MatchesDbService.getAllMatches().then(matches => {
+                    vm.matches = matches;
+                })
+            }
         });
+        vm.matches = {};
     });
