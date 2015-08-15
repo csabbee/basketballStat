@@ -9,6 +9,12 @@ angular.module('basketballStat.storage')
             updateEntry: updateEntry
         };
 
+        /**
+         *
+         * @param objectStore {String}
+         * @param entry {Object}
+         * @returns {Function|promise}
+         */
         function addEntry(objectStore, entry) {
             var deferResult = $q.defer();
 
@@ -27,7 +33,12 @@ angular.module('basketballStat.storage')
             return deferResult.promise;
         }
 
-
+        /**
+         *
+         * @param objectStore {String}
+         * @param key {String}
+         * @returns {Function|promise}
+         */
         function deleteEntry(objectStore, key) {
             var deferResult = $q.defer();
 
@@ -44,6 +55,12 @@ angular.module('basketballStat.storage')
             return deferResult.promise;
         }
 
+        /**
+         *
+         * @param objectStore {String}
+         * @param key {String}
+         * @returns {Function|promise}
+         */
         function getEntry(objectStore, key) {
             var deferResult = $q.defer();
 
@@ -61,6 +78,12 @@ angular.module('basketballStat.storage')
             return deferResult.promise;
         }
 
+        /**
+         *
+         * @param objectStore {String}
+         * @param entry {Object}
+         * @returns {Function|promise}
+         */
         function updateEntry(objectStore, entry) {
             var deferResult = $q.defer();
 
@@ -77,6 +100,11 @@ angular.module('basketballStat.storage')
             return deferResult.promise;
         }
 
+        /**
+         *
+         * @param objectStore {String}
+         * @returns {Function|promise}
+         */
         function getAllEntry(objectStore) {
             var deferResult = $q.defer();
 
