@@ -63,24 +63,6 @@ angular.module('basketballStat.mainModule', [
 				}
 			}
 		})
-		.state('app.matches', {
-			url: '/matches',
-			views: {
-				'menuContent': {
-					templateUrl: 'matches/matches.html',
-					controller: 'MatchesController as MatchesController'
-				}
-			}
-		})
-		.state('app.matches.new', {
-			url: '/new',
-			views: {
-				'match': {
-					templateUrl: 'matches/match/match.html',
-					controller: 'MatchController as MatchController'
-				}
-			}
-		})
 }).config(['$provide', function ($provide) {
 	'use strict';
 	$provide.decorator('$rootScope', ['$delegate', function ($delegate) {
