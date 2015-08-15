@@ -1,5 +1,5 @@
 angular.module('basketballStat.matches')
-    .service('MatchesDbService', (IndexedDbService, storageConfig)=> {
+    .service('MatchesDbService', (IndexedDbService, storageConfig, eventListing)=> {
         var matchesObjectStore = storageConfig.matchesObjectStore;
 
         return {
@@ -11,7 +11,7 @@ angular.module('basketballStat.matches')
         };
 
         function addMatch(match) {
-            return IndexedDbService.addEntry(matchesObjectStore, match);
+            return IndexedDbService.addEntry(matchesObjectStore, match, eventListing.matchListUpdate);
         }
 
         function getAllMatches() {
@@ -19,14 +19,14 @@ angular.module('basketballStat.matches')
         }
 
         function getMatch(key) {
-            return IndexedDbService.getEntry(matchesObjectStore, key);
+            return IndexedDbService.getEntry(matchesObjectStore, key, eventListing.matchListUpdate);
         }
 
         function deleteMatch(key) {
-            return IndexedDbService.deleteEntry(matchesObjectStore, key);
+            return IndexedDbService.deleteEntry(matchesObjectStore, key, eventListing.matchListUpdate);
         }
 
         function updateMatch(match) {
-            return IndexedDbService.getAllEntry(matchesObjectStore, match);
+            return IndexedDbService.getAllEntry(matchesObjectStore, match, eventListing.matchListUpdate);
         }
     });
