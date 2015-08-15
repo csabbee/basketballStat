@@ -1,4 +1,4 @@
-angular.module('basketballStat')
+angular.module('basketballStat.matches')
     .controller('MatchesController', function($scope) {
         var vm = this;
         $scope.$on('$stateChangeStart', (event, toState) => {
