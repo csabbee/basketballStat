@@ -1,4 +1,4 @@
-angular.module('basketballStat')
+angular.module('basketballStat.players')
     .controller('PlayerController', function($scope, IndexedDbService, $stateParams, StateHandler) {
         var vm = this,
             backupPlayer;
