@@ -1,4 +1,5 @@
 var log = require('gulp-util').log;
+var chalk = require( 'chalk' );
 var exports = module.exports = {};
 
 exports.logFilePath = logFilePath;
@@ -15,8 +16,13 @@ function injectModule(es, opt) {
     return es.map(function(file, cb) {
         var regex = /angular\.module\(\'([\S]+)\'\)/g;
         var content = String(file.contents);
-        var firstMatch = regex.exec(content)[0];
-        file.contents = new Buffer(addTryCatch(firstMatch) + content);
+        try {
+            var firstMatch = regex.exec(content)[0];
+            file.contents = new Buffer(addTryCatch(firstMatch) + content);
+        } catch (e) {
+            log(chalk.red(e));
+            log(chalk.cyan('No match found for regex: ' + regex + ' in: ' + file.path));
+        }
         return cb(null, file);
     });
 }
