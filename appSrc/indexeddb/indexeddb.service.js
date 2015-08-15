@@ -10,12 +10,12 @@ angular.module('basketballStat.storage')
         };
 
         /**
-         *
          * @param objectStore {String}
          * @param entry {Object}
+         * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
-        function addEntry(objectStore, entry) {
+        function addEntry(objectStore, entry, ...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
@@ -26,6 +26,11 @@ angular.module('basketballStat.storage')
                     .add(entry);
                 request.onsuccess = function(event) {
                     deferResult.resolve(event.target.result);
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
                 };
 
             });
@@ -39,7 +44,7 @@ angular.module('basketballStat.storage')
          * @param key {String}
          * @returns {Function|promise}
          */
-        function deleteEntry(objectStore, key) {
+        function deleteEntry(objectStore, key, ...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
@@ -49,6 +54,11 @@ angular.module('basketballStat.storage')
 
                 request.onsuccess = function(event) {
                     deferResult.resolve(event.target.result);
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
                 };
             });
 
@@ -61,7 +71,7 @@ angular.module('basketballStat.storage')
          * @param key {String}
          * @returns {Function|promise}
          */
-        function getEntry(objectStore, key) {
+        function getEntry(objectStore, key, ...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
@@ -72,6 +82,11 @@ angular.module('basketballStat.storage')
 
                 request.onsuccess = function(event) {
                     deferResult.resolve(event.target.result);
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
                 };
             });
 
@@ -84,7 +99,7 @@ angular.module('basketballStat.storage')
          * @param entry {Object}
          * @returns {Function|promise}
          */
-        function updateEntry(objectStore, entry) {
+        function updateEntry(objectStore, entry, ...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
@@ -94,6 +109,11 @@ angular.module('basketballStat.storage')
 
                 request.onsuccess = function(event) {
                     deferResult.resolve('entry set');
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
                 };
             });
 
