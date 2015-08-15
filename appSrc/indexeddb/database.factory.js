@@ -9,27 +9,6 @@ angular.module('basketballStat.storage')
             getDb: getDb
         };
 
-        (function() {
-            var request = window.indexedDB.open(storageConfig.database, '2');
-
-                request.onerror = function(event) {
-                };
-
-                request.onsuccess = function(event) {
-                    console.log('success', event);
-                    database = event.target.result;
-                };
-
-                request.onupgradeneeded = function(event) {
-                    database = event.target.result;
-
-                    var objectstore = database.createObjectStore(objectStore, { keyPath : 'ssnId' });
-                    objectstore.transaction.oncomplete = function(event) {
-                        console.log('objectstore created', event.target.result);
-                    }
-                };
-        })();
-
         function getDb(objectStore) {
             var db = $q.defer();
 
