@@ -10,12 +10,21 @@ angular.module('basketballStat.matches')
                     }
                 }
             })
-            .state('app.matches.new', {
-                url: '/new',
+            .state('app.matches.match', {
+                url: '/:ssId',
                 views: {
                     'match': {
                         templateUrl: 'matches/match/match.html',
                         controller: 'MatchController as MatchController'
+                    }
+                }
+            })
+            .state('app.matches.new', {
+                url: '/new',
+                views: {
+                    'match': {
+                        templateUrl: 'matches/new-match/new-match.html',
+                        controller: 'NewMatchController as NewMatchController'
                     }
                 }
             })
