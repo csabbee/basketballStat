@@ -1,4 +1,7 @@
-angular.module('basketballStat').config(($stateProvider, $urlRouterProvider) => {
+angular.module('basketballStat.mainModule', [
+    'basketballStat.helpers',
+    'basketballStat.storage',
+]).config(($stateProvider, $urlRouterProvider) => {
 	'use strict';
 
 	$urlRouterProvider.otherwise('/app/home');
