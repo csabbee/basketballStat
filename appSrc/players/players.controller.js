@@ -13,11 +13,6 @@ angular.module('basketballStat.players')
                 })
             }
         });
-        $scope.$onRootScope('players.list.update', () => {
-            PlayersDbService.getAllPlayer().then(players => {
-                vm.players = players;
-            });
-        });
 
         vm.players = {};
     });
