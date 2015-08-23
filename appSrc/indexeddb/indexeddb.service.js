@@ -1,5 +1,5 @@
 angular.module('basketballStat.storage')
-    .service('IndexedDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator) {
+    .service('IndexedDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast) {
 
         return {
             getAllEntry: getAllEntry,
@@ -15,7 +15,7 @@ angular.module('basketballStat.storage')
          * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
-        function addEntry(objectStore, entry, ...eventsToEmit) {
+        function addEntry(objectStore, entry, toastMessage,...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
@@ -26,6 +26,12 @@ angular.module('basketballStat.storage')
                     .add(entry);
                 request.onsuccess = function(event) {
                     deferResult.resolve(event.target.result);
+                    $cordovaToast.show(`${toastMessage} added`, 'long', 'center')
+                        .then(function(success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
                     if(!_.isUndefined(eventsToEmit)) {
                         eventsToEmit.forEach(eventToEmit => {
                             $rootScope.$emit(eventToEmit);
@@ -54,6 +60,13 @@ angular.module('basketballStat.storage')
 
                 request.onsuccess = function(event) {
                     deferResult.resolve(event.target.result);
+
+                    $cordovaToast.show(`Deleted`, 'long', 'center')
+                        .then(function(success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
                     if(!_.isUndefined(eventsToEmit)) {
                         eventsToEmit.forEach(eventToEmit => {
                             $rootScope.$emit(eventToEmit);
@@ -99,7 +112,7 @@ angular.module('basketballStat.storage')
          * @param entry {Object}
          * @returns {Function|promise}
          */
-        function updateEntry(objectStore, entry, ...eventsToEmit) {
+        function updateEntry(objectStore, entry, toastMessage,...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
@@ -109,6 +122,12 @@ angular.module('basketballStat.storage')
 
                 request.onsuccess = function(event) {
                     deferResult.resolve('entry set');
+                    $cordovaToast.show(`${toastMessage} saved`, 'long', 'center')
+                        .then(function(success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
                     if(!_.isUndefined(eventsToEmit)) {
                         eventsToEmit.forEach(eventToEmit => {
                             $rootScope.$emit(eventToEmit);

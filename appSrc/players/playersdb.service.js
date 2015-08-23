@@ -11,7 +11,7 @@ angular.module('basketballStat.players')
         };
 
         function addPlayer(player) {
-            return IndexedDbService.addEntry(playerObjectStore, player, eventListing.playerListUpdate);
+            return IndexedDbService.addEntry(playerObjectStore, player, `${player.firstName} ${player.lastName}`,eventListing.playerListUpdate);
         }
 
         function deletePlayer(key) {
@@ -23,7 +23,7 @@ angular.module('basketballStat.players')
         }
 
         function updatePlayer(player) {
-            return IndexedDbService.updateEntry(playerObjectStore, player, eventListing.playerListUpdate);
+            return IndexedDbService.updateEntry(playerObjectStore, player, `${player.firstName} ${player.lastName}`, eventListing.playerListUpdate);
         }
 
         function getAllPlayer() {

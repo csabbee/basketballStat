@@ -11,7 +11,7 @@ angular.module('basketballStat.matches')
         };
 
         function addMatch(match) {
-            return IndexedDbService.addEntry(matchesObjectStore, match, eventListing.matchListUpdate);
+            return IndexedDbService.addEntry(matchesObjectStore, match, '',eventListing.matchListUpdate);
         }
 
         function getAllMatches() {
@@ -23,10 +23,10 @@ angular.module('basketballStat.matches')
         }
 
         function deleteMatch(key) {
-            return IndexedDbService.deleteEntry(matchesObjectStore, key, eventListing.matchListUpdate);
+            return IndexedDbService.deleteEntry(matchesObjectStore, key, '',eventListing.matchListUpdate);
         }
 
         function updateMatch(match) {
-            return IndexedDbService.getAllEntry(matchesObjectStore, match, eventListing.matchListUpdate);
+            return IndexedDbService.getAllEntry(matchesObjectStore, match, '',eventListing.matchListUpdate);
         }
     });
