@@ -8,12 +8,13 @@ angular.module('basketballStat.helpers')
         };
 
         function link(scope, element, attributes) {
+            $ionicScrollDelegate.$getByHandle(attributes.fixedScrollHeight).scrollTop();
             var scrollView = $ionicScrollDelegate.$getByHandle(attributes.fixedScrollHeight).getScrollView();
             scrollView.onScroll = function() {
                 var translate3d = parseTranslate3d(scrollView.contentTransform.split(' ')[0]);
                 var scale = scrollView.contentTransform.split(' ')[1];
                 element.css('transform', `translate3d(${translate3d.x}px,${-translate3d.y}px,${translate3d.z}px)
-                ${scale}`);
+               ${scale}`);
             };
         }
 
