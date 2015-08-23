@@ -1,9 +1,9 @@
-<div class="list card">
-    <div class="item item-divider">
-        Match Data
-    </div>
-    <div class="item item-body">
-        <form name="form" class="list" novalidate>
+<form name="form" class="list" novalidate>
+    <div class="list card">
+        <div class="item item-divider">
+            Match Data
+        </div>
+        <div class="item item-body">
             <label class="item item-input-inset item-floating-label">
                 <span class="input-label">Opponent</span>
                 <input type="text" placeholder="Opponent"
@@ -13,20 +13,21 @@
                     <span ng-show="form.opponent.$error.required">Opponent is required</span>
                 </span>
             </label>
-        </form>
+        </div>
+        <div class="item item-divider">
+            Players participating
+        </div>
+        <ul class="list">
+            <li ng-repeat="player in NewMatchController.players" class="item item-checkbox">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="match.playerIds[player.ssnId]" id="{{player.ssnId}}">
+                </label>
+                {{player.firstName}} {{player.lastName}}
+            </li>
+        </ul>
     </div>
-    <div class="item item-divider">
-        Players participating
-    </div>
-    <ul class="list">
-        <li ng-repeat="player in NewMatchController.players" class="item item-checkbox">
-            <label class="checkbox">
-                <input type="checkbox">
-            </label>
-            {{player.firstName}} {{player.lastName}}
-        </li>
-    </ul>
-</div>
+</form>
 <ion-footer-bar fixed-scroll-height="matchesScroll" align-title="left" class="bar-clear">
-    <button class="button button-clear button-calm pull-right icon ion-checkmark-round"></button>
+    <button class="button button-clear button-calm pull-right icon ion-checkmark-round"
+            ng-click="NewMatchController.save(match, form)"></button>
 </ion-footer-bar>
