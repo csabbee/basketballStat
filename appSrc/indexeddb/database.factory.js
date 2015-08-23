@@ -11,7 +11,7 @@ angular.module('basketballStat.storage')
 
         function getDb(objectStore) {
             var db = $q.defer();
-            var request = window.indexedDB.open(storageConfig.database, '3');
+            var request = window.indexedDB.open(storageConfig.database, '4');
 
             request.onerror = function(event) {
             };
