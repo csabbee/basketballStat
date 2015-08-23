@@ -1,5 +1,5 @@
 angular.module('basketballStat.players')
-    .controller('PlayerController', function($scope, PlayersDbService, $stateParams, StateHandler) {
+    .controller('PlayerController', function($scope, PlayersDbService, $stateParams, StateHandler, $ionicScrollDelegate) {
         var vm = this,
             backupPlayer;
 
@@ -8,6 +8,9 @@ angular.module('basketballStat.players')
         });
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.players.player' ? true : false;
+            if(vm.activeView) {
+                $ionicScrollDelegate.scrollTop();
+            }
         });
 
         PlayersDbService.getPlayer($stateParams.ssnId).then(player => {
