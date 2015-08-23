@@ -11,7 +11,7 @@ angular.module('basketballStat.matches')
         };
 
         function addMatch(match) {
-            return IndexedDbService.addEntry(matchesObjectStore, match, '',eventListing.matchListUpdate);
+            return IndexedDbService.addEntry(matchesObjectStore, match, 'Match',eventListing.matchListUpdate);
         }
 
         function getAllMatches() {
