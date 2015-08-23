@@ -1,5 +1,5 @@
 angular.module('basketballStat.players')
-    .controller('NewPlayerController', function($scope, PlayersDbService, $stateParams, StateHandler, $cordovaToast) {
+    .controller('NewPlayerController', function($scope, PlayersDbService, $stateParams, StateHandler) {
         var vm = this;
 
         vm.goBack = function() {
@@ -18,12 +18,6 @@ angular.module('basketballStat.players')
             if (form.$dirty && form.$valid) {
                 PlayersDbService.addPlayer(player)
                     .then(() => {
-                        $cordovaToast.show(`Player ${player.firstName} ${player.lastName} added`, 'long', 'center')
-                            .then(function(success) {
-                                // success
-                            }, function (error) {
-                                // error
-                            });
                         StateHandler.goBack();
                     });
             }
