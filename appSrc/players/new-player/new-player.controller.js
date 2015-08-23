@@ -18,7 +18,7 @@ angular.module('basketballStat.players')
             if (form.$dirty && form.$valid) {
                 PlayersDbService.addPlayer(player)
                     .then(() => {
-                        $cordovaToast.show(`Player ${player.firstName} ${player.lastName} saved`, 'long', 'center')
+                        $cordovaToast.show(`Player ${player.firstName} ${player.lastName} added`, 'long', 'center')
                             .then(function(success) {
                                 // success
                             }, function (error) {
