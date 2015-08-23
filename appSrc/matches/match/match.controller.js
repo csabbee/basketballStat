@@ -1,4 +1,9 @@
 angular.module('basketballStat.matches')
-    .controller('MatchController', function() {
-        console.log('match ctrl');
+    .controller('MatchController', function($scope, MatchesDbService, $stateParams, StateHandler, $ionicScrollDelegate) {
+        var vm = this;
+        $ionicScrollDelegate.scrollTop();
+
+        MatchesDbService.getMatch($stateParams.ssnId).then(match => {
+            vm.match = match;
+        });
     });
