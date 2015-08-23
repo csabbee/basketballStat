@@ -1,6 +1,21 @@
 .bar-footer > .button.pull-right {
-  top: 0px;
+  top: -50px;
 }
 .bar-footer > .button.button-clear.icon:before, {
   font-size: 50px;
+}
+.bar-footer > .button.button-calm.icon:before, {
+  font-size: 40px;
+}
+
+.bar-subfooter {
+  top: 400px;
+}
+
+.bottom-padding {
+  padding-bottom: 25px;
+}
+
+.height-fix {
+  padding-bottom: 50px;
 }

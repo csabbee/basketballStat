@@ -24,7 +24,12 @@ angular.module('basketballStat.matches')
                 views: {
                     'match': {
                         templateUrl: 'matches/new-match/new-match.html',
-                        controller: 'NewMatchController as NewMatchController'
+                        controller: 'NewMatchController as NewMatchController',
+                        resolve: {
+                            players: function(PlayersDbService) {
+                                return PlayersDbService.getAllPlayer();
+                            }
+                        }
                     }
                 }
             })
