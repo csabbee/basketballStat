@@ -1,5 +1,7 @@
-.bar-footer > .button.pull-right {
-  top: -60px;
+.bar-footer {
+  .button.pull-right {
+    top: -60px;
+  }
 }
 .bar-footer > .button.button-clear.icon:before, {
   font-size: 50px;
