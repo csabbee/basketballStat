@@ -9,7 +9,7 @@ angular.module('basketballStat.players')
             vm.activeView = toState.name === 'app.players' ? true : false;
             if (vm.activeView) {
                 PlayersDbService.getAllPlayer().then(players => {
-                    vm.players = players;
+                    vm.players = _.pluck(players, 'doc');
                 })
             }
         });

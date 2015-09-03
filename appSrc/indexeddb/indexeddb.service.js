@@ -1,6 +1,5 @@
 angular.module('basketballStat.storage')
     .service('IndexedDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast) {
-
         return {
             getAllEntry: getAllEntry,
             addEntry: addEntry,
@@ -19,13 +18,8 @@ angular.module('basketballStat.storage')
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
-                entry.ssnId = KeyGenerator.nextKey(objectStore);
-
-                var request = database.transaction([objectStore], 'readwrite')
-                    .objectStore(objectStore)
-                    .add(entry);
-                request.onsuccess = function(event) {
-                    deferResult.resolve(event.target.result);
+                _.extend(entry, {'_id': KeyGenerator.nextKey(objectStore)});
+                database.put(entry).then(() => {
                     $cordovaToast.show(`${toastMessage} added`, 'long', 'center')
                         .then(function(success) {
                             // success
@@ -37,8 +31,9 @@ angular.module('basketballStat.storage')
                             $rootScope.$emit(eventToEmit);
                         });
                     }
-                };
-
+                }, function(err) {
+                    console.log(err);
+                });
             });
 
             return deferResult.promise;
@@ -47,20 +42,16 @@ angular.module('basketballStat.storage')
         /**
          *
          * @param objectStore {String}
-         * @param key {String}
+         * @param entry {Object}
+         * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
-        function deleteEntry(objectStore, key, ...eventsToEmit) {
+        function deleteEntry(objectStore, entry, ...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
-                var request = database.transaction([objectStore], 'readwrite')
-                    .objectStore(objectStore)
-                    .delete(key);
-
-                request.onsuccess = function(event) {
-                    deferResult.resolve(event.target.result);
-
+                database.remove(entry).then(()=> {
+                    deferResult.resolve('deleteted');
                     $cordovaToast.show(`Deleted`, 'long', 'center')
                         .then(function(success) {
                             // success
@@ -72,7 +63,7 @@ angular.module('basketballStat.storage')
                             $rootScope.$emit(eventToEmit);
                         });
                     }
-                };
+                });
             });
 
             return deferResult.promise;
@@ -82,25 +73,21 @@ angular.module('basketballStat.storage')
          *
          * @param objectStore {String}
          * @param key {String}
+         * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
         function getEntry(objectStore, key, ...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
-                var request = database.transaction([objectStore])
-                    .objectStore(objectStore)
-                    // This is needed because it tends to be converted to string
-                    .get(+key);
-
-                request.onsuccess = function(event) {
-                    deferResult.resolve(event.target.result);
+                database.get(key+'').then(entry => {
+                    deferResult.resolve(entry);
                     if(!_.isUndefined(eventsToEmit)) {
                         eventsToEmit.forEach(eventToEmit => {
                             $rootScope.$emit(eventToEmit);
                         });
                     }
-                };
+                });
             });
 
             return deferResult.promise;
@@ -110,17 +97,15 @@ angular.module('basketballStat.storage')
          *
          * @param objectStore {String}
          * @param entry {Object}
+         * @param toastMessage {String}
+         * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
         function updateEntry(objectStore, entry, toastMessage,...eventsToEmit) {
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
-                var request = database.transaction([objectStore], 'readwrite')
-                    .objectStore(objectStore)
-                    .put(entry);
-
-                request.onsuccess = function(event) {
+                database.put(entry).then(entry => {
                     deferResult.resolve('entry set');
                     $cordovaToast.show(`${toastMessage} saved`, 'long', 'center')
                         .then(function(success) {
@@ -133,7 +118,7 @@ angular.module('basketballStat.storage')
                             $rootScope.$emit(eventToEmit);
                         });
                     }
-                };
+                });
             });
 
             return deferResult.promise;
@@ -148,19 +133,9 @@ angular.module('basketballStat.storage')
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
-                var entries = [],
-                    table = database.transaction(objectStore).objectStore(objectStore);
-
-                table.openCursor().onsuccess = function(event) {
-                    var cursor = event.target.result;
-
-                    if (cursor) {
-                        entries.push(cursor.value);
-                        cursor.continue();
-                    } else {
-                        deferResult.resolve(entries);
-                    }
-                };
+                database.allDocs({include_docs: true}).then(docs => {
+                    deferResult.resolve(docs.rows);
+                });
             });
 
             return deferResult.promise;

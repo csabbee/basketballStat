@@ -13,7 +13,7 @@ angular.module('basketballStat.players')
                 }
             })
             .state('app.players.player', {
-                url: '/:ssnId',
+                url: '/:_id',
                 views: {
                     'player': {
                         templateUrl: 'players/player/player.html',
@@ -33,7 +33,7 @@ angular.module('basketballStat.players')
         // We 'pre-initialize' the database/object store
     }).run((storageConfig, KeyGenerator, PlayersDbService) => {
         PlayersDbService.getAllPlayer().then(players => {
-            var ids = players.map(players => players.ssnId);
+            var ids = players.map(player => parseFloat(player.doc._id));
             KeyGenerator.setSeed({
                 store: storageConfig.playerObjectStore,
                 usedIds: ids

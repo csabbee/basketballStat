@@ -19,6 +19,7 @@ angular.module('basketballStat.matches')
         }
 
         function getMatch(key) {
+            console.log(key);
             return IndexedDbService.getEntry(matchesObjectStore, key, eventListing.matchListUpdate);
         }
 

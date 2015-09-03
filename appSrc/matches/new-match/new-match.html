@@ -20,7 +20,7 @@
         <ul class="list">
             <li ng-repeat="player in NewMatchController.players" class="item item-checkbox">
                 <label class="checkbox">
-                    <input type="checkbox" ng-model="match.playerIds[player.ssnId]" id="{{player.ssnId}}">
+                    <input type="checkbox" ng-model="match.playerIds[player._id]" id="{{player._id}}">
                 </label>
                 {{player.firstName}} {{player.lastName}}
             </li>

@@ -59,6 +59,10 @@ gulp.task('javascript', function() {
     return gulp.src(paths.js)
         .pipe(sourcemaps.init())
         .pipe(babel())
+        .on('error', function(err) {
+            console.log(err);
+            this.emit('end');
+        })
         .pipe(ngAnnotate())
         .pipe(modularize.injectModule(es))
         .pipe(concant('basketballStat.js'))

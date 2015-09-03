@@ -13,7 +13,7 @@ angular.module('basketballStat.players')
             }
         });
 
-        PlayersDbService.getPlayer($stateParams.ssnId).then(player => {
+        PlayersDbService.getPlayer($stateParams._id).then(player => {
             vm.player = player;
             $scope.player = angular.copy(player);
             backupPlayer = angular.copy(player);
@@ -32,7 +32,7 @@ angular.module('basketballStat.players')
         };
 
         vm.delete = function() {
-            PlayersDbService.deletePlayer(vm.player.ssnId)
+            PlayersDbService.deletePlayer(vm.player)
                 .then(() => {
                     StateHandler.goBack();
                 });

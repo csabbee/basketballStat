@@ -19,8 +19,8 @@ angular.module('basketballStat.matches')
         };
 
         function idPresent(playerIds, player) {
-            return _.contains(playerIds, ''+player.ssnId);
+            return _.contains(playerIds, ''+player._id);
         }
-        vm.players = players;
+        vm.players = _.pluck(players, 'doc');
         $scope.match = {};
     });

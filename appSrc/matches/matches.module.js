@@ -11,7 +11,7 @@ angular.module('basketballStat.matches')
                 }
             })
             .state('app.matches.match', {
-                url: '/:ssnId',
+                url: '/:_id',
                 views: {
                     'match': {
                         templateUrl: 'matches/match/match.html',
@@ -35,7 +35,7 @@ angular.module('basketballStat.matches')
             })
     }).run((storageConfig, MatchesDbService, KeyGenerator)=> {
         MatchesDbService.getAllMatches().then(function(matches) {
-            var ids = matches.map(matches => matches.ssnId);
+            var ids = matches.map(match => parseFloat(match.doc._id));
             KeyGenerator.setSeed({
                 store: storageConfig.matchesObjectStore,
                 usedIds: ids
