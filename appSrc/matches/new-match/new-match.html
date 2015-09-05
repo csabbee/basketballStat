@@ -28,13 +28,10 @@
     </div>
 </form>
 <fixed-scroll-footer
+        scroll-delegate="matchesScroll"
         left-button-class="button-clear button-energized"
         left-button-icon="ion-arrow-left-b"
         left-button-click="NewMatchController.goBack()"
         right-button-class="button-clear button-calm"
         right-button-icon="ion-checkmark-round"
         right-button-click="NewMatchController.save(match, form)"></fixed-scroll-footer>
-<!--<ion-footer-bar fixed-scroll-height="matchesScroll" align-title="left" class="bar-clear">-->
-    <!--<button class="button button-clear button-calm pull-right icon ion-checkmark-round"-->
-            <!--ng-click="NewMatchController.save(match, form)"></button>-->
-<!--</ion-footer-bar>-->

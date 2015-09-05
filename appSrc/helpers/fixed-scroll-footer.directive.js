@@ -8,10 +8,11 @@ angular.module('basketballStat.helpers')
                 rightButtonClass: '@',
                 leftButtonClick: '&',
                 leftButtonIcon: '@',
-                leftButtonClass: '@'
+                leftButtonClass: '@',
+                scrollDelegate: '@'
             },
             link: link,
-            template:  `<ion-footer-bar fixed-scroll-height align-title="left" class="bar-clear">
+            template:  `<ion-footer-bar fixed-scroll-height="{{scrollDelegate}}" align-title="left" class="bar-clear">
                             <button class="button footer-pull-left icon"
                                 ng-class="[leftButtonClass, leftButtonIcon]"
                                 ng-click="leftButtonClick()"></button>

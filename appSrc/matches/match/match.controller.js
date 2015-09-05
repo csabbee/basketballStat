@@ -6,4 +6,8 @@ angular.module('basketballStat.matches')
         MatchesDbService.getMatch($stateParams._id).then(match => {
             vm.match = match;
         });
+
+        vm.goBack = function() {
+            StateHandler.goBack();
+        }
     });

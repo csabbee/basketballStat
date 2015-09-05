@@ -4,3 +4,9 @@
     <p>Date: {{MatchController.match.time | date:'MMM d, yyyy HH:mm'}}</p>
     <p>{{ MatchController.match | json}}</p>
 </div>
+
+<fixed-scroll-footer
+        scroll-delegate="matchesScroll"
+        left-button-class="button-clear button-positive"
+        left-button-icon="ion-arrow-left-b"
+        left-button-click="MatchController.goBack()"></fixed-scroll-footer>
