@@ -1,6 +1,6 @@
 <h1>This is the match view</h1>
 
 <div>
+    <p>Date: {{MatchController.match.time | date:'MMM d, yyyy HH:mm'}}</p>
     <p>{{ MatchController.match | json}}</p>
-    <p>Date: {{MatchController.match.time | date:'medium'}}</p>
 </div>

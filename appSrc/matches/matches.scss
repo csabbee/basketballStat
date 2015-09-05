@@ -1,13 +1,38 @@
-.bar-footer {
-  .button.pull-right {
+@import "../variables";
+
+
+.bar {
+  .button + .button:last-child {
     top: -60px;
+    border: 2px;
+    right: 5px;
   }
 }
-.bar-footer > .button.button-clear.icon:before, {
-  font-size: 50px;
+
+.bar-footer {
+  & .button {
+    position: absolute;
+  }
+  .button.footer-pull-right {
+    top: -60px;
+    border: 2px;
+    right: 5px;
+    height: 42px;
+  }
+  .button.footer-pull-left {
+    top: -60px;
+    left: 5px;
+    border: 2px;
+    height: 42px;
+  }
 }
-.bar-footer > .button.button-calm.icon:before, {
-  font-size: 40px;
+.bar-footer {
+  .button.button-clear.icon:before, {
+    font-size: 50px;
+  }
+  .button.button-calm.icon:before, {
+    font-size: 40px;
+  }
 }
 
 .bottom-padding {
@@ -16,4 +41,95 @@
 
 .height-fix {
   padding-bottom: 50px;
+}
+.platform-android .action-sheet-backdrop.active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.platform-android .action-sheet {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.platform-android .action-sheet .action-sheet-title, .platform-android .action-sheet .button {
+  border-color: #cccccc;
+  color: inherit;
+}
+
+.platform-android .action-sheet .button {
+  font-size: 20px;
+  text-align: center;
+  color: $relaxed-color;
+  &.destructive {
+    color: $danger-color;
+  }
+}
+
+.platform-android .action-sheet .action-sheet-title {
+  font-size: 14px;
+  padding: 16px;
+  color: #666;
+}
+
+.platform-android .action-sheet .button.active, .platform-android .action-sheet .button.activated {
+  text-align: center;
+  background: #e8e8e8;
+}
+
+.platform-android .action-sheet-group {
+  margin-bottom: 8px;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+.platform-android .action-sheet-cancel {
+  display: none;
+}
+
+.platform-android .action-sheet-has-icons .button {
+  padding-left: 56px;
+}
+
+.action-sheet-backdrop.active {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.action-sheet {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.action-sheet .action-sheet-title, .action-sheet .button {
+  border-color: #cccccc;
+  font-size: 20px;
+  color: $relaxed-color;
+  &.destructive {
+    color: $danger-color;
+  }
+}
+
+.action-sheet .action-sheet-title {
+  font-size: 14px;
+  padding: 16px;
+  color: #666;
+}
+
+.action-sheet .button.active, .action-sheet .button.activated {
+  text-align: center;
+  background: #e8e8e8;
+}
+
+.action-sheet-group {
+  margin-bottom: 8px;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+.action-sheet-cancel {
+  display: none;
+}
+
+.action-sheet-has-icons .button {
+  padding-left: 56px;
 }

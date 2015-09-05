@@ -7,19 +7,19 @@
             <div class="col">
                 <div class="list" >
                     <h1>The Matches view</h1>
-                    <div class="item item-button-right" ng-repeat="match in MatchesController.matches">
+                    <div class="item item-button-right" ng-repeat="match in MatchesController.matches" ng-click="MatchesController.show(match)">
                         {{ match.time | date:'MMM dd, yyyy'}} - {{match.opponent}}
-                        <button class="button button-outline button-energized"
-                                ui-sref="app.matches.match({_id: match._id})">
-                            <i class="icon ion-search"></i>
-                        </button>
+                        <!--<button class="button button-outline button-energized"-->
+                                <!--ui-sref="app.matches.match({_id: match._id})">-->
+                            <!--<i class="icon ion-search"></i>-->
+                        <!--</button>-->
                     </div>
                 </div>
             </div>
         </div>
         <div ui-view name="match" class="height-fix"></div>
         <div class="bar bar-footer" ng-if="MatchesController.activeView" fixed-scroll-height="matchesScroll">
-            <button class="button button-clear button-balanced pull-right icon ion-ios-plus"
+            <button class="button button-clear button-balanced footer-pull-right icon ion-ios-plus"
                     ui-sref="app.matches.new"></button>
         </div>
     </ion-content>

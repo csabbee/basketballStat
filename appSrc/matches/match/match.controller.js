@@ -3,7 +3,7 @@ angular.module('basketballStat.matches')
         var vm = this;
         $ionicScrollDelegate.scrollTop();
 
-        MatchesDbService.getMatch($stateParams.ssnId).then(match => {
+        MatchesDbService.getMatch($stateParams._id).then(match => {
             vm.match = match;
         });
     });

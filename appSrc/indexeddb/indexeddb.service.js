@@ -11,6 +11,7 @@ angular.module('basketballStat.storage')
         /**
          * @param objectStore {String}
          * @param entry {Object}
+         * @param toastMessage {String}
          * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
@@ -18,8 +19,9 @@ angular.module('basketballStat.storage')
             var deferResult = $q.defer();
 
             basketballStatDatabase.getDb(objectStore).then(function(database) {
-                _.extend(entry, {'_id': KeyGenerator.nextKey(objectStore)});
+                _.extend(entry, {'_id': KeyGenerator.nextKey(objectStore)+''});
                 database.put(entry).then(() => {
+                    deferResult.resolve('Added');
                     $cordovaToast.show(`${toastMessage} added`, 'long', 'center')
                         .then(function(success) {
                             // success
@@ -63,6 +65,8 @@ angular.module('basketballStat.storage')
                             $rootScope.$emit(eventToEmit);
                         });
                     }
+                },()=> {
+                    $cordovaToast.show('Error while deleting' ,'long', 'center');
                 });
             });
 

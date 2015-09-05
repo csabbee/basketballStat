@@ -22,12 +22,19 @@
                 <label class="checkbox">
                     <input type="checkbox" ng-model="match.playerIds[player._id]" id="{{player._id}}">
                 </label>
-                {{player.firstName}} {{player.lastName}}
+                {{::player.firstName}} {{::player.lastName}}
             </li>
         </ul>
     </div>
 </form>
-<ion-footer-bar fixed-scroll-height="matchesScroll" align-title="left" class="bar-clear">
-    <button class="button button-clear button-calm pull-right icon ion-checkmark-round"
-            ng-click="NewMatchController.save(match, form)"></button>
-</ion-footer-bar>
+<fixed-scroll-footer
+        left-button-class="button-clear button-energized"
+        left-button-icon="ion-arrow-left-b"
+        left-button-click="NewMatchController.goBack()"
+        right-button-class="button-clear button-calm"
+        right-button-icon="ion-checkmark-round"
+        right-button-click="NewMatchController.save(match, form)"></fixed-scroll-footer>
+<!--<ion-footer-bar fixed-scroll-height="matchesScroll" align-title="left" class="bar-clear">-->
+    <!--<button class="button button-clear button-calm pull-right icon ion-checkmark-round"-->
+            <!--ng-click="NewMatchController.save(match, form)"></button>-->
+<!--</ion-footer-bar>-->

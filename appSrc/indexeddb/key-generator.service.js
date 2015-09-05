@@ -33,7 +33,7 @@ angular.module('basketballStat.storage')
             var generatorObj = _.find(generators, generator => generator.store === store),
                 maxId = _.max(generatorObj.usedIds.map(id => parseFloat(id))),
                 nextKey = _.first(_.difference(_.range(maxId), generatorObj.usedIds));
-            nextKey = !_.isUndefined(nextKey) && _.isFinite(nextKey) ? nextKey : !_.isUndefined(maxId) && _.isFinite(maxId) ? ++maxId+'' : 0+'';
+            nextKey = !_.isUndefined(nextKey) && _.isFinite(nextKey) ? nextKey : !_.isUndefined(maxId) && _.isFinite(maxId) ? ++maxId+'' : '0';
             generatorObj.usedIds.push(parseFloat(nextKey));
 
             return nextKey;
