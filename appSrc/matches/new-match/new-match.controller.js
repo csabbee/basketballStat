@@ -1,5 +1,5 @@
 angular.module('basketballStat.matches')
-    .controller('NewMatchController', function(MatchesDbService, players, $scope, $cordovaToast, StateHandler) {
+    .controller('NewMatchController', function(MatchesDbService, players, $scope, $cordovaToast, StateHandler, $ionicPopup) {
         var vm = this,
             timeStamp = new Date();
 
@@ -17,8 +17,20 @@ angular.module('basketballStat.matches')
             }
         };
 
-        vm.goBack = function() {
-            StateHandler.goBack();
+        vm.goBack = function(form) {
+            if (form.$dirty) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Navigating away',
+                    template: 'Are you sure you want to navigate away from the page?'
+                });
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        StateHandler.goBack();
+                    }
+                });
+            } else {
+                StateHandler.goBack();
+            }
         };
 
         function idPresent(playerIds, player) {
