@@ -1,0 +1,12 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">{{MatchController.currentPlayer.firstName}} {{MatchController.currentPlayer.lastName}}</h1>
+        <button class="button button-clear button-dark icon ion-chevron-down" ng-click="closeModal()"></button>
+    </ion-header-bar>
+    <ion-content>
+        Hello!
+        <div>
+            {{MatchController.currentPlayer}}
+        </div>
+    </ion-content>
+</ion-modal-view>

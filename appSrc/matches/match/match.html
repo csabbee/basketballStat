@@ -1,5 +1,9 @@
-<h1>This is the match view</h1>
-
+<match-nav-bar></match-nav-bar>
+<ion-list>
+    <ion-item ng-repeat="player in MatchController.match.players" ng-click="MatchController.show(player)">
+        {{player.firstName}} {{player.lastName}}
+    </ion-item>
+</ion-list>
 <div>
     <p>Date: {{MatchController.match.time | date:'MMM d, yyyy HH:mm'}}</p>
     <p>{{ MatchController.match | json}}</p>

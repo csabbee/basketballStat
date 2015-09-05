@@ -20,7 +20,6 @@ angular.module('basketballStat.matches')
                     { text: `<strong>Open</strong>` }
                 ],
                 destructiveText: 'Delete',
-                //titleText: `Match options`,
                 cancelText: 'Cancel',
                 cancel: function() {
                     // add cancel code..
@@ -36,7 +35,7 @@ angular.module('basketballStat.matches')
                 destructiveButtonClicked: function() {
                     var confirmPopup = $ionicPopup.confirm({
                         title: 'Delete match',
-                        template: 'Are you sure you want to delete the match?'
+                        template: 'Are you sure?'
                     });
                     confirmPopup.then(function(res) {
                         if(res) {

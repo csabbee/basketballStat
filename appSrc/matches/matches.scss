@@ -39,6 +39,10 @@
   padding-bottom: 25px;
 }
 
+.no-header {
+  top: 0px;
+}
+
 .height-fix {
   padding-bottom: 50px;
 }
@@ -132,4 +136,14 @@
 
 .action-sheet-has-icons .button {
   padding-left: 56px;
+}
+
+match-nav-bar {
+  .bar.bar-header {
+    top: -43px;
+  }
+}
+
+.display-overflow {
+  overflow: visible;
 }
