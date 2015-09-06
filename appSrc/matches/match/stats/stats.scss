@@ -1,0 +1,78 @@
+.modal-title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  margin: 0 10px;
+  min-width: 30px;
+  height: 43px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 44px;
+}
+
+.picking {
+  cursor: pointer;
+}
+
+time-picker {
+  .picking {
+    .button.button-outline.display-time {
+      font-weight: bold;
+      font-size: 17px;
+    }
+  }
+}
+
+ion-item {
+  .toggle.my-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .modal-clickable-name-span {
+    padding: 15px;
+    margin-left: -15px;
+    padding-right: 130px;
+    cursor: pointer;
+  }
+}
+
+.header-stat-point {
+  position: absolute;
+  font-size: 16px;
+  font-weight: bold;
+  left: 15px;
+  top: 12px;
+}
+
+.list {
+  .item.stat-item {
+    height: 50px;
+    .stat-item-label {
+      position: absolute;
+      top: 14px;
+      left: 15px;
+    }
+    .stat-item-control {
+      position: absolute;
+      top: 14px;
+      right: 0px;
+      .button {
+        top: -10px;
+        &:before{
+          font-size: 35px;
+        }
+      }
+      input {
+        width: 40px;
+        text-align: center;
+      }
+    }
+  }
+}

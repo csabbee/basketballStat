@@ -1,7 +1,13 @@
 <match-nav-bar></match-nav-bar>
 <ion-list>
-    <ion-item ng-repeat="player in MatchController.match.players" ng-click="MatchController.show(player)">
-        {{player.firstName}} {{player.lastName}}
+    <ion-item ng-repeat="player in MatchController.match.players">
+        <span class="modal-clickable-name-span" ng-click="MatchController.show(player)">{{::player.firstName}} {{::player.lastName}}</span>
+        <label class="toggle pull-right my-toggle">
+            <input type="checkbox">
+            <div class="track">
+                <div class="handle"></div>
+            </div>
+        </label>
     </ion-item>
 </ion-list>
 <div>

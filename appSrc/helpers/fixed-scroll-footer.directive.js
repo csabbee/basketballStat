@@ -16,6 +16,7 @@ angular.module('basketballStat.helpers')
                             <button class="button footer-pull-left icon"
                                 ng-class="[leftButtonClass, leftButtonIcon]"
                                 ng-click="leftButtonClick()"></button>
+                                <div style="display: none" class="title">asdasd</div>
                             <button class="button footer-pull-right icon"
                                 ng-class="[rightButtonClass, rightButtonIcon]"
                                 ng-click="rightButtonClick()"></button>

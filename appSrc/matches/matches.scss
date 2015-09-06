@@ -2,10 +2,8 @@
 
 
 .bar {
-  .button + .button:last-child {
+  .title + .button:last-child {
     top: -60px;
-    border: 2px;
-    right: 5px;
   }
 }
 

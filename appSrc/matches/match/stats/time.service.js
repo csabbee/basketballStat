@@ -15,5 +15,6 @@ angular.module('basketballStat.matches')
 
         function stop() {
             $interval.cancel(timer);
+            $rootScope.$emit(eventListing.timerStopEmit);
         }
     });
