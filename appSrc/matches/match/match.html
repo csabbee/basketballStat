@@ -3,7 +3,8 @@
     <ion-item ng-repeat="player in MatchController.match.players">
         <span class="modal-clickable-name-span" ng-click="MatchController.show(player)">{{::player.firstName}} {{::player.lastName}}</span>
         <label class="toggle pull-right my-toggle">
-            <input type="checkbox">
+            <input type="checkbox" ng-model="MatchController.currentlyPlaying[player._id]"
+                   ng-click="MatchController.setCurrentlyPlaying()"/>
             <div class="track">
                 <div class="handle"></div>
             </div>

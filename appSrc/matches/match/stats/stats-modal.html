@@ -2,7 +2,7 @@
     <ion-header-bar>
         <div class="header-stat-point">{{MatchController.currentPlayer.stats.points}} pt</div>
         <h1 class="modal-title">
-            {{MatchController.currentPlayer.firstName}} {{MatchController.currentPlayer.lastName}}: {{MatchController.currentPlayer.stats.time}}
+            {{MatchController.currentPlayer.firstName}} {{MatchController.currentPlayer.lastName}}: {{MatchController.currentPlayer.stats.time | matchTimeDisplay}}
         </h1>
         <button class="button button-clear button-dark icon ion-chevron-down pull-right" ng-click="closeModal()"></button>
     </ion-header-bar>

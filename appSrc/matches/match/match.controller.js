@@ -1,15 +1,11 @@
 angular.module('basketballStat.matches')
     .controller('MatchController', function($scope, MatchesDbService, $stateParams, StateHandler, $ionicScrollDelegate,
-                                            $ionicModal) {
+                                            $ionicModal, eventListing) {
         var vm = this,
             modal,
             playerStat = {
-                time: '00:00:0',
+                time: 0,
                 points: 0,
-                fieldGoal: {
-                    made: 0,
-                    attempt: 0
-                },
                 twoPoint: {
                     made: 0,
                     attempt: 0
@@ -34,6 +30,8 @@ angular.module('basketballStat.matches')
             };
 
         $ionicScrollDelegate.scrollTop();
+
+        vm.currentlyPlaying = {};
 
         MatchesDbService.getMatch($stateParams._id).then(match => {
             match.players.forEach(player => {
@@ -69,4 +67,32 @@ angular.module('basketballStat.matches')
         vm.goBack = function() {
             StateHandler.goBack();
         };
+
+        vm.setCurrentlyPlaying = function() {
+            vm.selectedPlayerIds = _.chain(_.keys(vm.currentlyPlaying))
+                .filter(_.partial(isSelected, vm.currentlyPlaying))
+                .value();
+        };
+
+        $scope.$onRootScope(eventListing.timeTickEmit, ()=> {
+            _.chain(vm.match.players)
+                .filter(isCurrentlyPlaying)
+                .map(addPlayTime)
+                .value();
+        });
+        /**
+         * @param playerIdsObj {Object}
+         * @param id {String}
+         */
+        function isSelected(playerIdsObj, id) {
+            return playerIdsObj[id];
+        }
+
+        function isCurrentlyPlaying(player) {
+            return _.contains(vm.selectedPlayerIds, player._id);
+        }
+
+        function addPlayTime(player) {
+            return player.stats.time += 100;
+        }
     });
