@@ -43,5 +43,8 @@
   ],
   "cordovaPlatforms": [
     "android"
-  ]
+  ],
+  "scripts": {
+    "postinstall": "bower install"
+  }
 }
