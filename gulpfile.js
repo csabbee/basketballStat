@@ -58,12 +58,16 @@ gulp.task('htmlcache', function() {
 gulp.task('javascript', function() {
     return gulp.src(paths.js)
         .pipe(sourcemaps.init())
-        .pipe(babel())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .on('error', function(err) {
             console.log(err);
             this.emit('end');
         })
-        .pipe(ngAnnotate())
+        .pipe(ngAnnotate({
+            gulpWarnings: false
+        }))
         .pipe(modularize.injectModule(es))
         .pipe(concant('basketballStat.js'))
         .pipe(uglify())
