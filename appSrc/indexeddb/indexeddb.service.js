@@ -1,108 +1,146 @@
 angular.module('basketballStat.storage')
-    .service('IndexedDbService', function(basketballStatDatabase, $q, storageConfig, $rootScope, KeyGenerator) {
-        var db;
-
-        (function() {
-            basketballStatDatabase.getDb(storageConfig.playerObjectStore).then(function(database) {
-                db = database;
-                getAllPlayer().then(players => {
-                    var ids = players.map(players => players.ssnId);
-                    KeyGenerator.setSeed({
-                        store: storageConfig.playerObjectStore,
-                        usedIds: ids
-                    });
-                });
-            });
-        })();
-
+    .service('IndexedDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast) {
         return {
-            addPlayer: addPlayer,
-            deletePlayer: deletePlayer,
-            getPlayer: getPlayer,
-            updatePlayer: updatePlayer,
-            getAllPlayer: getAllPlayer
+            getAllEntry: getAllEntry,
+            addEntry: addEntry,
+            getEntry: getEntry,
+            deleteEntry: deleteEntry,
+            updateEntry: updateEntry
         };
 
-        function addPlayer(player) {
+        /**
+         * @param objectStore {String}
+         * @param entry {Object}
+         * @param toastMessage {String}
+         * @param eventsToEmit {String[]}
+         * @returns {Function|promise}
+         */
+        function addEntry(objectStore, entry, toastMessage,...eventsToEmit) {
             var deferResult = $q.defer();
-            player.ssnId = KeyGenerator.nextKey(storageConfig.playerObjectStore);
 
-            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
-                .objectStore(storageConfig.playerObjectStore)
-                .add(player);
-
-            request.onsuccess = function(event) {
-                deferResult.resolve(event.target.result);
-                $rootScope.$emit('players.list.update');
-            };
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                _.extend(entry, {'_id': KeyGenerator.nextKey(objectStore)+''});
+                database.put(entry).then(() => {
+                    deferResult.resolve('Added');
+                    $cordovaToast.show(`${toastMessage} added`, 'long', 'center')
+                        .then(function(success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+            });
 
             return deferResult.promise;
         }
 
-        function deletePlayer(key) {
+        /**
+         *
+         * @param objectStore {String}
+         * @param entry {Object}
+         * @param eventsToEmit {String[]}
+         * @returns {Function|promise}
+         */
+        function deleteEntry(objectStore, entry, ...eventsToEmit) {
             var deferResult = $q.defer();
 
-            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
-                .objectStore(storageConfig.playerObjectStore)
-                .delete(key);
-
-            request.onsuccess = function(event) {
-                deferResult.resolve(event.target.result);
-                $rootScope.$emit('players.list.update');
-            };
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                database.remove(entry).then(()=> {
+                    deferResult.resolve('deleteted');
+                    $cordovaToast.show(`Deleted`, 'long', 'center')
+                        .then(function(success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
+                },()=> {
+                    $cordovaToast.show('Error while deleting' ,'long', 'center');
+                });
+            });
 
             return deferResult.promise;
         }
 
-        function getPlayer(key) {
+        /**
+         *
+         * @param objectStore {String}
+         * @param key {String}
+         * @param eventsToEmit {String[]}
+         * @returns {Function|promise}
+         */
+        function getEntry(objectStore, key, ...eventsToEmit) {
             var deferResult = $q.defer();
 
-            var request = db.transaction([storageConfig.playerObjectStore])
-                .objectStore(storageConfig.playerObjectStore)
-                // This is needed because it tends to be converted to string
-                .get(+key);
-
-            request.onsuccess = function(event) {
-                deferResult.resolve(event.target.result);
-            };
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                database.get(key+'').then(entry => {
+                    deferResult.resolve(entry);
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
+                });
+            });
 
             return deferResult.promise;
         }
 
-        function updatePlayer(item) {
+        /**
+         *
+         * @param objectStore {String}
+         * @param entry {Object}
+         * @param toastMessage {String}
+         * @param eventsToEmit {String[]}
+         * @returns {Function|promise}
+         */
+        function updateEntry(objectStore, entry, toastMessage,...eventsToEmit) {
             var deferResult = $q.defer();
 
-            var request = db.transaction([storageConfig.playerObjectStore], 'readwrite')
-                .objectStore(storageConfig.playerObjectStore)
-                .put(item);
-
-            request.onsuccess = function(event) {
-                deferResult.resolve('player set');
-                $rootScope.$emit('players.list.update');
-            };
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                database.put(entry).then(entry => {
+                    deferResult.resolve('entry set');
+                    $cordovaToast.show(`${toastMessage} saved`, 'long', 'center')
+                        .then(function(success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
+                    if(!_.isUndefined(eventsToEmit)) {
+                        eventsToEmit.forEach(eventToEmit => {
+                            $rootScope.$emit(eventToEmit);
+                        });
+                    }
+                });
+            });
 
             return deferResult.promise;
         }
 
-        function getAllPlayer() {
-            return _getAllEntry(storageConfig.playerObjectStore);
-        }
+        /**
+         *
+         * @param objectStore {String}
+         * @returns {Function|promise}
+         */
+        function getAllEntry(objectStore) {
+            var deferResult = $q.defer();
 
-        function _getAllEntry(objectStore) {
-            var deferResult = $q.defer(),
-                entries = [],
-                objectStore = db.transaction(objectStore).objectStore(objectStore);
-
-            objectStore.openCursor().onsuccess = function(event) {
-                var cursor = event.target.result;
-
-                if (cursor) {
-                    entries.push(cursor.value);
-                    cursor.continue();
-                } else {
-                    deferResult.resolve(entries);
-                }
-            };
+            basketballStatDatabase.getDb(objectStore).then(function(database) {
+                database.allDocs({include_docs: true}).then(docs => {
+                    deferResult.resolve(docs.rows);
+                });
+            });
 
             return deferResult.promise;
         }

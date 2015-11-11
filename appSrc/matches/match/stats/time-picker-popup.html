@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="item item-text-wrap">
+        <div class="item range range-positive">
+            <i class="icon ion-clock"></i>
+            <input type="range" name="periodLength" min="1" max="15" ng-model="period.length" ng-init="period.length=10">
+        </div>
+    </div>
+    <div class="item item-divider">
+        <p>Minute<span ng-if="period.length > 1">s</span>: {{period.length}}</p>
+    </div>
+</div>
+

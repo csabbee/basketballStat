@@ -1,0 +1,115 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <div class="header-stat-point">{{MatchController.currentPlayer.stats.points}} pt</div>
+        <h1 class="modal-title">
+            {{MatchController.currentPlayer.firstName}} {{MatchController.currentPlayer.lastName}}: {{MatchController.currentPlayer.stats.time | matchTimeDisplay}}
+        </h1>
+        <button class="button button-clear button-dark icon ion-chevron-down pull-right" ng-click="closeModal()"></button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+            <div class="item item-divider">
+                Field Goals : {{MatchController.currentPlayer.stats.twoPoint.made + MatchController.currentPlayer.stats.threePoint.made}} / {{MatchController.currentPlayer.stats.twoPoint.attempt + MatchController.currentPlayer.stats.threePoint.attempt}}
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">2Pt attempt</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.twoPoint.attempt"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">2Pt made</div>
+                <div class="stat-item-control">
+                    <stat-item
+                            stat="MatchController.currentPlayer.stats.twoPoint.made"
+                            another-increment="MatchController.currentPlayer.stats.twoPoint.attempt"
+                            point-increment="MatchController.currentPlayer.stats.points"
+                            by-how-much="2"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">3Pt attempt</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.threePoint.attempt"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">3Pt made</div>
+                <div class="stat-item-control">
+                    <stat-item
+                            stat="MatchController.currentPlayer.stats.threePoint.made"
+                            another-increment="MatchController.currentPlayer.stats.threePoint.attempt"
+                            point-increment="MatchController.currentPlayer.stats.points"
+                            by-how-much="3"></stat-item>
+                </div>
+            </div>
+            <div class="item item-divider">
+                Free Throws : {{MatchController.currentPlayer.stats.freeThrow.made}} / {{MatchController.currentPlayer.stats.freeThrow.attempt}}
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">FT attempt</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.freeThrow.attempt"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">FT made</div>
+                <div class="stat-item-control">
+                    <stat-item
+                            stat="MatchController.currentPlayer.stats.freeThrow.made"
+                            another-increment="MatchController.currentPlayer.stats.freeThrow.attempt"
+                            point-increment="MatchController.currentPlayer.stats.points"
+                            by-how-much="1"></stat-item>
+                </div>
+            </div>
+            <div class="item item-divider">
+                Rebounds : {{MatchController.currentPlayer.stats.rebound.defensive + MatchController.currentPlayer.stats.rebound.offensive}}
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">Defensive</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.rebound.defensive"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">Offensive</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.rebound.offensive"></stat-item>
+                </div>
+            </div>
+            <div class="item item-divider">
+                Single Entry Stats
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">Assist</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.assist"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">Steal</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.steal"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">Block</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.block"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">Turnover</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.turnover"></stat-item>
+                </div>
+            </div>
+            <div class="item stat-item">
+                <div class="stat-item-label">Personal Foul</div>
+                <div class="stat-item-control">
+                    <stat-item stat="MatchController.currentPlayer.stats.personalFoul"></stat-item>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

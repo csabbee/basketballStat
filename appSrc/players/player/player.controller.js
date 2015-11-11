@@ -1,5 +1,5 @@
 angular.module('basketballStat.players')
-    .controller('PlayerController', function($scope, IndexedDbService, $stateParams, StateHandler) {
+    .controller('PlayerController', function($scope, PlayersDbService, $stateParams, StateHandler, $ionicScrollDelegate) {
         var vm = this,
             backupPlayer;
 
@@ -8,9 +8,12 @@ angular.module('basketballStat.players')
         });
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.players.player' ? true : false;
+            if(vm.activeView) {
+                $ionicScrollDelegate.scrollTop();
+            }
         });
 
-        IndexedDbService.getPlayer($stateParams.ssnId).then(player => {
+        PlayersDbService.getPlayer($stateParams._id).then(player => {
             vm.player = player;
             $scope.player = angular.copy(player);
             backupPlayer = angular.copy(player);
@@ -29,7 +32,7 @@ angular.module('basketballStat.players')
         };
 
         vm.delete = function() {
-            IndexedDbService.deletePlayer(vm.player.ssnId)
+            PlayersDbService.deletePlayer(vm.player)
                 .then(() => {
                     StateHandler.goBack();
                 });
@@ -38,7 +41,7 @@ angular.module('basketballStat.players')
         vm.update = function(player, form) {
             if (form.$dirty && form.$valid) {
                 player.ssnId = backupPlayer.ssnId;
-                IndexedDbService.updatePlayer(player)
+                PlayersDbService.updatePlayer(player)
                     .then(() => {
                         backupPlayer = angular.copy(player);
                         vm.player = angular.copy(player);

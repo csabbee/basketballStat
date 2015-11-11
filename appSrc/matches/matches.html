@@ -1,19 +1,22 @@
-<ion-view title="Matches View">
+<ion-view title="Matches">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
     </ion-nav-buttons>
-    <ion-content>
-        <div class="row row-top">
+    <ion-content class="full-height scroll-content ionic-scroll display-overflow" delegate-handle="matchesScroll">
+        <div class="row row-top" ng-hide="!MatchesController.activeView">
             <div class="col">
-                <div class="list" ng-hide="!MatchesController.activeView">
+                <div class="list" >
                     <h1>The Matches view</h1>
+                    <div class="item item-button-right" ng-repeat="match in MatchesController.matches" ng-click="MatchesController.show(match)">
+                        {{ match.time | date:'MMM dd, yyyy'}} - {{match.opponent}}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="bar bar-footer" ng-hide="!MatchesController.activeView">
-            <button class="button button-clear button-balanced pull-right icon ion-ios-plus"
+        <div ui-view name="match" class="height-fix"></div>
+        <div class="bar bar-footer" ng-if="MatchesController.activeView" fixed-scroll-height="matchesScroll">
+            <button class="button button-clear button-balanced footer-pull-right icon ion-ios-plus"
                     ui-sref="app.matches.new"></button>
         </div>
-        <div ui-view name="match"></div>
     </ion-content>
 </ion-view>

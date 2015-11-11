@@ -43,7 +43,7 @@ describe('KeyGeneratorService', () => {
             underTest.nextKey(testStoreObject.store);
             underTest.nextKey(testStoreObject.store);
             underTest.nextKey(testStoreObject.store);
-            var result = underTest.nextKey(testStoreObject.store);
+            var result = parseFloat(underTest.nextKey(testStoreObject.store));
             // THEN
             expect(result).toBe(expect3);
         });

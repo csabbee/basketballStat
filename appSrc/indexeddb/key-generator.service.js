@@ -31,10 +31,10 @@ angular.module('basketballStat.storage')
          */
         function nextKey(store) {
             var generatorObj = _.find(generators, generator => generator.store === store),
-                maxId = _.max(generatorObj.usedIds),
+                maxId = _.max(generatorObj.usedIds.map(id => parseFloat(id))),
                 nextKey = _.first(_.difference(_.range(maxId), generatorObj.usedIds));
-            nextKey = !_.isUndefined(nextKey) && _.isFinite(nextKey) ? nextKey : !_.isUndefined(maxId) && _.isFinite(maxId) ? ++maxId : 0;
-            generatorObj.usedIds.push(nextKey);
+            nextKey = !_.isUndefined(nextKey) && _.isFinite(nextKey) ? nextKey : !_.isUndefined(maxId) && _.isFinite(maxId) ? ++maxId+'' : '0';
+            generatorObj.usedIds.push(parseFloat(nextKey));
 
             return nextKey;
         }

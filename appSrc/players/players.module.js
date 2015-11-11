@@ -8,17 +8,12 @@ angular.module('basketballStat.players')
                 views: {
                     'menuContent': {
                         templateUrl: 'players/players.html',
-                        controller: 'PlayersController as PlayersController',
-                        resolve: {
-                            players: ['IndexedDbService', function(IndexedDbService) {
-                                return IndexedDbService.getAllPlayer();
-                            }]
-                        }
+                        controller: 'PlayersController as PlayersController'
                     }
                 }
             })
             .state('app.players.player', {
-                url: '/:ssnId',
+                url: '/:_id',
                 views: {
                     'player': {
                         templateUrl: 'players/player/player.html',
@@ -35,4 +30,13 @@ angular.module('basketballStat.players')
                     }
                 }
             })
+        // We 'pre-initialize' the database/object store
+    }).run((storageConfig, KeyGenerator, PlayersDbService) => {
+        PlayersDbService.getAllPlayer().then(players => {
+            var ids = players.map(player => parseFloat(player.doc._id));
+            KeyGenerator.setSeed({
+                store: storageConfig.playerObjectStore,
+                usedIds: ids
+            });
+        });
     });

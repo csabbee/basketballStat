@@ -1,1 +1,23 @@
-<h1>This is the match view</h1>
+<match-nav-bar></match-nav-bar>
+<ion-list>
+    <ion-item ng-repeat="player in MatchController.match.players">
+        <span class="modal-clickable-name-span" ng-click="MatchController.show(player)">{{::player.firstName}} {{::player.lastName}}</span>
+        <label class="toggle pull-right my-toggle">
+            <input type="checkbox" ng-model="MatchController.currentlyPlaying[player._id]"
+                   ng-click="MatchController.setCurrentlyPlaying()"/>
+            <div class="track">
+                <div class="handle"></div>
+            </div>
+        </label>
+    </ion-item>
+</ion-list>
+<div>
+    <p>Date: {{MatchController.match.time | date:'MMM d, yyyy HH:mm'}}</p>
+    <p>{{ MatchController.match | json}}</p>
+</div>
+
+<fixed-scroll-footer
+        scroll-delegate="matchesScroll"
+        left-button-class="button-clear button-positive"
+        left-button-icon="ion-arrow-left-b"
+        left-button-click="MatchController.goBack()"></fixed-scroll-footer>
