@@ -28,11 +28,7 @@ angular.module('basketballStat.storage')
                         }, function (error) {
                             // error
                         });
-                    if(!_.isUndefined(eventsToEmit)) {
-                        eventsToEmit.forEach(eventToEmit => {
-                            $rootScope.$emit(eventToEmit);
-                        });
-                    }
+                    emitEvents(eventsToEmit);
                 }, function(err) {
                     console.log(err);
                 });
@@ -60,11 +56,7 @@ angular.module('basketballStat.storage')
                         }, function (error) {
                             // error
                         });
-                    if(!_.isUndefined(eventsToEmit)) {
-                        eventsToEmit.forEach(eventToEmit => {
-                            $rootScope.$emit(eventToEmit);
-                        });
-                    }
+                    emitEvents(eventsToEmit);
                 },()=> {
                     $cordovaToast.show('Error while deleting' ,'long', 'center');
                 });
@@ -86,11 +78,7 @@ angular.module('basketballStat.storage')
             basketballStatDatabase.getDb(objectStore).then(function(database) {
                 database.get(key+'').then(entry => {
                     deferResult.resolve(entry);
-                    if(!_.isUndefined(eventsToEmit)) {
-                        eventsToEmit.forEach(eventToEmit => {
-                            $rootScope.$emit(eventToEmit);
-                        });
-                    }
+                    emitEvents(eventsToEmit);
                 });
             });
 
@@ -117,11 +105,7 @@ angular.module('basketballStat.storage')
                         }, function (error) {
                             // error
                         });
-                    if(!_.isUndefined(eventsToEmit)) {
-                        eventsToEmit.forEach(eventToEmit => {
-                            $rootScope.$emit(eventToEmit);
-                        });
-                    }
+                    emitEvents(eventsToEmit);
                 });
             });
 
@@ -143,5 +127,13 @@ angular.module('basketballStat.storage')
             });
 
             return deferResult.promise;
+        }
+
+        function emitEvents(eventsToEmit) {
+            if (!_.isUndefined(eventsToEmit)) {
+                eventsToEmit.forEach(eventToEmit => {
+                    $rootScope.$emit(eventToEmit);
+                });
+            }
         }
     });
