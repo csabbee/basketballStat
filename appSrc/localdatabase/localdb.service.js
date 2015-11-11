@@ -1,5 +1,5 @@
 angular.module('basketballStat.storage')
-    .service('IndexedDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast) {
+    .service('LocalDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast) {
         return {
             getAllEntry: getAllEntry,
             addEntry: addEntry,

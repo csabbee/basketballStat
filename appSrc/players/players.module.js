@@ -29,7 +29,7 @@ angular.module('basketballStat.players')
                         controller: 'NewPlayerController as NewPlayerController'
                     }
                 }
-            })
+            });
         // We 'pre-initialize' the database/object store
     }).run((storageConfig, KeyGenerator, PlayersDbService) => {
         PlayersDbService.getAllPlayer().then(players => {
