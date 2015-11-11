@@ -1,5 +1,5 @@
 angular.module('basketballStat.players')
-    .service('PlayersDbService', (IndexedDbService, storageConfig, eventListing)=> {
+    .service('PlayersDbService', (LocalDbService, storageConfig, eventListing)=> {
         var playerObjectStore = storageConfig.playerObjectStore;
 
         return {
@@ -11,22 +11,22 @@ angular.module('basketballStat.players')
         };
 
         function addPlayer(player) {
-            return IndexedDbService.addEntry(playerObjectStore, player, `${player.firstName} ${player.lastName}`,eventListing.playerListUpdate);
+            return LocalDbService.addEntry(playerObjectStore, player, `${player.firstName} ${player.lastName}`,eventListing.playerListUpdate);
         }
 
         function deletePlayer(key) {
-            return IndexedDbService.deleteEntry(playerObjectStore, key, eventListing.playerListUpdate);
+            return LocalDbService.deleteEntry(playerObjectStore, key, eventListing.playerListUpdate);
         }
 
         function getPlayer(key) {
-            return IndexedDbService.getEntry(playerObjectStore, key, eventListing.playerListUpdate);
+            return LocalDbService.getEntry(playerObjectStore, key, eventListing.playerListUpdate);
         }
 
         function updatePlayer(player) {
-            return IndexedDbService.updateEntry(playerObjectStore, player, `${player.firstName} ${player.lastName}`, eventListing.playerListUpdate);
+            return LocalDbService.updateEntry(playerObjectStore, player, `${player.firstName} ${player.lastName}`, eventListing.playerListUpdate);
         }
 
         function getAllPlayer() {
-            return IndexedDbService.getAllEntry(playerObjectStore);
+            return LocalDbService.getAllEntry(playerObjectStore);
         }
     });

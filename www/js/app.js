@@ -6,7 +6,7 @@
 angular.module('basketballStat', [
     'ionic', 'ngCordova', 'htmlTemplates', 'ui.router','basketballStat.mainModule'])
 
-    .run(function($ionicPlatform, $cordovaSplashscreen, IndexedDbService, StateHandler) {
+    .run(function($ionicPlatform, $cordovaSplashscreen, LocalDbService, StateHandler) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
