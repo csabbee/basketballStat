@@ -3,15 +3,23 @@
         <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
 	</ion-nav-buttons>
 	<ion-content>
-		<div class="row row-top">
-			<div class="col">
-				<h1>The Home view</h1>
-			</div>	
+		<div class="row half-height">
+			<div class="col">Quick match</div>
+			<div class="col">Calendar</div>
 		</div>
-		<div class="row row-bottom">
-			<div class="col">
-				<div ng-include="'test.html'"></div>
-			</div>	
+		<div class="row half-height">
+			<div class="col" ui-sref="app.players">Add player</div>
+			<div class="col">Manage team</div>
 		</div>
+        <!--<div class="row row-top">-->
+			<!--<div class="col">-->
+				<!--<h1>The Home view</h1>-->
+			<!--</div>	-->
+		<!--</div>-->
+		<!--<div class="row row-bottom">-->
+			<!--<div class="col">-->
+				<!--<div ng-include="'test.html'"></div>-->
+			<!--</div>	-->
+		<!--</div>-->
 	</ion-content>
 </ion-view>
