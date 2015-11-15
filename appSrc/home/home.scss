@@ -41,6 +41,6 @@
 }
 
 .home-quick-match {
-	background-color: lightskyblue;
+	@include radial-gradient(40%, 40%, cover, yellow, darken(orange, 25));
 	@extend %main-menu-item;
 }
