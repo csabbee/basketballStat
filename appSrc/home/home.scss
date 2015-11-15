@@ -1,3 +1,15 @@
+@import "../helpers/helper-mixins";
+
+.home-page-images {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin: auto;
+	overflow: auto;;
+}
+
 .home-player {
 	background-color: teal;
 }
