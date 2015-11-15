@@ -11,7 +11,7 @@
 		transform: translateY(-50%);
 		color: white;
 		pointer-events: none;
-		font-size: 2.5em;
+		font-size: 2em;
 		font-weight: 100;
 	}
 }
@@ -41,5 +41,6 @@
 }
 
 .home-quick-match {
-	background-color: lightskyblue
+	background-color: lightskyblue;
+	@extend %main-menu-item;
 }
