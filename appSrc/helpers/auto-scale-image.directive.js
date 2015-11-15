@@ -15,10 +15,18 @@ function autoScaleImage() {
     };
 
     function link(scope, element) {
-        if (element[0].parentNode.clientHeight > element[0].parentNode.clientWidth) {
-            element.attr('height', element[0].parentNode.clientHeight - 40);
-        } else {
-            element.attr('width', element[0].parentNode.clientWidth - 10)
+        element[0].onload = handleImageLoad;
+
+        function handleImageLoad() {
+            var image = element[0],
+                parentHeight = element[0].parentNode.clientHeight,
+                parentWidth = element[0].parentNode.clientWidth;
+
+            if (image.naturalHeight > image.naturalWidth) {
+                element.attr('height', parentHeight - 10);
+            } else {
+                element.attr('width', parentWidth - 10);
+            }
         }
     }
 }
