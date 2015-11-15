@@ -22,7 +22,7 @@ function autoScaleImage() {
                 parentHeight = element[0].parentNode.clientHeight,
                 parentWidth = element[0].parentNode.clientWidth;
 
-            if (image.naturalHeight > image.naturalWidth) {
+            if (image.naturalHeight / image.naturalWidth > parentHeight / parentWidth) {
                 element.attr('height', parentHeight - 10);
             } else {
                 element.attr('width', parentWidth - 10);
