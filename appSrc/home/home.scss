@@ -11,7 +11,7 @@
 }
 
 .home-player {
-	background-color: teal;
+	@include radial-gradient(80%, 20%, cover, #00e1f6, #1a82f7);
 	position: relative;
 	transform-style: preserve-3d;
 	div {
