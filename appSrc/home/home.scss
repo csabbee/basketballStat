@@ -1,17 +1,6 @@
 @import "../helpers/helper-mixins";
 
-.home-page-images {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	top: 0;
-	margin: auto;
-	overflow: auto;;
-}
-
-.home-player {
-	@include radial-gradient(80%, 20%, cover, #00e1f6, #1a82f7);
+%main-menu-item {
 	position: relative;
 	transform-style: preserve-3d;
 	div {
@@ -27,12 +16,28 @@
 	}
 }
 
+.home-page-images {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin: auto;
+	overflow: auto;
+}
+
+.home-player {
+	@include radial-gradient(80%, 20%, cover, #00e1f6, #1a82f7);
+	@extend %main-menu-item;
+}
+
 .home-calendar {
 	background-color: orange;
 }
 
 .home-manage-teams {
-	background-color: lightgreen;
+	@include radial-gradient(65%, 20%, cover, #9dff9d, darken(#9dff9d, 55));
+	@extend %main-menu-item;
 }
 
 .home-quick-match {
