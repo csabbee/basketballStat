@@ -11,12 +11,14 @@ function autoScaleImage() {
             imageSrc: '@'
         },
         link: link,
-        template: `<img ng-src="{{imageSrc}}" height="{{getHeight()}}"/>`
+        template: `<img ng-src="{{imageSrc}}"/>`
     };
 
     function link(scope, element) {
-        scope.getHeight = function() {
-            return element[0].parentNode.clientHeight - 10;
-        };
+        if (element[0].parentNode.clientHeight > element[0].parentNode.clientWidth) {
+            element.attr('height', element[0].parentNode.clientHeight - 40);
+        } else {
+            element.attr('width', element[0].parentNode.clientWidth - 10)
+        }
     }
 }
