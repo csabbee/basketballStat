@@ -1,0 +1,18 @@
+@mixin radial-gradient($x_coord, $y_coord, $size, $color_from, $color_to) {
+  /* fallback */
+  background-color: #2F2727;
+  background-position: 80% 20%;
+  background-repeat: no-repeat;
+
+  /* Safari 4-5, Chrome 1-9 */
+  background: -webkit-gradient(radial, $x_coord $y_coord, 0, 80% 40%, 100, from($color_from), to($color_to));
+
+  /* Safari 5.1+, Chrome 10+ */
+  background: -webkit-radial-gradient($x_coord $y_coord, $size, $color_from, $color_to);
+
+  /* Firefox 3.6+ */
+  background: -moz-radial-gradient($x_coord $y_coord, $size, $color_from, $color_to);
+
+  /* IE 10 */
+  background: -ms-radial-gradient($x_coord $y_coord, $size, $color_from, $color_to);
+}
