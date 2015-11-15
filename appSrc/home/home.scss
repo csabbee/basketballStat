@@ -12,6 +12,19 @@
 
 .home-player {
 	background-color: teal;
+	position: relative;
+	transform-style: preserve-3d;
+	div {
+		position: absolute;
+		text-align: center;
+		width: 100%;
+		top: 50%;
+		transform: translateY(-50%);
+		color: white;
+		pointer-events: none;
+		font-size: 2.5em;
+		font-weight: 100;
+	}
 }
 
 .home-calendar {
