@@ -2,6 +2,7 @@ angular.module('basketballStat.matches')
     .controller('MatchController', function($scope, MatchesDbService, $stateParams, StateHandler, $ionicScrollDelegate,
                                             $ionicModal, eventListing) {
         var vm = this,
+            saveMatchHandler,
             modal,
             playerStat = {
                 time: 0,
@@ -36,6 +37,9 @@ angular.module('basketballStat.matches')
         MatchesDbService.getMatch($stateParams._id).then(match => {
             match.players.map(setStat);
             vm.match = match;
+            saveMatchHandler = $scope.$on('$stateChangeStart', function() {
+                MatchesDbService.updateMatch(vm.match);
+            });
 
             function setStat(player) {
                 if (!player.stats) {
@@ -61,6 +65,7 @@ angular.module('basketballStat.matches')
         //Cleanup the modal when we're done with it!
         $scope.$on('$destroy', function() {
             modal.remove();
+            saveMatchHandler();
         });
 
         vm.show = function(player) {
