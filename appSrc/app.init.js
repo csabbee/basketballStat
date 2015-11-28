@@ -14,6 +14,14 @@ angular.module('basketballStat.mainModule', [
 			abstract: true,
 			templateUrl: 'menu.html'
 		})
+		.state('app.calendar', {
+			url: '/calendar',
+			views: {
+				'menuContent': {
+					templateUrl: 'calendar/calendar.html'
+				}
+			}
+		})
 		.state('app.home', {
 			url: '/home',
 			views: {
@@ -28,6 +36,14 @@ angular.module('basketballStat.mainModule', [
 			views: {
 				'menuContent': {
 					templateUrl: 'details.html'
+				}
+			}
+		})
+		.state('app.manageTeams', {
+			url: '/manage-teams',
+			views: {
+				'menuContent': {
+					templateUrl: 'manage-teams/manage-teams.html'
 				}
 			}
 		})

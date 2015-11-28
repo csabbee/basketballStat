@@ -33,6 +33,14 @@ angular.module('basketballStat.matches')
                     }
                 }
             })
+            .state('app.matches.quick', {
+                url: '/quick',
+                views: {
+                    'match': {
+                        templateUrl: 'matches/quick-match/quick-match.html'
+                    }
+                }
+            })
     }).run((storageConfig, MatchesDbService, KeyGenerator)=> {
         MatchesDbService.getAllMatches().then(function(matches) {
             var ids = matches.map(match => parseFloat(match.doc._id));

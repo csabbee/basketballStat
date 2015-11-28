@@ -1,0 +1,56 @@
+@import "../helpers/helper-mixins";
+
+%main-menu-item {
+	position: relative;
+	transform-style: preserve-3d;
+	div {
+		position: absolute;
+		text-align: center;
+		width: 100%;
+		top: 50%;
+		transform: translateY(-50%);
+		color: white;
+		pointer-events: none;
+		font-size: 2em;
+		font-weight: 100;
+	}
+}
+
+.home-page-images {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin: auto;
+	overflow: auto;
+}
+
+.home-player {
+	@include radial-gradient(80%, 20%, cover, #00e1f6, #1a82f7);
+	@extend %main-menu-item;
+}
+
+.home-calendar {
+	background-color: orange;
+}
+
+.home-manage-teams {
+	@include radial-gradient(65%, 20%, cover, #9dff9d, darken(#9dff9d, 55));
+	@extend %main-menu-item;
+}
+
+.home-quick-match {
+	@include radial-gradient(40%, 40%, cover, yellow, darken(orange, 25));
+	@extend %main-menu-item;
+}
+
+.vertical-placeholder {
+	width: 5px;
+}
+
+ion-content {
+	div.row.half-height {
+		padding-top: 5px;
+	}
+}
