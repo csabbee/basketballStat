@@ -45,10 +45,12 @@
 	@extend %main-menu-item;
 }
 
-.horizontal-placeholder {
-	height: 0px;
+.vertical-placeholder {
+	width: 5px;
 }
 
-.vertical-placeholder {
-	width: 10px;
+ion-content {
+	div.row.half-height {
+		padding-top: 5px;
+	}
 }
