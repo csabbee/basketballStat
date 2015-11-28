@@ -27,6 +27,6 @@ angular.module('basketballStat.matches')
         }
 
         function updateMatch(match) {
-            return LocalDbService.getAllEntry(matchesObjectStore, match, '',eventListing.matchListUpdate);
+            return LocalDbService.updateEntry(matchesObjectStore, match, '',eventListing.matchListUpdate);
         }
     });
