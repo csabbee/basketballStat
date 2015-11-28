@@ -44,3 +44,11 @@
 	@include radial-gradient(40%, 40%, cover, yellow, darken(orange, 25));
 	@extend %main-menu-item;
 }
+
+.horizontal-placeholder {
+	height: 0px;
+}
+
+.vertical-placeholder {
+	width: 10px;
+}
