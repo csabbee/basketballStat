@@ -34,11 +34,19 @@ angular.module('basketballStat.matches')
         vm.currentlyPlaying = {};
 
         MatchesDbService.getMatch($stateParams._id).then(match => {
-            match.players.forEach(player => {
-                player.stats = JSON.parse(JSON.stringify(playerStat));
-            });
+            match.players.map(setStat);
             vm.match = match;
+
+            function setStat(player) {
+                if (!player.stats) {
+                    player.stats = JSON.parse(JSON.stringify(playerStat));
+                }
+
+                return player;
+            }
         });
+
+
 
         $ionicModal.fromTemplateUrl('matches/match/stats/stats-modal.html', {
             scope: $scope,
