@@ -30,12 +30,25 @@ angular.module('basketballStat.storage')
          * @returns {number}
          */
         function nextKey(store) {
-            var generatorObj = _.find(generators, generator => generator.store === store),
-                maxId = _.max(generatorObj.usedIds.map(id => parseFloat(id))),
-                nextKey = _.first(_.difference(_.range(maxId), generatorObj.usedIds));
-            nextKey = !_.isUndefined(nextKey) && _.isFinite(nextKey) ? nextKey : !_.isUndefined(maxId) && _.isFinite(maxId) ? ++maxId+'' : '0';
-            generatorObj.usedIds.push(parseFloat(nextKey));
+            var generatorObj = findKeyGeneratorForStore(store),
+                maxUsedId = _.max(generatorObj.usedIds.map(id => parseFloat(id))),
+                lowestUnusedId = _.first(_.difference(_.range(maxUsedId), generatorObj.usedIds));
 
-            return nextKey;
+            var nextUnusedId = isValidId(lowestUnusedId) ? lowestUnusedId : isValidId(maxUsedId) ? ++maxUsedId+'' : '0';
+            generatorObj.usedIds.push(parseFloat(nextUnusedId));
+
+            return nextUnusedId;
+
+            function findKeyGeneratorForStore(store) {
+                return _.find(generators, isTheSameStore);
+
+                function isTheSameStore(generator) {
+                    return generator.store === store;
+                }
+            }
+
+            function isValidId(id) {
+                return !_.isUndefined(id) && _.isFinite(id);
+            }
         }
     });
