@@ -18,11 +18,11 @@ var es = require('event-stream');
 var modularize = require('./gulp-build/angular-modularize.js');
 
 var paths = {
-    sass: ['./scss/**/*.scss', './appSrc/**/*.scss'],
-    html: ['./appSrc/**/*.html'],
-    js: ['./appSrc/**/*.js'],
-    jsDest: './www/js',
-    cssDest: './www/css'
+    sass: ['scss/**/*.scss', 'appSrc/**/*.scss'],
+    html: ['appSrc/**/*.html'],
+    js: ['appSrc/**/*.js'],
+    jsDest: 'www/js',
+    cssDest: 'www/css'
 };
 
 gulp.task('default', ['sass', 'htmlcache', 'javascript', 'watch']);
