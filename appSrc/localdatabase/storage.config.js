@@ -2,5 +2,6 @@ angular.module('basketballStat.storage')
     .constant('storageConfig', {
         database: 'BasketballStat',
         playerObjectStore: 'players',
-        matchesObjectStore: 'matches'
+        matchesObjectStore: 'matches',
+        teamsObjectStore: 'teams'
     });

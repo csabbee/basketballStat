@@ -1,0 +1,10 @@
+$max-view-percent: 0.93;
+$manage-teams-view: 0.7;
+
+.manage-teams-view {
+  height: percentage($manage-teams-view);
+}
+
+.button-panel {
+  height: percentage($max-view-percent - $manage-teams-view);
+}

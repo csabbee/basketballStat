@@ -2,7 +2,8 @@ angular.module('basketballStat.mainModule', [
     'basketballStat.helpers',
     'basketballStat.storage',
     'basketballStat.matches',
-    'basketballStat.players'
+    'basketballStat.players',
+	'basketballStat.manageTeams'
 ]).config(($stateProvider, $urlRouterProvider) => {
 	'use strict';
 
@@ -36,14 +37,6 @@ angular.module('basketballStat.mainModule', [
 			views: {
 				'menuContent': {
 					templateUrl: 'details.html'
-				}
-			}
-		})
-		.state('app.manageTeams', {
-			url: '/manage-teams',
-			views: {
-				'menuContent': {
-					templateUrl: 'manage-teams/manage-teams.html'
 				}
 			}
 		})
