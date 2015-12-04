@@ -1,7 +1,6 @@
 angular.module('basketballStat.manageTeams')
     .controller('ManageTeamsController', function($scope, TeamsDbService) {
         var vm = this;
-        //vm.teams = _.pluck(teams, 'doc');
 
         $scope.$on('$stateChangeStart', (event, toState) => {
             vm.activeView = false;
@@ -11,7 +10,6 @@ angular.module('basketballStat.manageTeams')
         });
 
         TeamsDbService.getAllTeams().then(function(teams) {
-            console.log(teams);
             vm.teams = _.pluck(teams, 'doc');
         });
     });

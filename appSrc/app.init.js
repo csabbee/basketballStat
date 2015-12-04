@@ -21,6 +21,9 @@ angular.module('basketballStat.mainModule', [
 				'menuContent': {
 					templateUrl: 'calendar/calendar.html'
 				}
+			},
+			ownParams: {
+				'viewTitle': 'Calendar'
 			}
 		})
 		.state('app.home', {
@@ -30,6 +33,9 @@ angular.module('basketballStat.mainModule', [
 					templateUrl: 'home/home.html',
 					controller: 'HomeController as HomeController'
 				}
+			},
+			ownParams: {
+				'viewTitle': 'Home'
 			}
 		})
 		.state('app.details', {

@@ -1,15 +1,6 @@
 angular.module('basketballStat.manageTeams')
-    .controller('NewTeamController', function($scope, StateHandler, $ionicPopup, players, $timeout, TeamsDbService, $cordovaToast) {
+    .controller('NewTeamController', function($scope, StateHandler, $ionicPopup, players, TeamsDbService, $cordovaToast) {
         var vm = this;
-        var titleElement = angular.element(document.querySelector('[nav-bar=active] > ion-header-bar > div.title'));
-
-        $timeout(function() {
-            var oldTitle = titleElement.text();
-            titleElement.text('New Team');
-            $scope.$on('$stateChangeStart', function() {
-                titleElement.text(oldTitle);
-            })
-        });
 
         vm.players = _.pluck(players, 'doc');
 

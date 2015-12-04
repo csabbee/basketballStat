@@ -8,7 +8,10 @@ angular.module('basketballStat.manageTeams')
                         templateUrl: 'manage-teams/manage-teams.html',
                         controller: 'ManageTeamsController as ManageTeamsController'
                     }
-                }
+                },
+			    ownParams: {
+				   'viewTitle': 'Manage Teams'
+			    }
             })
             .state('app.manageTeams.newTeam', {
                 url: '/new-team',
@@ -22,19 +25,25 @@ angular.module('basketballStat.manageTeams')
                             }
                         }
                     }
-                }
+                },
+			    ownParams: {
+				   'viewTitle': 'New Team'
+			    }
             })
             .state('app.manageTeams.team', {
                 url: '/:_id',
                 views: {
                     'team': {
                         templateUrl: 'manage-teams/team/team.html',
-                        controller: 'TeamController as TeamController'
+                        controller: 'TeamController as TeamControllr'
                     }
-                }
+                },
+			    ownParams: {
+				   'viewTitle': 'Team'
+			    }
             })
     }).run((storageConfig, TeamsDbService, KeyGenerator) => {
-    TeamsDbService.getAllTeams().then(function(teams) {
+        TeamsDbService.getAllTeams().then(function(teams) {
             var ids = teams.map(team => parseFloat(team.doc._id));
             KeyGenerator.setSeed({
                 store: storageConfig.teamsObjectStore,
