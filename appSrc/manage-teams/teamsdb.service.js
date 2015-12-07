@@ -27,7 +27,7 @@ angular.module('basketballStat.manageTeams')
         }
 
         function updateTeam(team) {
-            return LocalDbService.updateEntry(teamsObjectStore, team, '',eventListing.teamListUpdate);
+            return LocalDbService.updateEntry(teamsObjectStore, team, 'Team Updated',eventListing.teamListUpdate);
         }
     });
 

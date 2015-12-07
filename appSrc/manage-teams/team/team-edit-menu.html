@@ -1,0 +1,10 @@
+<a class="button button-icon icon icon-right {{TeamEditMenuController.menuTogglerIcon}}"
+   ng-click="TeamEditMenuController.toggleIsEditable()"
+   ng-class="{'edit-active': TeamEditMenuController.menuToggler}"></a>
+<a class="button button-icon icon icon-right ion-trash-b menu-item menu-item-show-hide-animation"
+   ng-click="TeamEditMenuController.removeTeamTrigger()"
+   ng-show="TeamEditMenuController.menuToggler"></a>
+<a class="button button-icon icon icon-right ion-person-add menu-item menu-item-show-hide-animation"
+   ng-click="TeamEditMenuController.addPlayerTrigger()"
+   ng-show="TeamEditMenuController.menuToggler"></a>
+

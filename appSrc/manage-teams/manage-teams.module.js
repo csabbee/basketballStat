@@ -35,7 +35,15 @@ angular.module('basketballStat.manageTeams')
                 views: {
                     'team': {
                         templateUrl: 'manage-teams/team/team.html',
-                        controller: 'TeamController as TeamControllr'
+                        controller: 'TeamController as TeamController',
+                        resolve: {
+                            team: function($stateParams, TeamsDbService) {
+                                return TeamsDbService.getTeam($stateParams._id);
+                            },
+                            players: function(PlayersDbService) {
+                                return PlayersDbService.getAllPlayer();
+                            }
+                        }
                     }
                 },
 			    ownParams: {

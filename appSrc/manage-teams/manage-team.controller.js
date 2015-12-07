@@ -7,9 +7,12 @@ angular.module('basketballStat.manageTeams')
         });
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.manageTeams';
+
+            if(vm.activeView) {
+                TeamsDbService.getAllTeams().then(function(teams) {
+                    vm.teams = _.pluck(teams, 'doc');
+                });
+            }
         });
 
-        TeamsDbService.getAllTeams().then(function(teams) {
-            vm.teams = _.pluck(teams, 'doc');
-        });
     });

@@ -1,0 +1,24 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-stable">
+        <div class="buttons">
+            <a class="button button-icon icon ion-checkmark" ng-click="saveChanges()"></a>
+        </div>
+        <h1 class="title">Add players</h1>
+        <div class="buttons">
+            <a class="button button-icon icon ion-close" ng-click="hidePlayersModal()"></a>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        Hello!
+        <ul class="list">
+            <li class="item item-checkbox"
+                ng-repeat="player in playersNotYetAdded track by player._rev"
+                ng-click="togglePlayerToBeAdded(player)">
+                <label class="checkbox checkbox-energized">
+                    <input type="checkbox">
+                </label>
+                {{player.firstName}} {{player.lastName}}
+            </li>
+        </ul>
+    </ion-content>
+</ion-modal-view>

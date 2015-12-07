@@ -1,1 +1,16 @@
-<h3>YAAAAY TEEEEEAM</h3>
+<ion-list show-delete="TeamController.isEditable">
+    <div class="item item-divider">
+        <h3 class="team-name">{{TeamController.team.teamName}}</h3>
+        <team-edit-menu
+                menu-toggler="TeamController.isEditable"
+                menu-toggler-icon="ion-edit"
+                remove-team-trigger="TeamController.deleteTeam()"
+                add-player-trigger="TeamController.addPlayer()"></team-edit-menu>
+    </div>
+    <ion-item ng-repeat="player in TeamController.team.players track by player._rev">
+        <ion-delete-button class="ion-minus-circled"
+                           ng-click="TeamController.removePlayer(player)">
+        </ion-delete-button>
+        {{player.firstName}} {{player.lastName}}
+    </ion-item>
+</ion-list>
