@@ -5,6 +5,8 @@ $manage-teams-view: 0.7;
 $menu-item-animation-duration: 175ms;
 $menu-item-animation-delay: 175ms;
 
+$team-heading-padding-top: 0.2em;
+
 .manage-teams-view {
   height: percentage($manage-teams-view);
   .col {
@@ -25,9 +27,10 @@ $menu-item-animation-delay: 175ms;
 
 .item {
   h3.team-name {
-    font-size: 1.3em;
+    padding-top: $team-heading-padding-top;
+    font-size: 1.4em;
     width: 90%;
-    height: 1.4em;
+    height: 1.5em;
   }
   team-edit-menu {
     .icon.edit-active {
@@ -45,7 +48,7 @@ $menu-item-animation-delay: 175ms;
       right: 0;
       padding-right: 10px;
       padding-left: 0;
-      top: 0.0em;
+      top: $team-heading-padding-top;
       pointer-events: all;
     }
   }
@@ -68,7 +71,15 @@ $menu-item-animation-delay: 175ms;
 
 .item.item-divider {
   .team-name-form {
+    width: 60%;
     pointer-events: all;
-    margin-top: 40px;
+    margin: 0px 0px;
   }
+}
+
+#team-name-edit {
+  font-weight: 400;
+  font-size: 1.1em;
+  height: 1.4em;
+  padding-right: 10px;
 }
