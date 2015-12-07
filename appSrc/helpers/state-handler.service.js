@@ -13,9 +13,10 @@ angular.module('basketballStat.helpers')
             setTitle: setTitle
         };
 
-        function goBack() {
+        function goBack(value) {
             $ionicScrollDelegate.scrollTop();
             $state.go(previousState, previousParams);
+            return value;
         }
         
         function setTitle(newTitle) {

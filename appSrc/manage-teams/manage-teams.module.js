@@ -37,13 +37,12 @@ angular.module('basketballStat.manageTeams')
                         templateUrl: 'manage-teams/team/team.html',
                         controller: 'TeamController as TeamController',
                         resolve: {
-                            team: function($stateParams, TeamsDbService) {
+                            team: function($stateParams, TeamsDbService, Commons) {
                                 return TeamsDbService.getTeam($stateParams._id);
                             },
-                            players: function(PlayersDbService) {
-                                return PlayersDbService.getAllPlayer().then(function(players){
-                                    return _.pluck(players, 'doc');
-                                });
+                            players: function(PlayersDbService, Commons) {
+                                return PlayersDbService.getAllPlayer()
+                                    .then(Commons.pluckDoc);
                             }
                         }
                     }

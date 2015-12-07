@@ -1,5 +1,5 @@
 angular.module('basketballStat.manageTeams')
-    .controller('ManageTeamsController', function($scope, TeamsDbService) {
+    .controller('ManageTeamsController', function($scope, TeamsDbService, Commons) {
         var vm = this;
 
         $scope.$on('$stateChangeStart', (event, toState) => {
@@ -9,9 +9,11 @@ angular.module('basketballStat.manageTeams')
             vm.activeView = toState.name === 'app.manageTeams';
 
             if(vm.activeView) {
-                TeamsDbService.getAllTeams().then(function(teams) {
-                    vm.teams = _.pluck(teams, 'doc');
-                });
+                TeamsDbService.getAllTeams()
+                    .then(Commons.pluckDoc)
+                    .then(function(teams) {
+                        vm.teams = teams;
+                    });
             }
         });
 

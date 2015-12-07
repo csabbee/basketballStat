@@ -7,12 +7,12 @@ angular.module('basketballStat.storage')
         };
 
         function getDb(objectStore) {
-            var deferred = $q.defer();
             if (!databases[objectStore]) {
                 databases[objectStore] = new PouchDB(objectStore);
             }
-            deferred.resolve(databases[objectStore]);
 
-            return deferred.promise;
+            return $q(function (resolve, reject) {
+                resolve(databases[objectStore]);
+            });
         }
     });

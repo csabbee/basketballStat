@@ -18,7 +18,12 @@ angular.module('basketballStat.matches')
                 views: {
                     'match': {
                         templateUrl: 'matches/match/match.html',
-                        controller: 'MatchController as MatchController'
+                        controller: 'MatchController as MatchController',
+                        resolve: {
+                            match: function($stateParams, MatchesDbService) {
+                                return MatchesDbService.getMatch($stateParams._id);
+                            }
+                        }
                     }
                 },
 			    ownParams: {
@@ -32,8 +37,9 @@ angular.module('basketballStat.matches')
                         templateUrl: 'matches/new-match/new-match.html',
                         controller: 'NewMatchController as NewMatchController',
                         resolve: {
-                            players: function(PlayersDbService) {
-                                return PlayersDbService.getAllPlayer();
+                            players: function(PlayersDbService, Commons) {
+                                return PlayersDbService.getAllPlayer()
+                                    .then(Commons.pluckDoc);
                             }
                         }
                     }

@@ -17,9 +17,7 @@ angular.module('basketballStat.players')
         vm.save = function(player, form) {
             if (form.$dirty && form.$valid) {
                 PlayersDbService.addPlayer(player)
-                    .then(() => {
-                        StateHandler.goBack();
-                    });
+                    .then(StateHandler.goBack);
             }
         };
     });

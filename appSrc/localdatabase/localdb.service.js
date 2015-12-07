@@ -1,5 +1,5 @@
 angular.module('basketballStat.storage')
-    .service('LocalDbService', function(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast) {
+    .service('LocalDbService', function LocalDbService(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast, Commons) {
         return {
             getAllEntry: getAllEntry,
             addEntry: addEntry,
@@ -15,26 +15,14 @@ angular.module('basketballStat.storage')
          * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
-        function addEntry(objectStore, entry, toastMessage,...eventsToEmit) {
-            var deferResult = $q.defer();
-
-            basketballStatDatabase.getDb(objectStore).then(function(database) {
-                _.extend(entry, {'_id': KeyGenerator.nextKey(objectStore)+''});
-                database.put(entry).then(() => {
-                    deferResult.resolve('Added');
-                    $cordovaToast.show(`${toastMessage} added`, 'long', 'center')
-                        .then(function(success) {
-                            // success
-                        }, function (error) {
-                            // error
-                        });
-                    emitEvents(eventsToEmit);
-                }, function(err) {
-                    console.log(err);
-                });
-            });
-
-            return deferResult.promise;
+        function addEntry(objectStore, entry, toastMessage, ...eventsToEmit) {
+            return basketballStatDatabase.getDb(objectStore)
+                .then(function (database) {
+                    _.extend(entry, { '_id': KeyGenerator.nextKey(objectStore) + '' });
+                    return database.put(entry);
+                })
+                .then(showToastMessages(`${toastMessage} added`))
+                .catch(Commons.logToConsole);
         }
 
         /**
@@ -45,24 +33,13 @@ angular.module('basketballStat.storage')
          * @returns {Function|promise}
          */
         function deleteEntry(objectStore, entry, ...eventsToEmit) {
-            var deferResult = $q.defer();
-
-            basketballStatDatabase.getDb(objectStore).then(function(database) {
-                database.remove(entry).then(()=> {
-                    deferResult.resolve('deleteted');
-                    $cordovaToast.show(`Deleted`, 'long', 'center')
-                        .then(function(success) {
-                            // success
-                        }, function (error) {
-                            // error
-                        });
-                    emitEvents(eventsToEmit);
-                },()=> {
-                    $cordovaToast.show('Error while deleting' ,'long', 'center');
-                });
-            });
-
-            return deferResult.promise;
+            return basketballStatDatabase.getDb(objectStore)
+                .then(function (database) {
+                    return database.remove(entry);
+                })
+                .then(showToastMessages('Deleted'))
+                .then(emitEvents(eventsToEmit))
+                .catch(Commons.logToConsole)
         }
 
         /**
@@ -73,16 +50,12 @@ angular.module('basketballStat.storage')
          * @returns {Function|promise}
          */
         function getEntry(objectStore, key, ...eventsToEmit) {
-            var deferResult = $q.defer();
-
-            basketballStatDatabase.getDb(objectStore).then(function(database) {
-                database.get(key+'').then(entry => {
-                    deferResult.resolve(entry);
-                    emitEvents(eventsToEmit);
-                });
-            });
-
-            return deferResult.promise;
+            return basketballStatDatabase.getDb(objectStore)
+                .then(function (database) {
+                    return database.get(key + '');
+                })
+                .then(emitEvents(eventsToEmit))
+                .catch(Commons.logToConsole);
         }
 
         /**
@@ -93,23 +66,14 @@ angular.module('basketballStat.storage')
          * @param eventsToEmit {String[]}
          * @returns {Function|promise}
          */
-        function updateEntry(objectStore, entry, toastMessage,...eventsToEmit) {
-            var deferResult = $q.defer();
-
-            basketballStatDatabase.getDb(objectStore).then(function(database) {
-                database.put(entry).then(entry => {
-                    deferResult.resolve('entry set');
-                    $cordovaToast.show(`${toastMessage} saved`, 'long', 'center')
-                        .then(function(success) {
-                            // success
-                        }, function (error) {
-                            // error
-                        });
-                    emitEvents(eventsToEmit);
-                });
-            });
-
-            return deferResult.promise;
+        function updateEntry(objectStore, entry, toastMessage, ...eventsToEmit) {
+            return basketballStatDatabase.getDb(objectStore)
+                .then(function (database) {
+                    return database.put(entry);
+                })
+                .then(showToastMessages(`${toastMessage} saved`))
+                .then(emitEvents(eventsToEmit))
+                .catch(Commons.logToConsole);
         }
 
         /**
@@ -118,22 +82,33 @@ angular.module('basketballStat.storage')
          * @returns {Function|promise}
          */
         function getAllEntry(objectStore) {
-            var deferResult = $q.defer();
-
-            basketballStatDatabase.getDb(objectStore).then(function(database) {
-                database.allDocs({include_docs: true}).then(docs => {
-                    deferResult.resolve(docs.rows);
-                });
-            });
-
-            return deferResult.promise;
+            return basketballStatDatabase.getDb(objectStore)
+                .then(function (database) {
+                    return database.allDocs({ include_docs: true });
+                })
+                .then(function (docs) {
+                    return docs.rows;
+                })
+                .catch(Commons.logToConsole);
         }
 
         function emitEvents(eventsToEmit) {
-            if (!_.isUndefined(eventsToEmit)) {
-                eventsToEmit.forEach(eventToEmit => {
-                    $rootScope.$emit(eventToEmit);
-                });
+            return function (value) {
+                if (!_.isUndefined(eventsToEmit)) {
+                    eventsToEmit.forEach(eventToEmit => {
+                        $rootScope.$emit(eventToEmit);
+                    });
+                }
+                return value;
+            }
+        }
+
+        function showToastMessages(messageToShow) {
+            return function (value) {
+                return $cordovaToast.show(messageToShow, 'long', 'center')
+                    .then(function () {
+                        return value;
+                    });
             }
         }
     });
