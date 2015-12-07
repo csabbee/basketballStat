@@ -20,8 +20,8 @@ angular.module('basketballStat.manageTeams')
             });
             confirmPopup.then(function(res) {
                 if(res) {
-                    TeamsDbService.deleteTeam(team);
-                    StateHandler.goBack();
+                    TeamsDbService.deleteTeam(team)
+                        .then(StateHandler.goBack);
                 }
             });
         };

@@ -1,5 +1,5 @@
 angular.module('basketballStat.storage')
-    .service('LocalDbService', function LocalDbService(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast) {
+    .service('LocalDbService', function LocalDbService(basketballStatDatabase, $q, $rootScope, KeyGenerator, $cordovaToast, Commons) {
         return {
             getAllEntry: getAllEntry,
             addEntry: addEntry,
@@ -22,7 +22,7 @@ angular.module('basketballStat.storage')
                     return database.put(entry);
                 })
                 .then(showToastMessages(`${toastMessage} added`))
-                .catch(logToConsole);
+                .catch(Commons.logToConsole);
         }
 
         /**
@@ -39,7 +39,7 @@ angular.module('basketballStat.storage')
                 })
                 .then(showToastMessages('Deleted'))
                 .then(emitEvents(eventsToEmit))
-                .catch(logToConsole)
+                .catch(Commons.logToConsole)
         }
 
         /**
@@ -55,7 +55,7 @@ angular.module('basketballStat.storage')
                     return database.get(key + '');
                 })
                 .then(emitEvents(eventsToEmit))
-                .catch(logToConsole);
+                .catch(Commons.logToConsole);
         }
 
         /**
@@ -73,7 +73,7 @@ angular.module('basketballStat.storage')
                 })
                 .then(showToastMessages(`${toastMessage} saved`))
                 .then(emitEvents(eventsToEmit))
-                .catch(logToConsole);
+                .catch(Commons.logToConsole);
         }
 
         /**
@@ -89,7 +89,7 @@ angular.module('basketballStat.storage')
                 .then(function (docs) {
                     return docs.rows;
                 })
-                .catch(logToConsole);
+                .catch(Commons.logToConsole);
         }
 
         function emitEvents(eventsToEmit) {
@@ -110,9 +110,5 @@ angular.module('basketballStat.storage')
                         return value;
                     });
             }
-        }
-
-        function logToConsole(message) {
-            return console.log(message);
         }
     });

@@ -7,12 +7,12 @@ angular.module('basketballStat.matches')
             var selectedPlayerIds = _.chain(_.keys(match.playerIds))
                                         .filter(_.partial(isSelected, match.playerIds))
                                         .value();
-            var playing = _.filter(players, _.partial(idPresent, selectedPlayerIds));
+            var playing = _.filter(vm.players, _.partial(idPresent, selectedPlayerIds));
 
             if (form.$dirty && form.$valid) {
                 if (playing.length >= 5) {
                     match.time = timeStamp;
-                    match.players =_.pluck(playing, 'doc');
+                    match.players = playing;
                     MatchesDbService.addMatch(match);
                     StateHandler.goBack();
                 } else {
@@ -38,7 +38,7 @@ angular.module('basketballStat.matches')
         };
 
         function idPresent(playerIds, player) {
-            return _.contains(playerIds, ''+player.doc._id);
+            return _.contains(playerIds, ''+player._id);
         }
 
         /**
@@ -48,6 +48,6 @@ angular.module('basketballStat.matches')
         function isSelected(playerIdsObj, id) {
             return playerIdsObj[id];
         }
-        vm.players = _.pluck(players, 'doc');
+        vm.players = players;
         $scope.match = {};
     });

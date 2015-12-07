@@ -1,8 +1,6 @@
 angular.module('basketballStat.matches')
-    .controller('MatchController', function($scope, MatchesDbService, $stateParams, StateHandler, $ionicScrollDelegate,
-                                            $ionicModal, eventListing) {
+    .controller('MatchController', function ($scope, MatchesDbService, StateHandler, $ionicScrollDelegate, $ionicModal, eventListing, match) {
         var vm = this,
-            saveMatchHandler,
             modal,
             playerStat = {
                 time: 0,
@@ -28,29 +26,24 @@ angular.module('basketballStat.matches')
                 steal: 0,
                 block: 0,
                 personalFoul: 0
-            };
-
-        $ionicScrollDelegate.scrollTop();
-
-        vm.currentlyPlaying = {};
-
-        MatchesDbService.getMatch($stateParams._id).then(match => {
-            match.players.map(setStat);
-            vm.match = match;
+            },
             saveMatchHandler = $scope.$on('$stateChangeStart', function() {
                 MatchesDbService.updateMatch(vm.match);
             });
 
-            function setStat(player) {
-                if (!player.stats) {
-                    player.stats = JSON.parse(JSON.stringify(playerStat));
-                }
-
-                return player;
+        function setStat(player) {
+            if (!player.stats) {
+                player.stats = JSON.parse(JSON.stringify(playerStat));
             }
-        });
 
+            return player;
+        }
 
+        $ionicScrollDelegate.scrollTop();
+
+        vm.currentlyPlaying = {};
+        vm.match = match;
+        vm.match.players.map(setStat);
 
         $ionicModal.fromTemplateUrl('matches/match/stats/stats-modal.html', {
             scope: $scope,
@@ -59,35 +52,35 @@ angular.module('basketballStat.matches')
             modal = statModal;
         });
 
-        $scope.closeModal = function() {
+        $scope.closeModal = function () {
             modal.hide();
         };
         //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             modal.remove();
             saveMatchHandler();
         });
 
-        vm.show = function(player) {
+        vm.show = function (player) {
             vm.currentPlayer = player;
             modal.show();
         };
 
-        vm.buttonClick = function() {
+        vm.buttonClick = function () {
             console.log(`I'm clicked: ${arguments}`);
         };
 
-        vm.goBack = function() {
+        vm.goBack = function () {
             StateHandler.goBack();
         };
 
-        vm.setCurrentlyPlaying = function() {
+        vm.setCurrentlyPlaying = function () {
             vm.selectedPlayerIds = _.chain(_.keys(vm.currentlyPlaying))
                 .filter(_.partial(isSelected, vm.currentlyPlaying))
                 .value();
         };
 
-        $scope.$onRootScope(eventListing.timeTickEmit, ()=> {
+        $scope.$onRootScope(eventListing.timeTickEmit, () => {
             _.chain(vm.match.players)
                 .filter(isCurrentlyPlaying)
                 .map(addPlayTime)

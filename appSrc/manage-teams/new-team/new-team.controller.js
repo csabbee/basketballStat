@@ -12,8 +12,8 @@ angular.module('basketballStat.manageTeams')
             if (form.$dirty && form.$valid) {
                 if (members.length >= 5) {
                     team.players =_.pluck(members, 'doc');
-                    TeamsDbService.addTeam(team);
-                    StateHandler.goBack();
+                    TeamsDbService.addTeam(team)
+                        .then(StateHandler.goBack);
                 } else {
                     $cordovaToast.showLongCenter('Need to select at least 5 player');
                 }
