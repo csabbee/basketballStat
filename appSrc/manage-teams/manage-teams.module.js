@@ -41,7 +41,9 @@ angular.module('basketballStat.manageTeams')
                                 return TeamsDbService.getTeam($stateParams._id);
                             },
                             players: function(PlayersDbService) {
-                                return PlayersDbService.getAllPlayer();
+                                return PlayersDbService.getAllPlayer().then(function(players){
+                                    return _.pluck(players, 'doc');
+                                });
                             }
                         }
                     }
