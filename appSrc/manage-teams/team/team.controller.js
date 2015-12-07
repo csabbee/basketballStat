@@ -2,8 +2,6 @@ angular.module('basketballStat.manageTeams')
     .controller('TeamController', function($scope, team, players, TeamsDbService, $ionicModal, $ionicPopup, StateHandler) {
         var vm = this;
 
-        console.log(team);
-        console.log(players);
         vm.team = team;
         vm.isEditable = false;
 
