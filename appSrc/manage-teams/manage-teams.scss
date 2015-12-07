@@ -7,6 +7,16 @@ $menu-item-animation-delay: 175ms;
 
 .manage-teams-view {
   height: percentage($manage-teams-view);
+  .col {
+    .list {
+      .item {
+        div {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
 }
 
 .button-panel {
@@ -16,6 +26,8 @@ $menu-item-animation-delay: 175ms;
 .item {
   h3.team-name {
     font-size: 1.3em;
+    width: 90%;
+    height: 1.4em;
   }
   team-edit-menu {
     .icon.edit-active {
@@ -51,5 +63,12 @@ $menu-item-animation-delay: 175ms;
   }
   &.ng-hide {
     opacity: 0;
+  }
+}
+
+.item.item-divider {
+  .team-name-form {
+    pointer-events: all;
+    margin-top: 40px;
   }
 }
