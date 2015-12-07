@@ -2,7 +2,8 @@ angular.module('basketballStat.mainModule', [
     'basketballStat.helpers',
     'basketballStat.storage',
     'basketballStat.matches',
-    'basketballStat.players'
+    'basketballStat.players',
+	'basketballStat.manageTeams'
 ]).config(($stateProvider, $urlRouterProvider) => {
 	'use strict';
 
@@ -20,6 +21,9 @@ angular.module('basketballStat.mainModule', [
 				'menuContent': {
 					templateUrl: 'calendar/calendar.html'
 				}
+			},
+			ownParams: {
+				'viewTitle': 'Calendar'
 			}
 		})
 		.state('app.home', {
@@ -29,6 +33,9 @@ angular.module('basketballStat.mainModule', [
 					templateUrl: 'home/home.html',
 					controller: 'HomeController as HomeController'
 				}
+			},
+			ownParams: {
+				'viewTitle': 'Home'
 			}
 		})
 		.state('app.details', {
@@ -36,14 +43,6 @@ angular.module('basketballStat.mainModule', [
 			views: {
 				'menuContent': {
 					templateUrl: 'details.html'
-				}
-			}
-		})
-		.state('app.manageTeams', {
-			url: '/manage-teams',
-			views: {
-				'menuContent': {
-					templateUrl: 'manage-teams/manage-teams.html'
 				}
 			}
 		})

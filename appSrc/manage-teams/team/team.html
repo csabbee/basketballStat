@@ -1,0 +1,26 @@
+<ion-list show-delete="TeamController.isEditable">
+    <div class="item item-divider">
+        <h3 ng-show="!TeamController.isEditable" class="team-name">{{TeamController.team.teamName}}</h3>
+        <div class="list list-inset team-name-form" ng-show="TeamController.isEditable">
+            <label class="item item-input item-floating-label">
+                <input id="team-name-edit"
+                       type="text"
+                       placeholder="Team Name"
+                       ng-model="TeamController.team.teamName"
+                       ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0}}"/>
+            </label>
+        </div>
+
+        <team-edit-menu
+                menu-toggler="TeamController.isEditable"
+                menu-toggler-icon="ion-edit"
+                remove-team-trigger="TeamController.deleteTeam()"
+                add-player-trigger="TeamController.addPlayer()"></team-edit-menu>
+    </div>
+    <ion-item ng-repeat="player in TeamController.team.players track by player._rev">
+        <ion-delete-button class="ion-minus-circled"
+                           ng-click="TeamController.removePlayer(player)">
+        </ion-delete-button>
+        {{player.firstName}} {{player.lastName}}
+    </ion-item>
+</ion-list>

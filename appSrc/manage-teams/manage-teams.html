@@ -2,7 +2,27 @@
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
     </ion-nav-buttons>
-    <ion-content class="full-height scroll-content ionic-scroll display-overflow">
-		<h3>Work in progress...</h3>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-positive icon ion-plus-round"
+                ui-sref="app.manageTeams.newTeam"
+                ng-hide="!ManageTeamsController.activeView">
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="full-height scroll-content ionic-scroll display-overflow" delegate-handle="manageTeamsScroll">
+        <div class="row row-top manage-teams-view" ng-hide="!ManageTeamsController.activeView">
+            <div class="col">
+                <div class="list" ng-hide="!ManageTeamsController.activeView">
+                    <div class="item item-button-right" ng-repeat="team in ManageTeamsController.teams">
+                        <div ng-bind="::team.teamName"></div>
+                        <button class="button button-outline button-balanced"
+                                ui-sref="app.manageTeams.team({_id: team._id})">
+                            <i class="icon ion-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                <div ui-view name="team"></div>
+            </div>
+        </div>
+        <div ui-view name="team" class="height-fix"></div>
     </ion-content>
 </ion-view>

@@ -1,0 +1,24 @@
+$modal-enter-animation-duration: 400ms;
+$modal-exit-animation-duration: 250ms;
+
+.add-player-modal-animation {
+  -webkit-transform: translate3d(0, 0, 0) scale(0);
+  transform: translate3d(0, 0, 0) scale(0);
+  opacity: 0;
+
+  &.ng-enter, .ng-enter {
+    -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) $modal-enter-animation-duration;
+    transition: all cubic-bezier(0.1, 0.7, 0.1, 1) $modal-enter-animation-duration;
+  }
+
+  &.ng-enter-active, .ng-enter-active {
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+
+  &.ng-leave, .ng-leave {
+    -webkit-transition: all ease-in-out $modal-exit-animation-duration;
+    transition: all ease-in-out $modal-exit-animation-duration;
+  }
+}

@@ -1,5 +1,5 @@
 angular.module('basketballStat.matches')
-    .controller('MatchesController', function($scope, MatchesDbService, $ionicActionSheet, $ionicPopup, $state) {
+    .controller('MatchesController', function($scope, MatchesDbService, $ionicActionSheet, $ionicPopup, $state, $ionicNavBarDelegate) {
         var vm = this;
 
         $scope.$on('$stateChangeStart', (event, toState) => {
@@ -8,6 +8,7 @@ angular.module('basketballStat.matches')
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.matches';
             if (vm.activeView) {
+                $ionicNavBarDelegate.title('Matches');
                 MatchesDbService.getAllMatches().then(matches => {
                     vm.matches = _.pluck(matches, 'doc');
                 })

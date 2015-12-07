@@ -29,6 +29,7 @@ angular.module('basketballStat.storage')
          * @param {string} store
          * @returns {number}
          */
+        // TODO: player ids stored in matches, teams. Upon deleting a player the next added one will get its stats...
         function nextKey(store) {
             var generatorObj = findKeyGeneratorForStore(store),
                 maxUsedId = _.max(generatorObj.usedIds.map(id => parseFloat(id))),

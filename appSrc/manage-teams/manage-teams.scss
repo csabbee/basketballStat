@@ -1,0 +1,85 @@
+@import "./team/add-player-modal";
+
+$max-view-percent: 0.93;
+$manage-teams-view: 0.7;
+$menu-item-animation-duration: 175ms;
+$menu-item-animation-delay: 175ms;
+
+$team-heading-padding-top: 0.2em;
+
+.manage-teams-view {
+  height: percentage($manage-teams-view);
+  .col {
+    .list {
+      .item {
+        div {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+.button-panel {
+  height: percentage($max-view-percent - $manage-teams-view);
+}
+
+.item {
+  h3.team-name {
+    padding-top: $team-heading-padding-top;
+    font-size: 1.4em;
+    width: 90%;
+    height: 1.5em;
+  }
+  team-edit-menu {
+    .icon.edit-active {
+      color: #9fe100;
+    }
+  }
+}
+
+.item.item-divider {
+  team-edit-menu {
+    .icon-right {
+      transition-delay: $menu-item-animation-delay;
+      transition: all ease-in-out $menu-item-animation-duration;
+      position: absolute;
+      right: 0;
+      padding-right: 10px;
+      padding-left: 0;
+      top: $team-heading-padding-top;
+      pointer-events: all;
+    }
+  }
+}
+
+.menu-item-show-hide-animation {
+  &.ng-hide-add, &.ng-hide-remove {
+    animation-delay: $menu-item-animation-delay;
+    -webkit-transition:$menu-item-animation-duration linear all;
+    transition:$menu-item-animation-duration linear all;
+
+    /* remember to add this */
+    display:block!important;
+    opacity:1;
+  }
+  &.ng-hide {
+    opacity: 0;
+  }
+}
+
+.item.item-divider {
+  .team-name-form {
+    width: 60%;
+    pointer-events: all;
+    margin: 0px 0px;
+  }
+}
+
+#team-name-edit {
+  font-weight: 400;
+  font-size: 1.1em;
+  height: 1.4em;
+  padding-right: 10px;
+}

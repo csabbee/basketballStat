@@ -10,7 +10,10 @@ angular.module('basketballStat.players')
                         templateUrl: 'players/players.html',
                         controller: 'PlayersController as PlayersController'
                     }
-                }
+                },
+			    ownParams: {
+				   'viewTitle': 'Players'
+			    }
             })
             .state('app.players.player', {
                 url: '/:_id',
@@ -19,7 +22,10 @@ angular.module('basketballStat.players')
                         templateUrl: 'players/player/player.html',
                         controller: 'PlayerController as PlayerController'
                     }
-                }
+                },
+			    ownParams: {
+				   'viewTitle': 'Player'
+			    }
             })
             .state('app.players.newPlayer', {
                 url: '/new',
@@ -28,7 +34,10 @@ angular.module('basketballStat.players')
                         templateUrl: 'players/new-player/new-player.html',
                         controller: 'NewPlayerController as NewPlayerController'
                     }
-                }
+                },
+			    ownParams: {
+				   'viewTitle': 'New Player'
+			    }
             });
         // We 'pre-initialize' the database/object store
     }).run((storageConfig, KeyGenerator, PlayersDbService) => {
