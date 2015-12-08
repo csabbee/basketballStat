@@ -105,10 +105,14 @@ angular.module('basketballStat.storage')
 
         function showToastMessages(messageToShow) {
             return function (value) {
-                return $cordovaToast.show(messageToShow, 'long', 'center')
-                    .then(function () {
+                try {
+                    return $cordovaToast.show(messageToShow, 'long', 'center')
+                    .then(function() {
                         return value;
                     });
+                } catch(e) {
+                    return value;
+                }
             }
         }
     });
