@@ -1,5 +1,5 @@
 angular.module('basketballStat.manageTeams')
-    .controller('TeamController', function($scope, team, players, TeamsDbService, $ionicModal, $ionicPopup, StateHandler) {
+    .controller('TeamController', function($scope, team, players, TeamsDbService, $ionicModal, $ionicPopup, StateHandler, $stateParams) {
         var vm = this;
 
         vm.team = team;
@@ -8,6 +8,19 @@ angular.module('basketballStat.manageTeams')
         vm.removePlayer = function removePlayer(player) {
             vm.team.players.splice(team.players.indexOf(player), 1);
         };
+
+        function updateTeam() {
+            TeamsDbService.updateTeam(vm.team)
+            .then(function() {
+                return TeamsDbService.getTeam($stateParams._id);
+            })
+            .then(function(team) {
+                vm.team = team;
+                return team;
+            });
+        }
+
+        vm.updateTeam = updateTeam;
 
         vm.deleteTeam = function removeTeam() {
             var confirmPopup = $ionicPopup.confirm({
@@ -50,7 +63,7 @@ angular.module('basketballStat.manageTeams')
                 $scope.saveChanges = function() {
                     hidePlayersModal();
                     vm.team.players = _.union(vm.team.players, playersToAdd);
-                    TeamsDbService.updateTeam(team);
+                    updateTeam();
                 };
 
                 function hidePlayersModal() {
