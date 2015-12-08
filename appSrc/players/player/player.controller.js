@@ -38,15 +38,15 @@ angular.module('basketballStat.players')
 
         vm.update = function(player, form) {
             if (form.$dirty && form.$valid) {
-                player.ssnId = backupPlayer.ssnId;
+                player._id = backupPlayer._id;
                 PlayersDbService.updatePlayer(player)
                     .then(() => {
                         backupPlayer = angular.copy(player);
-                        vm.player = angular.copy(player);
+                        $scope.player = angular.copy(player);
                         StateHandler.goBack();
                     })
                     .catch(() => {
-                        vm.player = angular.copy(backupPlayer);
+                        $scope.player = angular.copy(backupPlayer);
                     });
             }
         };
