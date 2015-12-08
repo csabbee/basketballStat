@@ -33,9 +33,7 @@ angular.module('basketballStat.players')
 
         vm.delete = function() {
             PlayersDbService.deletePlayer(vm.player)
-                .then(() => {
-                    StateHandler.goBack();
-                });
+                .then(StateHandler.goBack);
         };
 
         vm.update = function(player, form) {
