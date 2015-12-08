@@ -5,10 +5,6 @@ angular.module('basketballStat.manageTeams')
         vm.team = team;
         vm.isEditable = false;
 
-        $scope.$on('$stateChangeStart', function() {
-            TeamsDbService.updateTeam(team);
-        });
-
         vm.removePlayer = function removePlayer(player) {
             vm.team.players.splice(team.players.indexOf(player), 1);
         };
