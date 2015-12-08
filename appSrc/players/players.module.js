@@ -8,13 +8,7 @@ angular.module('basketballStat.players')
                 views: {
                     'menuContent': {
                         templateUrl: 'players/players.html',
-                        controller: 'PlayersController as PlayersController',
-                        resolve: {
-                            players: function(PlayersDbService, Commons) {
-                                return PlayersDbService.getAllPlayer()
-                                    .then(Commons.pluckDoc);
-                            }
-                        }
+                        controller: 'PlayersController as PlayersController'
                     }
                 },
 			    ownParams: {

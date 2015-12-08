@@ -1,5 +1,5 @@
 angular.module('basketballStat.players')
-    .controller('PlayersController', function($scope, PlayersDbService, Commons, players) {
+    .controller('PlayersController', function($scope, PlayersDbService, Commons) {
         var vm = this;
 
         $scope.$on('$stateChangeStart', (event, toState) => {
@@ -7,7 +7,12 @@ angular.module('basketballStat.players')
         });
         $scope.$on('$stateChangeSuccess', (event, toState) => {
             vm.activeView = toState.name === 'app.players' ? true : false;
+            if (vm.activeView) {
+                PlayersDbService.getAllPlayer()
+                    .then(Commons.pluckDoc)
+                    .then(function(players) {
+                        vm.players = players;
+                    });
+            }
         });
-
-        vm.players = players;
     });

@@ -6,7 +6,8 @@ angular.module('basketballStat.manageTeams')
                 menuToggler: '=',
                 menuTogglerIcon: '@',
                 removeTeamTrigger: '&',
-                addPlayerTrigger: '&'
+                addPlayerTrigger: '&',
+                updateTeamTrigger: '&'
             },
             bindToController: true,
             link: link,
@@ -19,6 +20,9 @@ angular.module('basketballStat.manageTeams')
             var vm = this;
             vm.toggleIsEditable = function() {
                 vm.menuToggler = !vm.menuToggler;
+                if (!vm.menuToggler) {
+                    vm.updateTeamTrigger();
+                }
             };
         }
 
