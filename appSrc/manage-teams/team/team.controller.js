@@ -9,6 +9,10 @@ angular.module('basketballStat.manageTeams')
             vm.team.players.splice(team.players.indexOf(player), 1);
         };
 
+        vm.goBack = function() {
+            return StateHandler.goBack();
+        }
+
         function updateTeam() {
             TeamsDbService.updateTeam(vm.team)
             .then(function() {
