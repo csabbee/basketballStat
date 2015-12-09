@@ -2,6 +2,7 @@ angular.module('basketballStat.matches')
     .directive('matchNavBar', function() {
         return {
             restrict: 'E',
+            replace: true,
             link: link,
             scope: {},
             templateUrl: 'matches/match/match-nav-bar.html',

@@ -8,15 +8,12 @@ angular.module('basketballStat.manageTeams')
                         templateUrl: 'manage-teams/manage-teams.html',
                         controller: 'ManageTeamsController as ManageTeamsController'
                     }
-                },
-			    ownParams: {
-				   'viewTitle': 'Manage Teams'
-			    }
+                }
             })
-            .state('app.manageTeams.newTeam', {
-                url: '/new-team',
+            .state('app.newTeam', {
+                url: '/manage-teams/new-team',
                 views: {
-                    'team': {
+                    'menuContent': {
                         templateUrl: 'manage-teams/new-team/new-team.html',
                         controller: 'NewTeamController as NewTeamController',
                         resolve: {
@@ -25,15 +22,12 @@ angular.module('basketballStat.manageTeams')
                             }
                         }
                     }
-                },
-			    ownParams: {
-				   'viewTitle': 'New Team'
-			    }
+                }
             })
-            .state('app.manageTeams.team', {
-                url: '/:_id',
+            .state('app.team', {
+                url: '/manage-teams/:_id',
                 views: {
-                    'team': {
+                    'menuContent': {
                         templateUrl: 'manage-teams/team/team.html',
                         controller: 'TeamController as TeamController',
                         resolve: {
@@ -46,10 +40,7 @@ angular.module('basketballStat.manageTeams')
                             }
                         }
                     }
-                },
-			    ownParams: {
-				   'viewTitle': 'Team'
-			    }
+                }
             })
     }).run((storageConfig, TeamsDbService, KeyGenerator) => {
         TeamsDbService.getAllTeams().then(function(teams) {

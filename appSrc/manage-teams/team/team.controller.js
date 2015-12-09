@@ -29,7 +29,7 @@ angular.module('basketballStat.manageTeams')
             });
             confirmPopup.then(function(res) {
                 if(res) {
-                    TeamsDbService.deleteTeam(team)
+                    TeamsDbService.deleteTeam(vm.team)
                         .then(StateHandler.goBack);
                 }
             });

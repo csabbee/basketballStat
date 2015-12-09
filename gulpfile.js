@@ -71,7 +71,7 @@ gulp.task('javascript', function() {
         .pipe(modularize.injectModule(es))
         .pipe(concant('basketballStat.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write('.', { sourceRoot: '/appSrc'}))
+        .pipe(sourcemaps.write('.', { sourceRoot: 'appSrc'}))
         .pipe(gulp.dest(paths.jsDest));
 });
 

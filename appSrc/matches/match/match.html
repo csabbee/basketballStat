@@ -1,23 +1,36 @@
-<match-nav-bar></match-nav-bar>
-<ion-list>
-    <ion-item ng-repeat="player in MatchController.match.players">
-        <span class="modal-clickable-name-span" ng-click="MatchController.show(player)">{{::player.firstName}} {{::player.lastName}}</span>
-        <label class="toggle pull-right my-toggle">
-            <input type="checkbox" ng-model="MatchController.currentlyPlaying[player._id]"
-                   ng-click="MatchController.setCurrentlyPlaying()"/>
-            <div class="track">
-                <div class="handle"></div>
-            </div>
-        </label>
-    </ion-item>
-</ion-list>
-<div>
-    <p>Date: {{MatchController.match.time | date:'MMM d, yyyy HH:mm'}}</p>
-    <p>{{ MatchController.match | json}}</p>
-</div>
+<ion-view view-title="Match">
+    <div class="bar bar-header">
+        <time-picker time-obj="{time: MatchNavBarController.time}" set-period="MatchNavBarController.setPeriod"></time-picker>
+        <time-start-stop></time-start-stop>
+        <h1 class="title">Header Buttons</h1>
+    </div>
+    <!--<match-nav-bar></match-nav-bar>-->
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
+    </ion-nav-buttons>
+    <match-nav-bar></match-nav-bar>
+    <ion-content class="full-height scroll-content ionic-scroll display-overflow" delegate-handle="matchesScroll">
+        <ion-list>
+            <ion-item ng-repeat="player in MatchController.match.players">
+                <span class="modal-clickable-name-span" ng-click="MatchController.show(player)">{{::player.firstName}} {{::player.lastName}}</span>
+                <label class="toggle pull-right my-toggle">
+                    <input type="checkbox" ng-model="MatchController.currentlyPlaying[player._id]"
+                        ng-click="MatchController.setCurrentlyPlaying()"/>
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </ion-item>
+        </ion-list>
+        <div>
+            <!--<p>Date: {{MatchController.match.time | date:'MMM d, yyyy HH:mm'}}</p>
+            <p>{{ MatchController.match | json}}</p>-->
+        </div>
 
-<fixed-scroll-footer
-        scroll-delegate="matchesScroll"
-        left-button-class="button-clear button-positive"
-        left-button-icon="ion-arrow-left-b"
-        left-button-click="MatchController.goBack()"></fixed-scroll-footer>
+        <fixed-scroll-footer
+                scroll-delegate="matchesScroll"
+                left-button-class="button-clear button-positive"
+                left-button-icon="ion-arrow-left-b"
+                left-button-click="MatchController.goBack()"></fixed-scroll-footer>
+	</ion-content>
+</ion-view>

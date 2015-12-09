@@ -1,26 +1,32 @@
-<ion-list show-delete="TeamController.isEditable">
-    <div class="item item-divider">
-        <h3 ng-show="!TeamController.isEditable" class="team-name">{{TeamController.team.teamName}}</h3>
-        <div class="list list-inset team-name-form" ng-show="TeamController.isEditable">
-            <label class="item item-input item-floating-label">
-                <input id="team-name-edit"
-                       type="text"
-                       placeholder="Team Name"
-                       ng-model="TeamController.team.teamName"/>
-            </label>
-        </div>
-
-        <team-edit-menu
-                menu-toggler="TeamController.isEditable"
-                menu-toggler-icon="ion-edit"
-                remove-team-trigger="TeamController.deleteTeam()"
-                update-team-trigger="TeamController.updateTeam()"
-                add-player-trigger="TeamController.addPlayer()"></team-edit-menu>
-    </div>
-    <ion-item ng-repeat="player in TeamController.team.players track by player._rev">
-        <ion-delete-button class="ion-minus-circled"
-                           ng-click="TeamController.removePlayer(player)">
-        </ion-delete-button>
-        {{player.firstName}} {{player.lastName}}
-    </ion-item>
-</ion-list>
+<ion-view view-title="Team">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
+    </ion-nav-buttons>
+    <ion-content class="full-height scroll-content ionic-scroll display-overflow" delegate-handle="manageTeamsScroll">
+        <ion-list show-delete="TeamController.isEditable">
+            <div class="item item-divider">
+                <h3 ng-show="!TeamController.isEditable" class="team-name">{{TeamController.team.teamName}}</h3>
+                <div class="list list-inset team-name-form" ng-show="TeamController.isEditable">
+                    <label class="item item-input item-floating-label">
+                        <input id="team-name-edit"
+                            type="text"
+                            placeholder="Team Name"
+                            ng-model="TeamController.team.teamName"/>
+                    </label>
+                </div>
+                <team-edit-menu
+                        menu-toggler="TeamController.isEditable"
+                        menu-toggler-icon="ion-edit"
+                        remove-team-trigger="TeamController.deleteTeam()"
+                        update-team-trigger="TeamController.updateTeam()"
+                        add-player-trigger="TeamController.addPlayer()"></team-edit-menu>
+            </div>
+            <ion-item ng-repeat="player in TeamController.team.players track by player._rev">
+                <ion-delete-button class="ion-minus-circled"
+                                ng-click="TeamController.removePlayer(player)">
+                </ion-delete-button>
+                {{player.firstName}} {{player.lastName}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

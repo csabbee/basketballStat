@@ -20,13 +20,9 @@
   cursor: pointer;
 }
 
-time-picker {
-  .picking {
-    .button.button-outline.display-time {
-      font-weight: bold;
-      font-size: 17px;
-    }
-  }
+.button.button-outline.display-time {
+  font-weight: bold;
+  font-size: 17px;
 }
 
 ion-item {
