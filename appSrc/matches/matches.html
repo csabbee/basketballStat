@@ -1,4 +1,4 @@
-<ion-view title="Matches">
+<ion-view view-title="Matches">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
     </ion-nav-buttons>
@@ -16,7 +16,7 @@
         <div ui-view name="match" class="height-fix"></div>
         <div class="bar bar-footer" ng-if="MatchesController.activeView" fixed-scroll-height="matchesScroll">
             <button class="button button-clear button-balanced footer-pull-right icon ion-ios-plus"
-                    ui-sref="app.matches.new"></button>
+                    ui-sref="app.newMatch"></button>
         </div>
     </ion-content>
 </ion-view>

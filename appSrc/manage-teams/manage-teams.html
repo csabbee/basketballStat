@@ -1,10 +1,10 @@
-<ion-view title="Manage Teams">
+<ion-view view-title="Manage Teams">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <button class="button button-clear button-positive icon ion-plus-round"
-                ui-sref="app.manageTeams.newTeam"
+                ui-sref="app.newTeam"
                 ng-hide="!ManageTeamsController.activeView">
         </button>
     </ion-nav-buttons>
@@ -15,7 +15,7 @@
                     <div class="item item-button-right" ng-repeat="team in ManageTeamsController.teams">
                         <div ng-bind="::team.teamName"></div>
                         <button class="button button-outline button-balanced"
-                                ui-sref="app.manageTeams.team({_id: team._id})">
+                                ui-sref="app.team({_id: team._id})">
                             <i class="icon ion-edit"></i>
                         </button>
                     </div>
@@ -23,6 +23,5 @@
                 <div ui-view name="team"></div>
             </div>
         </div>
-        <div ui-view name="team" class="height-fix"></div>
     </ion-content>
 </ion-view>

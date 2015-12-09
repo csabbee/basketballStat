@@ -2,14 +2,12 @@ angular.module('basketballStat.matches')
     .directive('timePicker', function($ionicPopup) {
         return {
             restrict: 'E',
+            replace: true,
             scope: {
                 timeObj: '=',
                 setPeriod: '&'
             },
-            template: `
-            <div class="picking" ng-click="showPicker()">
-                <div class="button button-outline button-dark display-time">{{timeObj.time | matchTimeDisplay}}</div>
-            </div>`,
+            template: '<div class="button button-outline button-dark display-time" ng-click="showPicker()">{{timeObj.time | matchTimeDisplay}}</div>',
             link: link
         };
 

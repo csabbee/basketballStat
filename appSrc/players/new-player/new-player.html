@@ -1,50 +1,58 @@
-<div class="list card">
-    <div class="item item-divider">
-        Player Data
-    </div>
-    <div class="item item-body">
-        <form name="form" class="list" novalidate>
-            <label class="item item-input-inset item-floating-label">
-                <span class="input-label">First Name</span>
-                <input type="text" placeholder="First Name"
-                       ng-model="player.firstName"
-                       required="">
-                <span ng-show="form.$submitted || form.firstName.$touched">
-                    <span ng-show="form.firstName.$error.required">First Name is required</span>
-                </span>
-            </label>
-            <label class="item item-input-inset item-floating-label">
-                <span class="input-label">Last Name</span>
-                <input type="text" placeholder="Last Name"
-                       ng-model="player.lastName"
-                       required="">
-                <div ng-show="form.$submitted || form.lastName.$touched">
-                    <div ng-show="form.lastName.$error.required">Last Name is required</div>
-                </div>
-            </label>
+<ion-view view-title="New Player">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right"></ion-nav-buttons>
+    <ion-content class="full-height">
+        <div class="list card">
             <div class="item item-divider">
+                Player Data
             </div>
-            <div class="button-bar">
-                <input type="button" class="button button-outline button-assertive"
-                       ng-click="NewPlayerController.reset(form)" value="Reset" />
-                <input type="submit" class="button button-outline button-balanced"
-                       ng-click="NewPlayerController.save(player, form)" value="Save" />
-            </div>
+            <div class="item item-body">
+                <form name="form" class="list" novalidate>
+                    <label class="item item-input-inset item-floating-label">
+                        <span class="input-label">First Name</span>
+                        <input type="text" placeholder="First Name"
+                            ng-model="player.firstName"
+                            required="">
+                        <span ng-show="form.$submitted || form.firstName.$touched">
+                            <span ng-show="form.firstName.$error.required">First Name is required</span>
+                        </span>
+                    </label>
+                    <label class="item item-input-inset item-floating-label">
+                        <span class="input-label">Last Name</span>
+                        <input type="text" placeholder="Last Name"
+                            ng-model="player.lastName"
+                            required="">
+                        <div ng-show="form.$submitted || form.lastName.$touched">
+                            <div ng-show="form.lastName.$error.required">Last Name is required</div>
+                        </div>
+                    </label>
+                    <div class="item item-divider">
+                    </div>
+                    <div class="button-bar">
+                        <input type="button" class="button button-outline button-assertive"
+                            ng-click="NewPlayerController.reset(form)" value="Reset" />
+                        <input type="submit" class="button button-outline button-balanced"
+                            ng-click="NewPlayerController.save(player, form)" value="Save" />
+                    </div>
 
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item" href="#">
-                    <i class="icon ion-thumbsup"></i>
-                    Like
-                </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-chatbox"></i>
-                    Comment
-                </a>
-                <a class="tab-item" href="#" ng-click="NewPlayerController.goBack()">
-                    <i class="icon ion-arrow-return-left"></i>
-                    Back
-                </a>
+                    <div class="item tabs tabs-secondary tabs-icon-left">
+                        <a class="tab-item" href="#">
+                            <i class="icon ion-thumbsup"></i>
+                            Like
+                        </a>
+                        <a class="tab-item" href="#">
+                            <i class="icon ion-chatbox"></i>
+                            Comment
+                        </a>
+                        <a class="tab-item" href="#" ng-click="NewPlayerController.goBack()">
+                            <i class="icon ion-arrow-return-left"></i>
+                            Back
+                        </a>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
+    </ion-content>
+</ion-view>

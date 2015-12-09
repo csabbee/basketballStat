@@ -8,15 +8,12 @@ angular.module('basketballStat.matches')
                         templateUrl: 'matches/matches.html',
                         controller: 'MatchesController as MatchesController'
                     }
-                },
-			    ownParams: {
-				   'viewTitle': 'Matches'
-			    }
+                }
             })
-            .state('app.matches.match', {
-                url: '/:_id',
+            .state('app.match', {
+                url: '/matches/:_id',
                 views: {
-                    'match': {
+                    'menuContent': {
                         templateUrl: 'matches/match/match.html',
                         controller: 'MatchController as MatchController',
                         resolve: {
@@ -25,15 +22,12 @@ angular.module('basketballStat.matches')
                             }
                         }
                     }
-                },
-			    ownParams: {
-				   'viewTitle': 'Match'
-			    }
+                }
             })
-            .state('app.matches.new', {
-                url: '/new',
+            .state('app.newMatch', {
+                url: '/matches/new',
                 views: {
-                    'match': {
+                    'menuContent': {
                         templateUrl: 'matches/new-match/new-match.html',
                         controller: 'NewMatchController as NewMatchController',
                         resolve: {
@@ -43,21 +37,15 @@ angular.module('basketballStat.matches')
                             }
                         }
                     }
-                },
-			    ownParams: {
-				   'viewTitle': 'New Match'
-			    }
+                }
             })
-            .state('app.matches.quick', {
-                url: '/quick',
+            .state('app.quickMatch', {
+                url: '/matches/quick',
                 views: {
-                    'match': {
+                    'menuContent': {
                         templateUrl: 'matches/quick-match/quick-match.html'
                     }
-                },
-			    ownParams: {
-				   'viewTitle': 'Quick Match'
-			    }
+                }
             })
     }).run((storageConfig, MatchesDbService, KeyGenerator)=> {
         MatchesDbService.getAllMatches().then(function(matches) {

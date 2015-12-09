@@ -1,37 +1,44 @@
-<form name="form" class="list" novalidate>
-    <div class="list card">
-        <div class="item item-divider">
-            Team
-        </div>
-        <div class="item item-body">
-            <label class="item item-input-inset item-floating-label">
-                <span class="input-label">Name</span>
-                <input type="text" placeholder="Team name"
-                       ng-model="NewTeamController.team.teamName"
-                       required="">
-                <span ng-show="form.$submitted || form.team.$touched">
-                    <span ng-show="form.opponent.$error.required">Team name is required</span>
-                </span>
-            </label>
-        </div>
-        <div class="item item-divider">
-            Roaster
-        </div>
-        <ul class="list">
-            <li ng-repeat="player in NewTeamController.players" class="item item-checkbox">
-                <label class="checkbox checkbox-calm">
-                    <input type="checkbox" ng-model="NewTeamController.team.playerIds[player._id]" id="{{::player._id}}">
-                </label>
-                {{::player.firstName}} {{::player.lastName}}
-            </li>
-        </ul>
-    </div>
-</form>
-<fixed-scroll-footer
-        scroll-delegate="manageTeamsScroll"
-        left-button-class="button-clear button-energized"
-        left-button-icon="ion-arrow-left-b"
-        left-button-click="NewTeamController.goBack(form)"
-        right-button-class="button-clear button-calm"
-        right-button-icon="ion-checkmark-round"
-        right-button-click="NewTeamController.save(NewTeamController.team, form)"></fixed-scroll-footer>
+<ion-view view-title="New Team">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
+    </ion-nav-buttons>
+    <ion-content class="full-height scroll-content ionic-scroll display-overflow" delegate-handle="manageTeamsScroll">
+        <form name="form" class="list" novalidate>
+            <div class="list card">
+                <div class="item item-divider">
+                    Team
+                </div>
+                <div class="item item-body">
+                    <label class="item item-input-inset item-floating-label">
+                        <span class="input-label">Name</span>
+                        <input type="text" placeholder="Team name"
+                            ng-model="NewTeamController.team.teamName"
+                            required="">
+                        <span ng-show="form.$submitted || form.team.$touched">
+                            <span ng-show="form.opponent.$error.required">Team name is required</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="item item-divider">
+                    Roaster
+                </div>
+                <ul class="list">
+                    <li ng-repeat="player in NewTeamController.players" class="item item-checkbox">
+                        <label class="checkbox checkbox-calm">
+                            <input type="checkbox" ng-model="NewTeamController.team.playerIds[player._id]" id="{{::player._id}}">
+                        </label>
+                        {{::player.firstName}} {{::player.lastName}}
+                    </li>
+                </ul>
+            </div>
+        </form>
+        <fixed-scroll-footer
+                scroll-delegate="manageTeamsScroll"
+                left-button-class="button-clear button-energized"
+                left-button-icon="ion-arrow-left-b"
+                left-button-click="NewTeamController.goBack(form)"
+                right-button-class="button-clear button-calm"
+                right-button-icon="ion-checkmark-round"
+                right-button-click="NewTeamController.save(NewTeamController.team, form)"></fixed-scroll-footer>
+    </ion-content>
+</ion-view>            

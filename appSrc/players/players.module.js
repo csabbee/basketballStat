@@ -15,10 +15,10 @@ angular.module('basketballStat.players')
 				   'viewTitle': 'Players'
 			    }
             })
-            .state('app.players.player', {
-                url: '/:_id',
+            .state('app.player', {
+                url: '/players/:_id',
                 views: {
-                    'player': {
+                    'menuContent': {
                         templateUrl: 'players/player/player.html',
                         controller: 'PlayerController as PlayerController'
                     }
@@ -27,10 +27,10 @@ angular.module('basketballStat.players')
 				   'viewTitle': 'Player'
 			    }
             })
-            .state('app.players.newPlayer', {
-                url: '/new',
+            .state('app.newPlayer', {
+                url: '/players/new',
                 views: {
-                    'player': {
+                    'menuContent': {
                         templateUrl: 'players/new-player/new-player.html',
                         controller: 'NewPlayerController as NewPlayerController'
                     }
