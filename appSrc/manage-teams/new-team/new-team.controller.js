@@ -4,15 +4,16 @@ angular.module('basketballStat.manageTeams')
 
         vm.players = _.pluck(players, 'doc');
 
-        vm.save = function(team, form) {
-            var selectedPlayerIds = _.chain(_.keys(team.playerIds))
-                .filter(_.partial(isSelected, team.playerIds))
+        vm.save = function() {
+            var selectedPlayerIds = _.chain(_.keys(vm.team.playerIds))
+                .filter(_.partial(isSelected, vm.team.playerIds))
                 .value();
             var members = _.filter(players, _.partial(idPresent, selectedPlayerIds));
-            if (form.$dirty && form.$valid) {
+            if (vm.form.$dirty && vm.form.$valid) {
                 if (members.length >= 5) {
-                    team.players =_.pluck(members, 'doc');
-                    TeamsDbService.addTeam(team)
+                    vm.team.players =_.pluck(members, 'doc');
+                    TeamsDbService.addTeam(vm.team)
+                        .then(resetForm)
                         .then(StateHandler.goBack);
                 } else {
                     $cordovaToast.showLongCenter('Need to select at least 5 player');
@@ -20,8 +21,8 @@ angular.module('basketballStat.manageTeams')
             }
         };
 
-        vm.goBack = function goBack(form) {
-            if (form.$dirty) {
+        vm.goBack = function goBack() {
+            if (vm.form.$dirty) {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Navigating away',
                     template: 'Are you sure?'
@@ -46,6 +47,11 @@ angular.module('basketballStat.manageTeams')
          */
         function isSelected(playerIdsObj, id) {
             return playerIdsObj[id];
+        }
+
+        function resetForm(value) {
+            vm.team = {};
+            return value;
         }
 
         vm.team = {};

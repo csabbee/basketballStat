@@ -13,10 +13,11 @@
                 </div>
             </div>
         </div>
-        <div ui-view name="match" class="height-fix"></div>
-        <div class="bar bar-footer" ng-if="MatchesController.activeView" fixed-scroll-height="matchesScroll">
-            <button class="button button-clear button-balanced footer-pull-right icon ion-ios-plus"
-                    ui-sref="app.newMatch"></button>
-        </div>
     </ion-content>
+    <ion-footer-bar class="bar-clear">
+        <div class="buttons">
+            <h1 class="title"></h1>
+            <button class="button button-clear button-balanced icon ion-ios-plus" ui-sref="app.newMatch"></button>
+        </div>
+    </ion-footer-bar>
 </ion-view>
