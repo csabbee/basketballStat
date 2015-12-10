@@ -25,7 +25,7 @@ angular.module('basketballStat.manageTeams')
                 }
             })
             .state('app.team', {
-                url: '/manage-teams/:_id',
+                url: '/manage-teams/team/:_id',
                 views: {
                     'menuContent': {
                         templateUrl: 'manage-teams/team/team.html',
