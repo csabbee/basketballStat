@@ -11,7 +11,7 @@ angular.module('basketballStat.matches')
                 }
             })
             .state('app.match', {
-                url: '/matches/:_id',
+                url: '/matches/match/:_id',
                 views: {
                     'menuContent': {
                         templateUrl: 'matches/match/match.html',
