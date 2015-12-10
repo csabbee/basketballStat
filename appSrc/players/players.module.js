@@ -16,7 +16,7 @@ angular.module('basketballStat.players')
 			    }
             })
             .state('app.player', {
-                url: '/players/:_id',
+                url: '/players/player/:_id',
                 views: {
                     'menuContent': {
                         templateUrl: 'players/player/player.html',
