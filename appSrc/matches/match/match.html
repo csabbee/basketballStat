@@ -4,7 +4,6 @@
         <time-start-stop></time-start-stop>
         <h1 class="title">Header Buttons</h1>
     </div>
-    <!--<match-nav-bar></match-nav-bar>-->
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
     </ion-nav-buttons>
@@ -22,15 +21,10 @@
                 </label>
             </ion-item>
         </ion-list>
-        <div>
-            <!--<p>Date: {{MatchController.match.time | date:'MMM d, yyyy HH:mm'}}</p>
-            <p>{{ MatchController.match | json}}</p>-->
-        </div>
-
-        <fixed-scroll-footer
-                scroll-delegate="matchesScroll"
-                left-button-class="button-clear button-positive"
-                left-button-icon="ion-arrow-left-b"
-                left-button-click="MatchController.goBack()"></fixed-scroll-footer>
 	</ion-content>
+    <ion-footer-bar class="bar-clear">
+        <div class="buttons">
+            <button class="button button-clear button-positive icon ion-arrow-left-b" ng-click="MatchController.goBack()"></button>
+        </div>
+    </ion-footer-bar>
 </ion-view>

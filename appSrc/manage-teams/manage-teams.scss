@@ -21,10 +21,6 @@ $team-heading-padding-top: 0.2em;
   }
 }
 
-.button-panel {
-  height: percentage($max-view-percent - $manage-teams-view);
-}
-
 .item {
   h3.team-name {
     padding-top: $team-heading-padding-top;

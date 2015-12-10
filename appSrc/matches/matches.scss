@@ -1,29 +1,11 @@
 @import "../variables";
 
-
-.bar {
-  .title + .button:last-child {
-    top: -60px;
+[view-title=Matches] {
+  .bar-footer {
+    bottom: 10px;
   }
 }
 
-.bar-footer {
-  & .button {
-    position: absolute;
-  }
-  .button.footer-pull-right {
-    top: -60px;
-    border: 2px;
-    right: 5px;
-    height: 42px;
-  }
-  .button.footer-pull-left {
-    top: -60px;
-    left: 5px;
-    border: 2px;
-    height: 42px;
-  }
-}
 .bar-footer {
   .button.button-clear.icon:before, {
     font-size: 50px;
@@ -41,9 +23,6 @@
   top: 0px;
 }
 
-.height-fix {
-  padding-bottom: 50px;
-}
 .platform-android .action-sheet-backdrop.active {
   background-color: rgba(0, 0, 0, 0.2);
 }

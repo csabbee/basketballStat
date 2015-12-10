@@ -3,7 +3,7 @@
         <button menu-toggle="left" class="button button-clear icon-right ion-navicon-round"></button>
     </ion-nav-buttons>
     <ion-content class="full-height scroll-content ionic-scroll display-overflow">
-        <form name="form" class="list" novalidate>
+        <form name="NewMatchController.form" class="list" novalidate>
             <div class="list card">
                 <div class="item item-divider">
                     Match Data
@@ -12,10 +12,10 @@
                     <label class="item item-input-inset item-floating-label">
                         <span class="input-label">Opponent</span>
                         <input type="text" placeholder="Opponent"
-                            ng-model="match.opponent"
+                            ng-model="NewMatchController.match.opponent"
                             required="">
-                        <span ng-show="form.$submitted || form.firstName.$touched">
-                            <span ng-show="form.opponent.$error.required">Opponent is required</span>
+                        <span ng-show="NewMatchController.form.$submitted">
+                            <span ng-show="NewMatchController.form.opponent.$error.required">Opponent is required</span>
                         </span>
                     </label>
                 </div>
@@ -25,20 +25,27 @@
                 <ul class="list">
                     <li ng-repeat="player in NewMatchController.players" class="item item-checkbox">
                         <label class="checkbox">
-                            <input type="checkbox" ng-model="match.playerIds[player._id]" id="{{player._id}}">
+                            <input type="checkbox" ng-model="NewMatchController.match.playerIds[player._id]" id="{{player._id}}">
                         </label>
                         {{::player.firstName}} {{::player.lastName}}
                     </li>
                 </ul>
             </div>
         </form>
-        <fixed-scroll-footer
+        <!--<fixed-scroll-footer
                 scroll-delegate="matchesScroll"
                 left-button-class="button-clear button-energized"
                 left-button-icon="ion-arrow-left-b"
                 left-button-click="NewMatchController.goBack(form)"
                 right-button-class="button-clear button-calm"
                 right-button-icon="ion-checkmark-round"
-                right-button-click="NewMatchController.save(match, form)"></fixed-scroll-footer>
+                right-button-click="NewMatchController.save(match, form)"></fixed-scroll-footer>-->
 	</ion-content>
+    <ion-footer-bar class="bar-clear">
+        <div class="buttons">
+            <button class="button button-clear button-energized icon ion-arrow-left-b" ng-click="NewMatchController.goBack()"></button>
+            <h1 class="title"></h1>
+            <button class="button button-clear button-calm icon ion-checkmark-round" ng-click="NewMatchController.save()"></button>
+        </div>
+    </ion-footer-bar>
 </ion-view>
