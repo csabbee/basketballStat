@@ -1,0 +1,49 @@
+@import "_stat-modal-mixin";
+
+$button-border-color: #8E8585; 
+
+.stat-modal-body {
+	@include bbs-flex(row, wrap);
+}
+
+.stat-modal-items {
+	@include bbs-flex(row, wrap)
+}
+
+.stat-button-group {
+	@include bbs-flex(column, wrap);
+	margin-right: 5px;
+	margin-top: 15px;
+	.stat-button-top-group {
+		.stat-button-top {
+			@include bbs-flex(row, nowrap, center);
+			padding-left: 3px;
+			padding-right: 3px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			border: 1px solid $button-border-color;
+			font-size: 1.3em;
+			span {
+				opacity: 0.1;
+				&.active-stat {
+					opacity: 1.0;
+				}
+			}
+		}
+	}
+	
+	.stat-button-bottom-group {
+		@include bbs-flex(row, wrap, space-around);
+		.stat-button-bottom {
+			font-size: 3em;
+			padding-left: 2px;
+		}
+	}
+	&:first-child {
+		margin-left: 5px;
+	}
+}
+
+.stat-button-bottom.activated, .stat-button-top.activated{
+	opacity: 0.3;
+}

@@ -1,0 +1,41 @@
+@mixin bbs-flex($direction, $wrap: nowrap, $justify-content: flex-start) {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+    flex-direction: $direction;
+
+	-webkit-flex-wrap: $wrap;
+	-ms-flex-wrap: $wrap;
+	flex-wrap: $wrap;
+	
+	-webkit-justify-content: $justify-content;
+    -ms-flex-pack: $justify-content;
+    justify-content: $justify-content;
+}
+
+@mixin bbs-flex-items($align-item: flex-start) {
+	-webkit-align-items: $align-item;
+    align-items: $align-item;
+	@if $align-item == "flex-start" {
+		-ms-flex-align: start;
+	} @else if $align-item == "flex-end" {
+		-ms-flex-align: end;
+	} @else {
+		-ms-flex-align: $align-item;
+	}
+}
+
+@mixin bbs-flex-item($align-self) {
+	-webkit-align-self: $align-self;
+    align-self: $align-self;
+	@if $align-self == "flex-start" {
+		 -ms-flex-item-align: start;
+	} @else if $align-self == "flex-end" {
+		 -ms-flex-item-align: end;
+	} @else {
+		 -ms-flex-item-align: $align-self;
+	}
+}
