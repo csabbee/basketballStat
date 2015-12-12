@@ -66,10 +66,6 @@ angular.module('basketballStat.matches')
             modal.show();
         };
 
-        vm.buttonClick = function () {
-            console.log(`I'm clicked: ${arguments}`);
-        };
-
         vm.goBack = function () {
             StateHandler.goBack();
         };
