@@ -45,7 +45,7 @@ angular.module('basketballStat.matches')
         vm.match = match;
         vm.match.players.map(setStat);
 
-        $ionicModal.fromTemplateUrl('matches/match/stats/stats-modal.html', {
+        $ionicModal.fromTemplateUrl('matches/match/stats/new-stats-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(statModal => {
