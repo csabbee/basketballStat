@@ -58,6 +58,7 @@ angular.module('basketballStat.matches')
 
         $scope.closeModal = function () {
             modal.hide();
+            $scope.$emit('modal.hide');
         };
         //Cleanup the modal when we're done with it!
         $scope.$on('$destroy', function () {
