@@ -39,11 +39,15 @@ angular.module('basketballStat.matches')
             return player;
         }
 
-        $ionicScrollDelegate.scrollTop();
+        function pushEvent(event) {
+        }
 
+        $ionicScrollDelegate.scrollTop();
         vm.currentlyPlaying = {};
         vm.match = match;
         vm.match.players.map(setStat);
+
+        vm.pushEvent = pushEvent;
 
         $ionicModal.fromTemplateUrl('matches/match/stats/new-stats-modal.html', {
             scope: $scope,
