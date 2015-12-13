@@ -25,7 +25,8 @@ angular.module('basketballStat.matches')
                 turnover: 0,
                 steal: 0,
                 block: 0,
-                personalFoul: 0
+                personalFoul: 0,
+                events: [],
             },
             saveMatchHandler = $scope.$on('$stateChangeStart', function() {
                 MatchesDbService.updateMatch(vm.match);
@@ -40,6 +41,8 @@ angular.module('basketballStat.matches')
         }
 
         function pushEvent(event) {
+            var length = vm.currentPlayer.events.length;
+            vm.currentPlayer.events.push(event+' '+length);
         }
 
         $ionicScrollDelegate.scrollTop();
@@ -80,6 +83,10 @@ angular.module('basketballStat.matches')
                 .filter(_.partial(isSelected, vm.currentlyPlaying))
                 .value();
         };
+
+        $scope.$on('reorderedEventsArray', function(event, reorderedArray) {
+            vm.currentPlayer.events = reorderedArray;
+        });
 
         $scope.$onRootScope(eventListing.timeTickEmit, () => {
             _.chain(vm.match.players)
