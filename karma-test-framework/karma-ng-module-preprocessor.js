@@ -10,7 +10,7 @@ function createPreprocessor(logger, helper) {
 
     function preprocess(content, file, done) {
         log.debug('Processing "%s".', file.originalPath);
-        var regex = /angular\.module\(\'([\S]+)\'\)/g;
+        var regex = /angular\.module\('[\S]+'\)/g;
 
         try {
             var fileContent = String(content);
