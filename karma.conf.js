@@ -25,7 +25,11 @@ module.exports = function(config) {
         // list of files /ww patterns to load in the browser
         files: [
             'www/lib/underscore/underscore-min.js',
-            'www/lib/angular/angular.js',
+            'www/lib/pouchdb/dist/pouchdb.js',
+            'www/lib/ionic/js/ionic.bundle.js',
+            'www/lib/angular-ui-router/release/angular-ui-router.js',
+            'www/lib/ngCordova/dist/ng-cordova.js',
+            'www/lib/ngCordova/dist/ng-cordova-mocks.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'www/js/app.js',
             'appSrc/**/*.js',
@@ -42,10 +46,9 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'appSrc/**/*.js': ['ng-modularize', 'babel'],
+            'appSrc/**/*.js': ['babel', 'ng-modularize'],
             'test/**/*.js': ['babel']
         },
-
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
