@@ -4,6 +4,7 @@ $button-border-color: #8E8585;
 
 .stat-modal-body {
 	@include bbs-flex(row, wrap);
+	padding-left: 5px;
 }
 
 .stat-modal-items {
@@ -38,9 +39,6 @@ $button-border-color: #8E8585;
 			font-size: 3em;
 			padding-left: 2px;
 		}
-	}
-	&:first-child {
-		margin-left: 5px;
 	}
 }
 
