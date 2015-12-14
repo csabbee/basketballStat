@@ -24,6 +24,8 @@ module.exports = function(config) {
 
         // list of files /ww patterns to load in the browser
         files: [
+            'node_modules/es5-shim/es5-shim.js',
+            'node_modules/es6-shim/es6-shim.js',
             'www/lib/underscore/underscore-min.js',
             'www/lib/pouchdb/dist/pouchdb.js',
             'www/lib/ionic/js/ionic.bundle.js',
@@ -76,9 +78,9 @@ module.exports = function(config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            'Chrome',
+            // 'Chrome',
             //'IE',
-            //'PhantomJS'
+            'PhantomJS'
         ],
 
 
