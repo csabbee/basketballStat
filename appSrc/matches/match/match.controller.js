@@ -43,6 +43,12 @@ angular.module('basketballStat.matches')
         function pushEvent(event) {
             var length = vm.currentPlayer.stats.events.length;
             vm.currentPlayer.stats.events.push(event+' '+length);
+            $ionicScrollDelegate.resize();
+        }
+
+        function removeEvent(index) {
+            vm.currentPlayer.stats.events.splice(index, 1);
+            $ionicScrollDelegate.resize();
         }
 
         $ionicScrollDelegate.scrollTop();
@@ -51,6 +57,7 @@ angular.module('basketballStat.matches')
         vm.match.players.map(setStat);
 
         vm.pushEvent = pushEvent;
+        vm.removeEvent = removeEvent;
 
         $ionicModal.fromTemplateUrl('matches/match/stats/new-stats-modal.html', {
             scope: $scope,
