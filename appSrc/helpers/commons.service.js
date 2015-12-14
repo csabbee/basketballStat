@@ -1,11 +1,11 @@
 angular.module('basketballStat.helpers')
 	.service('Commons', Commons);
 
-function Commons() {
+function Commons($q) {
 	return {
 		pluckDoc: pluckDoc,
 		logToConsole: logToConsole,
-        swapArrayItemsByIndex: swapArrayItemsByIndex
+        shiftArrayItemsByIndex: shiftArrayItemsByIndex
 	};
 
 	function pluckDoc(documents) {
@@ -17,20 +17,32 @@ function Commons() {
 		return console.log(message);
 	}
 
-	function swapArrayItemsByIndex(fromIndex, toIndex, array) {
+	function shiftArrayItemsByIndex(fromIndex, toIndex, array) {
         if (fromIndex === toIndex) {
-            return Promise.resolve(array);
+            return $q(function(resolve, reject) {
+                resolve(array);
+            });
+        }
+        var copiedArray = array.slice();
+
+        if (fromIndex > toIndex) {
+            let elementToMove = copiedArray.splice(fromIndex, 1)[0];
+            let firstPart = copiedArray.slice(0, toIndex);
+            let lastPart = copiedArray.slice(toIndex);
+            firstPart.push(elementToMove);
+            copiedArray = firstPart.concat(lastPart);
+        } else {
+            let firstPart = copiedArray.slice(0, fromIndex);
+            let lastPart = copiedArray.slice(fromIndex);
+            let elementToMove = lastPart.shift();
+            let lastPartsFirstPart = lastPart.slice(0, toIndex - fromIndex);
+            let lastPartsLastPart = lastPart.slice(toIndex - fromIndex);
+            lastPartsFirstPart.push(elementToMove);
+            copiedArray = firstPart.concat(lastPartsFirstPart, lastPartsLastPart);
         }
 
-        var lowerIndex = fromIndex < toIndex ? fromIndex : toIndex;
-        var higherIndex = lowerIndex === fromIndex ? toIndex : fromIndex;
-        var firstPart = array.slice(0, lowerIndex);
-        var middlePart = array.slice(lowerIndex, higherIndex);
-        var endPart = array.slice(higherIndex);
-        var lowerElement = middlePart.shift();
-        var higherElement = endPart.shift();
-        middlePart.unshift(higherElement);
-        endPart.unshift(lowerElement);
-        return Promise.resolve(firstPart.concat(middlePart, endPart));
+        return $q(function(resolve, reject) {
+            resolve(copiedArray);
+        });
     }
 }
