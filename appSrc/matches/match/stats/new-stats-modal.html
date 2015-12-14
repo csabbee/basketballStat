@@ -58,14 +58,14 @@
 				  show-delete="MatchStatModalController.shouldShowDelete"
 				  show-reorder="MatchStatModalController.shouldShowReorder"
 				  can-swipe="MatchStatModalController.listCanSwipe">
-			<ion-item ng-repeat="event in MatchController.currentPlayer.events track by $index">
+			<ion-item ng-repeat="event in MatchController.currentPlayer.stats.events track by $index">
 
 				<p>{{event}}</p>
 				<ion-delete-button class="ion-minus-circled"
-								   ng-click="MatchController.currentPlayer.events.splice($index, 1)">
+								   ng-click="MatchController.currentPlayer.stats.events.splice($index, 1)">
 				</ion-delete-button>
 				<ion-reorder-button class="ion-navicon"
-									on-reorder="MatchStatModalController.reorderItem(event, $fromIndex, $toIndex, MatchController.currentPlayer.events)">
+									on-reorder="MatchStatModalController.reorderItem(event, $fromIndex, $toIndex, MatchController.currentPlayer.stats.events)">
 				</ion-reorder-button>
 			</ion-item>
 		</ion-list>
