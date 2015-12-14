@@ -5,7 +5,7 @@ angular.module('basketballStat.matches')
         this.listCanSwipe = false;
 
         this.reorderItem = function(item, $fromIndex, $toIndex, array) {
-            return Commons.swapArrayItemsByIndex($fromIndex, $toIndex, array)
+            return Commons.shiftArrayItemsByIndex($fromIndex, $toIndex, array)
                 .then(function(newArray) {
                     $scope.$emit('reorderedEventsArray', newArray);
                     return newArray;
