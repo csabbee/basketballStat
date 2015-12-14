@@ -41,8 +41,8 @@ angular.module('basketballStat.matches')
         }
 
         function pushEvent(event) {
-            var length = vm.currentPlayer.events.length;
-            vm.currentPlayer.events.push(event+' '+length);
+            var length = vm.currentPlayer.stats.events.length;
+            vm.currentPlayer.stats.events.push(event+' '+length);
         }
 
         $ionicScrollDelegate.scrollTop();
@@ -85,7 +85,7 @@ angular.module('basketballStat.matches')
         };
 
         $scope.$on('reorderedEventsArray', function(event, reorderedArray) {
-            vm.currentPlayer.events = reorderedArray;
+            vm.currentPlayer.stats.events = reorderedArray;
         });
 
         $scope.$onRootScope(eventListing.timeTickEmit, () => {
