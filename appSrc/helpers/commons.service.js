@@ -24,23 +24,7 @@ function Commons($q) {
             });
         }
         var copiedArray = array.slice();
-
-        if (fromIndex > toIndex) {
-            let elementToMove = copiedArray.splice(fromIndex, 1)[0];
-            let firstPart = copiedArray.slice(0, toIndex);
-            let lastPart = copiedArray.slice(toIndex);
-            firstPart.push(elementToMove);
-            copiedArray = firstPart.concat(lastPart);
-        } else {
-            let firstPart = copiedArray.slice(0, fromIndex);
-            let lastPart = copiedArray.slice(fromIndex);
-            let elementToMove = lastPart.shift();
-            let lastPartsFirstPart = lastPart.slice(0, toIndex - fromIndex);
-            let lastPartsLastPart = lastPart.slice(toIndex - fromIndex);
-            lastPartsFirstPart.push(elementToMove);
-            copiedArray = firstPart.concat(lastPartsFirstPart, lastPartsLastPart);
-        }
-
+        copiedArray.splice(toIndex, 0, copiedArray.splice(fromIndex, 1)[0]);
         return $q(function(resolve, reject) {
             resolve(copiedArray);
         });
