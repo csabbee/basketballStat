@@ -12,8 +12,7 @@ function statButtonGroup() {
 			statTwo: '=',
             anotherIncrement: '=',
             pointIncrement: '=',
-            byHowMuch: '@',
-			pushEvent: '&'
+            byHowMuch: '@'
 		},
 		template: `
 			<div class="stat-button-group">
@@ -25,8 +24,6 @@ function statButtonGroup() {
 					</a>
 				</div>
 				<div class="stat-button-bottom-group">
-					<a class="stat-button-bottom assertive icon ion-minus-circled"
-					   ng-click="decrement()"></a>
 					<a class="stat-button-bottom positive icon ion-plus-circled"
 					   ng-click="increment()"></a>
 				</div>
@@ -50,7 +47,6 @@ function statButtonGroup() {
 		}
 
 		scope.increment = function() {
-			scope.pushEvent()('eyyoo');
 			if(scope.isActive) {
 				scope.statOne += 1;
 				if(!_.isUndefined(scope.pointIncrement)) {
@@ -64,26 +60,6 @@ function statButtonGroup() {
             	scope.anotherIncrement += 1;
             }
         };
-
-        scope.decrement = function() {
-            if(scope.isActive) {
-				if (scope.statOne > 0) {
-					scope.statOne -= 1;
-					if(scope.pointIncrement) {
-						scope.pointIncrement -= Number(attrs.byHowMuch);
-					}
-				}
-			} else {
-				if (scope.statTwo > 0) {
-					if (!_.isUndefined(scope.anotherIncrement) && scope.statTwo > scope.statOne) {
-						scope.statTwo -= 1;
-					} 
-					if (_.isUndefined(scope.anotherIncrement)) {
-						scope.statTwo -= 1;
-					}
-				}
-			}
-        }
 	}
 
 	return directive;

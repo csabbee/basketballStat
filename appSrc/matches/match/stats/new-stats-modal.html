@@ -50,8 +50,7 @@
 				<stat-button-group
 					top-left-button="PF"
 					stat-one="MatchController.currentPlayer.stats.personalFoul"
-					single-entry="true"
-					push-event="MatchController.pushEvent"></stat-button-group>
+					single-entry="true"></stat-button-group>
 			</div>
 		</div>
 		<ion-list ng-controller="MatchStatModalController as MatchStatModalController"
@@ -59,7 +58,7 @@
 				  show-reorder="MatchStatModalController.shouldShowReorder"
 				  can-swipe="MatchStatModalController.listCanSwipe">
 			<ion-item ng-repeat="event in MatchController.currentPlayer.stats.events track by $index">
-				<p>{{event}}</p>
+				<p>{{event.name}}</p>
 				<ion-delete-button class="ion-minus-circled"
 								   ng-click="MatchController.removeEvent($index)">
 				</ion-delete-button>

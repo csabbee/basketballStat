@@ -1,5 +1,5 @@
 angular.module('basketballStat.matches')
-    .controller('MatchController', function ($scope, MatchesDbService, StateHandler, $ionicScrollDelegate, $ionicModal, eventListing, match) {
+    .controller('MatchController', function ($scope, MatchesDbService, StateHandler, $ionicScrollDelegate, $ionicModal, eventListing, match, StatEventHandler) {
         var vm = this,
             modal,
             playerStat = {
@@ -41,13 +41,60 @@ angular.module('basketballStat.matches')
         }
 
         function pushEvent(event) {
-            var length = vm.currentPlayer.stats.events.length;
-            vm.currentPlayer.stats.events.push(event+' '+length);
+            vm.currentPlayer.stats.events.push(event);
             $ionicScrollDelegate.resize();
         }
 
+        function registerWatchers(player) {
+            var keys = Object.keys(player.stats).filter(key => key !== 'time' && key !== 'events' && key !== 'points');
+            keys.forEach(registerWatcher);
+
+            function registerWatcher(stat, index, array) {
+                if (typeof player.stats[stat] !== 'object') {
+                    $scope.$watch(function() {
+                        return player.stats[stat];
+                    }, function(newValue, oldValue) {
+                        console.log(stat);
+                        if (newValue > 0 && newValue > oldValue) {
+                            let event = StatEventHandler.handleEventCreation(player.stats, stat);
+                            // let event = {
+                            //     name: stat,
+                            //     // toRemove: player.stats[stat] -= 1;
+                            //     remove: function() {
+                            //         player.stats[stat] -= 1;
+                            //     }
+                            // }
+                            pushEvent(event);
+                        }
+                    });
+                } else {
+                    var keys = Object.keys(player.stats[stat]);
+                    keys.forEach(function(key) {
+                        $scope.$watch(function() {
+                            return player.stats[stat][key];
+                        }, function(newValue, oldValue) {
+                            console.log(`${stat}.${key}`);
+
+                            if (newValue > 0 && newValue > oldValue) {
+                                // let event = {
+                                //     name: `${stat}.${key}`,
+                                //     // toRemove: player.stats[stat][key]
+                                //     remove: function() {
+                                //         player.stats[stat][key] -= 1;
+                                //     }
+                                // }
+                                let event = StatEventHandler.handleEventCreation(player.stats, stat, key);
+                                pushEvent(event);
+                            }
+                        });
+                    });
+                }
+            }
+        }
+
         function removeEvent(index) {
-            vm.currentPlayer.stats.events.splice(index, 1);
+            var removedEvent = vm.currentPlayer.stats.events.splice(index, 1);
+            removedEvent[0].remove();
             $ionicScrollDelegate.resize();
         }
 
@@ -55,6 +102,7 @@ angular.module('basketballStat.matches')
         vm.currentlyPlaying = {};
         vm.match = match;
         vm.match.players.map(setStat);
+        vm.match.players.forEach(registerWatchers);
 
         vm.pushEvent = pushEvent;
         vm.removeEvent = removeEvent;
