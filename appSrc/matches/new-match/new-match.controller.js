@@ -10,9 +10,6 @@ angular.module('basketballStat.matches')
             var playing = _.filter(vm.players, _.partial(idPresent, selectedPlayerIds));
 
             if (vm.form.$dirty && vm.form.$valid) {
-                console.log(vm.form);
-                console.log('playing', playing);
-                console.log('selectedPlayerIds', selectedPlayerIds);
                 if (playing.length >= 5) {
                     vm.match.time = timeStamp;
                     vm.match.players = playing;
