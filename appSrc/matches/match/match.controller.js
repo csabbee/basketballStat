@@ -77,7 +77,9 @@ angular.module('basketballStat.matches')
 
         function removeEvent(index) {
             var removedEvent = vm.currentPlayer.stats.events.splice(index, 1);
-            removedEvent[0].remove();
+            if (!StatEventHandler.handleEventRemove(removedEvent[0])) {
+                vm.currentPlayer.stats.events.splice(index, 0, removedEvent[0]);
+            }
             $ionicScrollDelegate.resize();
         }
 
