@@ -54,16 +54,8 @@ angular.module('basketballStat.matches')
                     $scope.$watch(function() {
                         return player.stats[stat];
                     }, function(newValue, oldValue) {
-                        console.log(stat);
                         if (newValue > 0 && newValue > oldValue) {
                             let event = StatEventHandler.handleEventCreation(player.stats, stat);
-                            // let event = {
-                            //     name: stat,
-                            //     // toRemove: player.stats[stat] -= 1;
-                            //     remove: function() {
-                            //         player.stats[stat] -= 1;
-                            //     }
-                            // }
                             pushEvent(event);
                         }
                     });
@@ -73,16 +65,7 @@ angular.module('basketballStat.matches')
                         $scope.$watch(function() {
                             return player.stats[stat][key];
                         }, function(newValue, oldValue) {
-                            console.log(`${stat}.${key}`);
-
                             if (newValue > 0 && newValue > oldValue) {
-                                // let event = {
-                                //     name: `${stat}.${key}`,
-                                //     // toRemove: player.stats[stat][key]
-                                //     remove: function() {
-                                //         player.stats[stat][key] -= 1;
-                                //     }
-                                // }
                                 let event = StatEventHandler.handleEventCreation(player.stats, stat, key);
                                 pushEvent(event);
                             }
