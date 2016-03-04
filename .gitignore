@@ -11,3 +11,4 @@ ionic.app*.css
 .idea/
 *.js.map
 .zedstate
+www/build

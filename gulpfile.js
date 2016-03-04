@@ -18,9 +18,9 @@ var es = require('event-stream');
 var modularize = require('./gulp-build/angular-modularize.js');
 
 var paths = {
-    sass: ['scss/**/*.scss', 'appSrc/**/*.scss'],
-    html: ['appSrc/**/*.html'],
-    js: ['appSrc/**/*.js'],
+    sass: ['scss/**/*.scss', 'app/**/*.scss'],
+    html: ['app/**/*.html'],
+    js: ['app/**/*.js'],
     jsDest: 'www/js',
     cssDest: 'www/css'
 };
@@ -71,7 +71,7 @@ gulp.task('javascript', function() {
         .pipe(modularize.injectModule(es))
         .pipe(concant('basketballStat.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write('.', { sourceRoot: 'appSrc'}))
+        .pipe(sourcemaps.write('.', { sourceRoot: 'app'}))
         .pipe(gulp.dest(paths.jsDest));
 });
 
