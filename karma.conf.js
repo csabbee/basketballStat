@@ -5,7 +5,6 @@ module.exports = function(config) {
     config.set({
         // karma plugins: install plugins globally
         plugins: [
-            'karma-webpack',
             'karma-typescript-preprocessor2',
             'karma-jasmine',
             'karma-chrome-launcher',
