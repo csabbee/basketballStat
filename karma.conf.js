@@ -53,7 +53,8 @@ module.exports = function(config) {
                 //return path.replace(/\.ts$/, '.js');
                 return path;
             }, function(path) {
-                return path.replace(/[\/\\]test[\/\\]/i, '/'); // remove directory test and change to /
+                //return path.replace(/[\/\\]test[\/\\]/i, '/'); // remove directory test and change to /
+                return path;
             }]
         },
 
