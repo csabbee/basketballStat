@@ -5,12 +5,12 @@ module.exports = function(config) {
     config.set({
         // karma plugins: install plugins globally
         plugins: [
+            'karma-webpack',
+            'karma-typescript-preprocessor2',
             'karma-jasmine',
-            'karma-babel-preprocessor',
             'karma-chrome-launcher',
             'karma-ie-launcher',
-            'karma-phantomjs-launcher',
-            require('./karma-test-framework/karma-ng-module-preprocessor')
+            'karma-phantomjs-launcher'
         ],
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -24,19 +24,9 @@ module.exports = function(config) {
 
         // list of files /ww patterns to load in the browser
         files: [
-            'node_modules/es5-shim/es5-shim.js',
             'node_modules/es6-shim/es6-shim.js',
-            'www/lib/underscore/underscore-min.js',
-            'www/lib/pouchdb/dist/pouchdb.js',
-            'www/lib/ionic/js/ionic.bundle.js',
-            'www/lib/angular-ui-router/release/angular-ui-router.js',
-            'www/lib/ngCordova/dist/ng-cordova.js',
-            'www/lib/ngCordova/dist/ng-cordova-mocks.js',
-            'node_modules/angular-mocks/angular-mocks.js',
-            'www/js/app.js',
-            'app/**/*.js',
-            'www/js/htmlcache.js',
-            'test/unit-test/**/*Spec.js'
+            'app/**/*.ts',
+            'test/unit-test/**/*Spec.ts'
         ],
 
 
@@ -48,8 +38,24 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'appSrc/**/*.js': ['babel', 'ng-modularize'],
-            'test/**/*.js': ['babel']
+            'app/**/*.ts': ['typescript'],
+            'test/unit-test/**/*Spec.ts': ['typescript']
+        },
+
+        typescriptPreprocessor: {
+            // options passed to typescript compiler
+            tsconfigPath: './tsconfig.json', // *obligatory
+            compilerOptions: { // *optional
+                removeComments: false
+            },
+            // transforming the filenames
+            // you can pass more than one, they will be execute in order
+            transformPath: [function(path) { // *optional
+                //return path.replace(/\.ts$/, '.js');
+                return path;
+            }, function(path) {
+                return path.replace(/[\/\\]test[\/\\]/i, '/'); // remove directory test and change to /
+            }]
         },
 
         // test results reporter to use
@@ -88,4 +94,4 @@ module.exports = function(config) {
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false
     })
-}
+};
