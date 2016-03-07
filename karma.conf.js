@@ -1,10 +1,13 @@
 // Karma configuration
 // Generated on Sun Jul 05 2015 09:52:45 GMT+0200 (Central Europe Daylight Time)
+var webpackConfig = require('./webpack.config');
 
 module.exports = function(config) {
     config.set({
         // karma plugins: install plugins globally
         plugins: [
+            'karma-webpack',
+            //'karma-commonjs-require',
             'karma-typescript-preprocessor2',
             'karma-jasmine',
             'karma-chrome-launcher',
@@ -24,7 +27,6 @@ module.exports = function(config) {
         // list of files /ww patterns to load in the browser
         files: [
             'node_modules/es6-shim/es6-shim.js',
-            'app/**/*.ts',
             'test/unit-test/**/*Spec.ts'
         ],
 
@@ -38,8 +40,10 @@ module.exports = function(config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             'app/**/*.ts': ['typescript'],
-            'test/unit-test/**/*Spec.ts': ['typescript']
+            'test/unit-test/**/*Spec.ts': ['typescript', 'webpack']
         },
+
+        webpack: webpackConfig,
 
         typescriptPreprocessor: {
             // options passed to typescript compiler
@@ -50,11 +54,13 @@ module.exports = function(config) {
             // transforming the filenames
             // you can pass more than one, they will be execute in order
             transformPath: [function(path) { // *optional
-                //return path.replace(/\.ts$/, '.js');
-                return path;
+                return path.replace(/\.ts$/, '.js');
+                //return path;
             }, function(path) {
+                var subPath = path.replace('H:/Programming/projects/basketballstat', '');
+                return subPath.replace(/\//g, '\\');
                 //return path.replace(/[\/\\]test[\/\\]/i, '/'); // remove directory test and change to /
-                return path;
+                //return path;
             }]
         },
 

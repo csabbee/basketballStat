@@ -1,4 +1,4 @@
-import {TableFactory} from '../../../../app/database/local/table-factory.service';
+import {TableFactory} from 'app/datastorage/local/table-factory.service';
 
 describe('TableFactory', () => {
     var underTest: TableFactory;

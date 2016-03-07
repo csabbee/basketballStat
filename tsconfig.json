@@ -12,7 +12,8 @@
     "inlineSources": false
   },
   "files": [
-    "app/app.ts"
+    "app/app.ts",
+    "typings/test.d.ts"
   ],
   "exclude": [
     "node_modules"
