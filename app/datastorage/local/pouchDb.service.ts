@@ -1,9 +1,7 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, Output, EventEmitter} from 'angular2/core';
 import {Serializable} from '../../models/serializable';
 import {Toaster} from '../../helpers/toaster';
 import {TableFactory} from './table-factory.service';
-import {Output} from "angular2/core";
-import EventEmitter = webdriver.EventEmitter;
 
 @Injectable()
 export class PouchDbService {
