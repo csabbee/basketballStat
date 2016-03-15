@@ -1,5 +1,5 @@
 import {TableFactory} from 'app/datastorage/local/table-factory.service';
-
+s
 describe('TableFactory', () => {
     var underTest: TableFactory;
 
